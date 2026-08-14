@@ -166,6 +166,9 @@ export const BlogPost: React.FC = () => {
               src={post.image_url}
               alt={pick(post, 'title')}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.src = "/doctor.png";
+              }}
             />
           </div>
         </Reveal>

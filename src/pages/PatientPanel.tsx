@@ -54,6 +54,12 @@ import {
   clearSession,
   DOCTOR_ADMIN_PHONES
 } from '../lib/appointmentStore';
+import { 
+  DOCTOR_NIKAN_URL, 
+  HOSPITAL_NAME_FA, 
+  HOSPITAL_NAME_EN, 
+  HOSPITAL_CENTRAL_PHONE_FA 
+} from '../lib/siteConstants';
 
 const STORAGE_KEY = 'dr_patient_phone';
 const PROFILE_KEY_PREFIX = 'dr_patient_profile_';
@@ -296,14 +302,23 @@ export const PatientPanel: React.FC = () => {
               ? 'شما با دسترسی مدیریت پزشک وارد شده‌اید. در حال انتقال خودکار به میز کار و پنل نوبت‌های کلینیک...'
               : 'Redirecting to Doctor Dashboard...'}
           </p>
-          <div className="pt-2">
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-2.5">
             <Link 
               to="/admin" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-md hover:bg-primary/90 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-md hover:bg-primary/90 transition-all"
             >
               <ShieldCheck className="w-4 h-4 text-emerald-300" />
               <span>{isFa ? 'ورود به پنل مدیریت پزشک' : 'Go to Doctor Admin'}</span>
             </Link>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-destructive/30 text-destructive hover:bg-destructive/10 text-xs font-bold transition-all cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>{isFa ? 'خروج از حساب پزشک' : 'Logout Doctor'}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -557,11 +572,11 @@ export const PatientPanel: React.FC = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full border border-border text-muted-foreground hover:text-destructive hover:bg-destructive/10 text-xs font-medium transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
                     title={t('panel_logout')}
                   >
                     <LogOut className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">{t('panel_logout')}</span>
+                    <span>{t('panel_logout')}</span>
                   </button>
                 </div>
 
@@ -1172,59 +1187,141 @@ export const PatientPanel: React.FC = () => {
 
                   {/* Step 1: Visit Format */}
                   {step === 1 && (
-                    <div className="space-y-4">
-                      <h3 className="font-heading font-bold text-foreground text-base sm:text-lg">
-                        {t('bk_step_type')}
-                      </h3>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-heading font-bold text-foreground text-base sm:text-lg">
+                            {t('bk_step_type')}
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {isFa ? 'شیوه دریافت خدمت را انتخاب فرمایید:' : 'Select consultation mode:'}
+                          </p>
+                        </div>
                         <button
                           type="button"
-                          onClick={() => {
-                            setDraft({ ...draft, visit_type: 'in_person' });
-                            setStep(2);
-                          }}
-                          className={`p-6 rounded-3xl border text-start transition-all cursor-pointer ${
-                            draft.visit_type === 'in_person'
-                              ? 'border-primary bg-primary/10 shadow-sm'
-                              : 'border-border bg-background hover:border-primary/40'
-                          }`}
+                          onClick={() => setStep(0)}
+                          className="text-xs text-primary font-semibold hover:underline"
                         >
-                          <Building2 className="w-8 h-8 text-primary mb-3" />
-                          <h4 className="font-heading font-bold text-foreground text-base">{t('visit_inperson_title')}</h4>
-                          <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{t('visit_inperson_desc')}</p>
+                          {isFa ? 'تغییر خدمت' : 'Change Service'}
                         </button>
+                      </div>
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setDraft({ ...draft, visit_type: 'online' });
-                            setStep(2);
-                          }}
-                          className={`p-6 rounded-3xl border text-start transition-all cursor-pointer ${
-                            draft.visit_type === 'online'
-                              ? 'border-secondary bg-secondary/10 shadow-sm'
-                              : 'border-border bg-background hover:border-secondary/40'
-                          }`}
-                        >
-                          <Video className="w-8 h-8 text-secondary mb-3" />
-                          <h4 className="font-heading font-bold text-foreground text-base">{t('visit_online_title')}</h4>
-                          <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{t('visit_online_desc')}</p>
-                        </button>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        
+                        {/* Option A: In-Person Nikan Hospital (Direct External Portal) */}
+                        <div className="relative p-6 sm:p-7 rounded-3xl border-2 border-primary/40 bg-card hover:border-primary transition-all flex flex-col justify-between shadow-xs">
+                          <div>
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                                <Building2 className="w-6 h-6" />
+                              </div>
+                              <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20 flex items-center gap-1">
+                                <ExternalLink className="w-3 h-3" />
+                                <span>{isFa ? 'سایت بیمارستان نیکان' : 'Nikan Hospital Site'}</span>
+                              </span>
+                            </div>
+
+                            <h4 className="font-heading font-bold text-foreground text-base mb-2">
+                              {t('visit_inperson_title')}
+                            </h4>
+                            
+                            <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+                              {isFa 
+                                ? 'نوبت‌دهی و پذیرش ویزیت‌های حضوری سرکار خانم دکتر فاطمه مومنی در بیمارستان فوق‌تخصصی نیکان غرب، مستقیماً از طریق سامانه رسمی بیمارستان نیکان انجام می‌شود.'
+                                : 'In-person consultations at Nikan West Hospital are managed directly through the official Nikan Hospital booking portal.'}
+                            </p>
+
+                            <div className="p-3 rounded-2xl bg-muted/40 border border-border/70 text-[11px] text-muted-foreground space-y-1.5 mb-4">
+                              <p className="font-medium text-foreground">
+                                {isFa ? 'نشانی: بزرگراه همت غرب، روبروی بوستان جوانمردان' : 'Location: Hemmat West, opp. Javanmardan Park'}
+                              </p>
+                              <p>
+                                {isFa ? `تلفن گویای بیمارستان: ${HOSPITAL_CENTRAL_PHONE_FA}` : `Hospital Central Phone: ${HOSPITAL_CENTRAL_PHONE_FA}`}
+                              </p>
+                            </div>
+                          </div>
+
+                          <a
+                            href={DOCTOR_NIKAN_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-md hover:opacity-95 transition-all cursor-pointer"
+                          >
+                            <span>{isFa ? 'ورود مستقیم به سامانه نوبت‌دهی بیمارستان نیکان' : 'Open Nikan Hospital Portal'}</span>
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        </div>
+
+                        {/* Option B: Online Video Session (Direct On-Site Fast Admission) */}
+                        <div className="relative p-6 sm:p-7 rounded-3xl border-2 border-secondary/60 bg-card hover:border-secondary transition-all flex flex-col justify-between shadow-xs">
+                          <div>
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="w-12 h-12 rounded-2xl bg-secondary/25 text-primary flex items-center justify-center">
+                                <Video className="w-6 h-6" />
+                              </div>
+                              <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-secondary/30 text-secondary-foreground border border-secondary/40 flex items-center gap-1">
+                                <Sparkles className="w-3 h-3 text-amber-500" />
+                                <span>{isFa ? 'پذیرش مستقیم در سایت' : 'Direct On-Site Booking'}</span>
+                              </span>
+                            </div>
+
+                            <h4 className="font-heading font-bold text-foreground text-base mb-2">
+                              {t('visit_online_title')}
+                            </h4>
+                            
+                            <p className="text-xs text-muted-foreground leading-relaxed mb-4">
+                              {isFa 
+                                ? 'مشاوره تصویری و غیرحضوری با دکتر فاطمه مومنی در محیط امن، با امکان انتخاب سریع روز و ساعت، صدور نسخه الکترونیک و ارتباط در چت پزشک.'
+                                : 'Direct video consultation with Dr. Fatemeh Momeni. Select time slot, register online, receive digital prescriptions and direct doctor messaging.'}
+                            </p>
+
+                            <div className="p-3 rounded-2xl bg-secondary/15 border border-secondary/30 text-[11px] text-foreground space-y-1 mb-4">
+                              <p className="font-semibold text-primary">
+                                {isFa ? '✓ پذیرش سراسری مراجعین داخل و خارج از کشور' : '✓ Available nationwide and internationally'}
+                              </p>
+                              <p className="text-muted-foreground">
+                                {isFa ? '✓ بدون نیاز به مراجعه حضوری و اتلاف وقت' : '✓ No commute required'}
+                              </p>
+                            </div>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setDraft({ ...draft, visit_type: 'online' });
+                              setStep(2);
+                            }}
+                            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-md btn-soft-glow hover:opacity-95 transition-all cursor-pointer"
+                          >
+                            <Calendar className="w-4 h-4" />
+                            <span>{isFa ? 'ادامه و انتخاب زمان ویزیت آنلاین' : 'Select Online Time Slot'}</span>
+                          </button>
+                        </div>
+
                       </div>
                     </div>
                   )}
 
-                  {/* Step 2: Date & Slot Selection */}
+                  {/* Step 2: Date & Slot Selection (Online Video Consultation) */}
                   {step === 2 && (
                     <div className="space-y-6">
-                      <div>
-                        <h3 className="font-heading font-bold text-foreground text-base sm:text-lg mb-1">
-                          {t('bk_step_date')}
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          {isFa ? 'روز کاری مورد نظر خود را انتخاب نمایید:' : 'Select preferred consultation day:'}
-                        </p>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-heading font-bold text-foreground text-base sm:text-lg mb-1">
+                            {t('bk_step_date')}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            {isFa ? 'روز کاری و ساعت مناسب خود را برای مشاوره آنلاین انتخاب فرمایید:' : 'Select preferred consultation day and time for remote session:'}
+                          </p>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setStep(1)}
+                          className="text-xs text-primary font-semibold hover:underline"
+                        >
+                          {isFa ? 'تغییر شیوه ویزیت' : 'Change Mode'}
+                        </button>
                       </div>
 
                       {/* Day selector pills */}
@@ -1249,7 +1346,7 @@ export const PatientPanel: React.FC = () => {
                       {/* Time Slots */}
                       <div className="space-y-2">
                         <label className="block text-xs font-semibold text-foreground">
-                          {isFa ? 'انتخاب ساعت حضور یا تماس ویدیویی:' : 'Select Time Slot:'}
+                          {isFa ? 'انتخاب ساعت تماس ویدیویی آنلاین:' : 'Select Video Session Slot:'}
                         </label>
                         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-2">
                           {SLOTS.map((slot) => (
@@ -1269,13 +1366,21 @@ export const PatientPanel: React.FC = () => {
                         </div>
                       </div>
 
-                      <div className="pt-4 flex justify-end">
+                      <div className="pt-4 flex items-center justify-between border-t border-border/60">
+                        <button
+                          type="button"
+                          onClick={() => setStep(1)}
+                          className="px-4 py-2 rounded-full border border-border text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer"
+                        >
+                          {isFa ? 'مرحله قبل' : 'Back'}
+                        </button>
+
                         <button
                           type="button"
                           onClick={() => setStep(3)}
-                          className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:opacity-95 cursor-pointer"
+                          className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold btn-soft-glow hover:opacity-95 shadow-md cursor-pointer"
                         >
-                          {isFa ? 'مرحله بعد: ثبت مشخصات' : 'Next Step'}
+                          {isFa ? 'مرحله بعد: ثبت مشخصات و پذیرش' : 'Next Step'}
                         </button>
                       </div>
                     </div>
@@ -1297,7 +1402,7 @@ export const PatientPanel: React.FC = () => {
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">{isFa ? 'شیوه ویزیت:' : 'Format:'}</span>
                           <span className="font-bold text-foreground">
-                            {draft.visit_type === 'in_person' ? (isFa ? 'حضوری بیمارستان نیکان غرب' : 'In-Person Nikan') : (isFa ? 'مشاوره آنلاین تصویری' : 'Online Video')}
+                            {isFa ? 'مشاوره آنلاین تصویری (محیط امن)' : 'Online Video Session'}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -1346,7 +1451,7 @@ export const PatientPanel: React.FC = () => {
                           type="submit"
                           className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold btn-soft-glow hover:opacity-95 shadow-md cursor-pointer"
                         >
-                          {isFa ? 'ثبت نهایی و ارسال به پزشک' : 'Submit Booking'}
+                          {isFa ? 'تایید نهایی و ثبت نوبت در سایت' : 'Submit & Book Online'}
                         </button>
                       </div>
                     </div>

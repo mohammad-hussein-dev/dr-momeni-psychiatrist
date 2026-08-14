@@ -13,29 +13,47 @@ export const HOSPITAL_CENTRAL_PHONE = "02129129";
 export const HOSPITAL_CENTRAL_PHONE_FA = "۰۲۱-۲۹۱۲۹";
 
 // Location & Address
-export const ADDRESS_FA = "تهران، همت غرب، بیمارستان نیکان غرب، بخش کلینیک‌های تخصصی اعصاب و روان";
-export const ADDRESS_EN = "Tehran, Hemmat West Expressway, Nikan Gharb Hospital, Department of Psychiatry";
-export const ADDRESS_EXACT_HINT_FA = "تهران، بزرگراه همت غرب، نرسیده به میدان دریاچه شهدای خلیج فارس، بیمارستان نیکان غرب";
-export const ADDRESS_EXACT_HINT_EN = "Tehran, Shahid Hemmat Expressway West, near Chitgar Lake, Nikan Gharb Hospital";
+export const ADDRESS_FA = "تهران، بزرگراه همت غرب، روبروی بوستان جوانمردان (نرسیده به میدان المپیک)، بیمارستان فوق تخصصی نیکان غرب، بخش کلینیک‌های تخصصی اعصاب و روان";
+export const ADDRESS_EN = "Tehran, Shahid Hemmat Expressway West, opposite Javanmardan Park (before Olympic Square), Nikan West Hospital, Department of Psychiatry";
+export const ADDRESS_EXACT_HINT_FA = "تهران، بزرگراه همت غرب، روبروی بوستان جوانمردان (نرسیده به میدان المپیک)، بیمارستان نیکان غرب";
+export const ADDRESS_EXACT_HINT_EN = "Tehran, Shahid Hemmat Expressway West, opposite Javanmardan Park, Nikan Gharb Hospital";
 
-// Coordinates
-export const LATITUDE = 35.7583;
-export const LONGITUDE = 51.2482;
+// Exact Verified Coordinates of Nikan Gharb Hospital & Dedicated Parking
+export const LATITUDE = 35.75711;
+export const LONGITUDE = 51.27039;
 
-// Multi-App Navigation Links
-export const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=35.7583,51.2482`;
-export const WAZE_URL = `https://waze.com/ul?ll=35.7583,51.2482&navigate=yes`;
-export const NESHAN_URL = `https://nshn.ir/?lat=35.7583&lng=51.2482`;
-export const BALAD_URL = `https://balad.ir/location?latitude=35.7583&longitude=51.2482`;
-export const APPLE_MAPS_URL = `https://maps.apple.com/?ll=35.7583,51.2482&q=Nikan+Gharb+Hospital`;
+// Dedicated Parking Information
+export const PARKING_NAME_FA = "پارکینگ اختصاصی و طبقاتی بیمارستان نیکان غرب";
+export const PARKING_NAME_EN = "Nikan Gharb Hospital Dedicated Multi-Storey Parking";
+export const PARKING_ENTRANCE_FA = "تهران، بزرگراه همت غرب (مسیر شرق به غرب)، لاین کندرو پیش از میدان المپیک، روبروی بوستان جوانمردان، ورودی پارکینگ طبقاتی بیمارستان نیکان غرب";
+export const PARKING_ENTRANCE_EN = "Tehran, Shahid Hemmat Expressway West (East to West), Service Lane before Olympic Square, opp. Javanmardan Park, Nikan Hospital Parking Entrance";
+export const PARKING_FEATURES_FA = [
+  "پارکینگ سرپوشیده طبقاتی ۲۴ ساعته مجهز به سیستم مکانیزه",
+  "دسترسی مستقیم و بدون پله آسانسور از طبقات پارکینگ به بخش کلینیک‌های تخصصی اعصاب و روان",
+  "مجهز به رمپ استاندارد و آسانسور ویژه توان‌یابان، سالمندان و کالسکه",
+  "امنیت کامل، نگهبانی شبانه‌روزی و دوربین‌های مداربسته"
+];
+export const PARKING_FEATURES_EN = [
+  "24/7 covered multi-storey parking facility",
+  "Direct elevator access from all parking floors straight to the Psychiatry Clinic",
+  "Fully accessible ramps and elevators for elderly and disabled patients",
+  "24/7 on-site security and CCTV surveillance"
+];
+
+// Multi-App Navigation Links with User-Verified Neshan Link
+export const NESHAN_URL = "https://nshn.ir/27rbv2k7WxJlj4";
+export const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${LATITUDE},${LONGITUDE}`;
+export const WAZE_URL = `https://waze.com/ul?ll=${LATITUDE},${LONGITUDE}&navigate=yes`;
+export const BALAD_URL = `https://balad.ir/location?latitude=${LATITUDE}&longitude=${LONGITUDE}`;
+export const APPLE_MAPS_URL = `https://maps.apple.com/?ll=${LATITUDE},${LONGITUDE}&q=Nikan+Gharb+Hospital`;
 export const MAPS_URL = GOOGLE_MAPS_URL;
 
-// High Precision OpenStreetMap embed URL centered around Nikan Gharb
-export const OSM_EMBED_URL = `https://www.openstreetmap.org/export/embed.html?bbox=51.2380%2C35.7500%2C51.2580%2C35.7660&layer=mapnik&marker=35.7583%2C51.2482`;
+// High Precision OpenStreetMap embed URL centered directly on Nikan Gharb Hospital (Lat 35.75711, Lng 51.27039)
+export const OSM_EMBED_URL = `https://www.openstreetmap.org/export/embed.html?bbox=51.2600%2C35.7500%2C51.2800%2C35.7640&layer=mapnik&marker=${LATITUDE}%2C${LONGITUDE}`;
 
-// Primary Portrait of Dr. Fatemeh Momeni
-export const HERO_IMG = "https://media.base44.com/images/public/6a74f2a2d4d291dc08716b22/5d3e24f0f_______________.jpg";
-export const ABOUT_IMG = "https://media.base44.com/images/public/6a74f2a2d4d291dc08716b22/5d3e24f0f_______________.jpg";
+// Primary Portrait of Dr. Fatemeh Momeni (Local portable asset)
+export const HERO_IMG = "/doctor.png";
+export const ABOUT_IMG = "/doctor.png";
 
 // Clinical & Ambient Photography
 export const CLINIC_ROOM_IMG = "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80";

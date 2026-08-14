@@ -568,22 +568,73 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
               const isEditing = editingMsgId === msg.id;
               const hasReactions = msg.reactions && msg.reactions.length > 0;
 
-              // Group reactions by emoji
-              const reactionGroups: { emoji: string; count: number; userReacted: boolean }[] = [];
-              if (msg.reactions) {
+              // Group reactions by emoji and capture reactor identities cleanly
+              const reactionGroups: {
+                emoji: string;
+                count: number;
+                userReacted: boolean;
+                hasDoctor: boolean;
+                hasPatient: boolean;
+                doctorName?: string;
+                patientName?: string;
+                tooltipText: string;
+              }[] = [];
+
+              if (msg.reactions && msg.reactions.length > 0) {
                 const currentRole = isDoctor ? 'doctor' : 'patient';
-                const counts: Record<string, { count: number; userReacted: boolean }> = {};
+                const groupMap: Record<string, {
+                  count: number;
+                  userReacted: boolean;
+                  hasDoctor: boolean;
+                  hasPatient: boolean;
+                  doctorName?: string;
+                  patientName?: string;
+                  names: string[];
+                }> = {};
+
                 msg.reactions.forEach(r => {
-                  if (!counts[r.emoji]) {
-                    counts[r.emoji] = { count: 0, userReacted: false };
+                  if (!groupMap[r.emoji]) {
+                    groupMap[r.emoji] = {
+                      count: 0,
+                      userReacted: false,
+                      hasDoctor: false,
+                      hasPatient: false,
+                      names: []
+                    };
                   }
-                  counts[r.emoji].count += 1;
+                  const entry = groupMap[r.emoji];
+                  entry.count += 1;
                   if (r.by === currentRole) {
-                    counts[r.emoji].userReacted = true;
+                    entry.userReacted = true;
+                  }
+                  if (r.by === 'doctor') {
+                    entry.hasDoctor = true;
+                    entry.doctorName = r.name || (isFa ? 'دکتر فاطمه مومنی' : 'Dr. Fatemeh Momeni');
+                    if (!entry.names.includes(entry.doctorName)) {
+                      entry.names.push(entry.doctorName);
+                    }
+                  } else {
+                    entry.hasPatient = true;
+                    entry.patientName = r.name || msg.patientName || (isFa ? 'مراجع' : 'Patient');
+                    if (!entry.names.includes(entry.patientName)) {
+                      entry.names.push(entry.patientName);
+                    }
                   }
                 });
-                Object.entries(counts).forEach(([emoji, data]) => {
-                  reactionGroups.push({ emoji, count: data.count, userReacted: data.userReacted });
+
+                Object.entries(groupMap).forEach(([emoji, data]) => {
+                  const namesStr = data.names.join(isFa ? ' و ' : ', ');
+                  const tooltipText = isFa ? `واکنش: ${namesStr}` : `Reaction by ${namesStr}`;
+                  reactionGroups.push({
+                    emoji,
+                    count: data.count,
+                    userReacted: data.userReacted,
+                    hasDoctor: data.hasDoctor,
+                    hasPatient: data.hasPatient,
+                    doctorName: data.doctorName,
+                    patientName: data.patientName,
+                    tooltipText
+                  });
                 });
               }
 
@@ -856,21 +907,49 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
 
                   {/* Reaction Pills Row underneath Message */}
                   {hasReactions && (
-                    <div className={`flex flex-wrap gap-1 mt-1 px-1 ${isMe ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`flex flex-wrap items-center gap-1.5 mt-1 px-1 select-none ${isMe ? 'justify-end' : 'justify-start'}`}>
                       {reactionGroups.map((rec) => (
                         <button
                           key={rec.emoji}
                           type="button"
                           onClick={() => handleToggleReaction(msg.id, rec.emoji)}
-                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono shadow-2xs border transition-all cursor-pointer ${
+                          className={`group/rec inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono shadow-2xs border transition-all cursor-pointer ${
                             rec.userReacted
-                              ? 'bg-primary/15 border-primary/40 text-primary font-bold scale-105'
-                              : 'bg-card/90 border-border/80 text-foreground hover:bg-muted'
+                              ? 'bg-primary/15 border-primary/40 text-primary font-bold scale-[1.02]'
+                              : 'bg-card/95 border-border/80 text-foreground hover:bg-muted'
                           }`}
-                          title={isFa ? 'کلیک برای تغییر یا ثبت واکنش' : 'Toggle reaction'}
+                          title={`${rec.tooltipText} - ${isFa ? 'کلیک برای ثبت / لغو واکنش' : 'Click to toggle'}`}
                         >
-                          <span className="text-xs">{rec.emoji}</span>
-                          {rec.count > 1 && <span className="text-[10px] font-bold">{rec.count}</span>}
+                          <span className="text-xs transition-transform group-hover/rec:scale-110 leading-none">{rec.emoji}</span>
+                          
+                          {/* Micro Author Badges - Crisp, neat and never intrusive */}
+                          <div className="inline-flex items-center gap-0.5">
+                            {rec.hasDoctor && (
+                              <span
+                                className="inline-flex items-center gap-0.5 px-1 py-0.2 rounded-md bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-[9px] font-bold tracking-tight"
+                                title={rec.doctorName || (isFa ? 'دکتر فاطمه مومنی' : 'Dr. Momeni')}
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                                <span>{isFa ? 'پزشک' : 'Dr'}</span>
+                              </span>
+                            )}
+
+                            {rec.hasPatient && (
+                              <span
+                                className="inline-flex items-center gap-0.5 px-1 py-0.2 rounded-md bg-sky-500/20 text-sky-800 dark:text-sky-300 text-[9px] font-bold tracking-tight"
+                                title={rec.patientName || (isFa ? 'مراجع' : 'Patient')}
+                              >
+                                <User className="w-2.5 h-2.5 shrink-0" />
+                                <span>{isFa ? 'مراجع' : 'Patient'}</span>
+                              </span>
+                            )}
+
+                            {rec.count > 1 && (
+                              <span className="text-[10px] font-bold text-muted-foreground ms-0.5">
+                                {rec.count}
+                              </span>
+                            )}
+                          </div>
                         </button>
                       ))}
                     </div>

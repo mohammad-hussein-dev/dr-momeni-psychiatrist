@@ -44,7 +44,8 @@ import {
   BadgeCheck,
   BookOpen,
   Heart,
-  Star
+  Star,
+  Layers
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '../i18n/LanguageProvider';
@@ -113,6 +114,7 @@ export const AdminPanel: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [visitTypeFilter, setVisitTypeFilter] = useState<string>('all');
+  const [isVisitTypeDropdownOpen, setIsVisitTypeDropdownOpen] = useState<boolean>(false);
   
   // Selected Appointment for Modal
   const [selectedAppt, setSelectedAppt] = useState<Appointment | null>(null);
@@ -168,10 +170,19 @@ export const AdminPanel: React.FC = () => {
     };
   }, []);
 
-  // Sync session state
+  // Sync session state in real-time
   useEffect(() => {
-    const active = getActiveSession();
-    setSession(active);
+    const handleAuthSync = () => {
+      setSession(getActiveSession());
+    };
+
+    window.addEventListener('storage', handleAuthSync);
+    window.addEventListener('auth_state_changed', handleAuthSync);
+
+    return () => {
+      window.removeEventListener('storage', handleAuthSync);
+      window.removeEventListener('auth_state_changed', handleAuthSync);
+    };
   }, []);
 
   const isDoctorOrAdmin = session?.role === 'doctor_admin';
@@ -583,19 +594,19 @@ export const AdminPanel: React.FC = () => {
           <div className="space-y-5">
             
             {/* Top Bar / Header */}
-            <div className="rounded-3xl bg-card border border-border/80 p-4 sm:p-5 shadow-xs">
+            <div className="rounded-3xl bg-card border border-border p-4 sm:p-5 shadow-sm transition-all">
               <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 sm:gap-4">
                 
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-primary to-primary/80 text-primary-foreground flex items-center justify-center shadow-sm font-bold shrink-0">
-                    <ShieldCheck className="w-6 h-6" />
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-primary-foreground flex items-center justify-center shadow-md font-bold shrink-0 animate-float-slow">
+                    <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-1.5">
                       <h1 className="font-heading font-bold text-base sm:text-lg text-foreground">
                         {isFa ? 'سامانه بالینی و مدیریت مطب دکتر فاطمه مومنی' : 'Dr. Fatemeh Momeni Clinical Portal'}
                       </h1>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/15 text-primary border border-primary/25">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-primary/10 text-primary border border-primary/20 shadow-2xs">
                         {isFa ? 'نظام پزشکی: ۱۳۶۸۸۲' : 'M.D. 136882'}
                       </span>
                     </div>
@@ -608,7 +619,7 @@ export const AdminPanel: React.FC = () => {
                 <div className="flex items-center gap-2 self-stretch lg:self-auto justify-end shrink-0">
                   <Link
                     to="/panel"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-foreground hover:text-primary hover:bg-accent/40 transition-all"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-border bg-card text-xs font-semibold text-foreground hover:text-primary hover:border-primary/40 hover:shadow-2xs transition-all cursor-pointer"
                   >
                     <User className="w-3.5 h-3.5" />
                     <span>{isFa ? 'نمای مراجع' : 'Patient View'}</span>
@@ -616,7 +627,7 @@ export const AdminPanel: React.FC = () => {
 
                   <button
                     onClick={loadData}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted/40 hover:shadow-2xs transition-all cursor-pointer"
                     title={isFa ? 'بروزرسانی داده‌ها' : 'Refresh'}
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
@@ -625,7 +636,7 @@ export const AdminPanel: React.FC = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-destructive/30 text-xs font-medium text-destructive hover:bg-destructive/10 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl border border-destructive/30 bg-rose-500/5 hover:bg-rose-500 hover:text-white text-xs font-bold text-destructive transition-all shadow-2xs cursor-pointer"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     <span>{isFa ? 'خروج' : 'Logout'}</span>
@@ -639,17 +650,19 @@ export const AdminPanel: React.FC = () => {
                 
                 <button
                   onClick={() => setActiveTab('visits')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'visits'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <Calendar className="w-3.5 h-3.5 shrink-0" />
                   <span className="truncate">{isFa ? 'مدیریت ویزیت‌ها' : 'Visits'}</span>
                   {pendingCount > 0 && (
-                    <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono shrink-0 ${
-                      activeTab === 'visits' ? 'bg-black/20 text-white' : 'bg-amber-500 text-white'
+                    <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono shrink-0 shadow-2xs ${
+                      activeTab === 'visits' 
+                        ? 'bg-amber-300 text-amber-950 font-black ring-1 ring-amber-200' 
+                        : 'bg-amber-500 text-white font-black animate-pulse'
                     }`}>
                       {pendingCount}
                     </span>
@@ -658,65 +671,80 @@ export const AdminPanel: React.FC = () => {
 
                 <button
                   onClick={() => setActiveTab('chat')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'chat'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <MessageSquare className="w-3.5 h-3.5 shrink-0 text-sky-500" />
                   <span className="truncate">{isFa ? 'چت با مراجعین' : 'Chat'}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0 ring-2 ring-emerald-400/40" />
                 </button>
 
                 <button
                   onClick={() => setActiveTab('prescription')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'prescription'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <Pill className="w-3.5 h-3.5 shrink-0 text-indigo-500" />
                   <span className="truncate">{isFa ? 'نسخه‌نویسی آنلاین' : 'Rx & Files'}</span>
+                  <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono font-black shrink-0 tracking-wider shadow-2xs ${
+                    activeTab === 'prescription'
+                      ? 'bg-white/25 text-white ring-1 ring-white/40'
+                      : 'bg-indigo-100 text-indigo-950 border border-indigo-300 dark:bg-indigo-950/80 dark:text-indigo-200 dark:border-indigo-700'
+                  }`}>
+                    Rx
+                  </span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('articles')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'articles'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <BookOpen className="w-3.5 h-3.5 shrink-0 text-amber-500" />
                   <span className="truncate">{isFa ? 'مقالات علمی' : 'Articles'}</span>
-                  <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-700 dark:text-amber-300 shrink-0">
+                  <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-black shrink-0 shadow-2xs ${
+                    activeTab === 'articles'
+                      ? 'bg-amber-300 text-amber-950 font-black ring-1 ring-amber-200'
+                      : 'bg-amber-100 text-amber-950 border border-amber-300 dark:bg-amber-950/90 dark:text-amber-100 dark:border-amber-600'
+                  }`}>
                     {posts.length}
                   </span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('testimonials')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'testimonials'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <Heart className="w-3.5 h-3.5 shrink-0 text-rose-500" />
                   <span className="truncate">{isFa ? 'نظرات و تجارب' : 'Reviews'}</span>
-                  <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-700 dark:text-rose-300 shrink-0">
+                  <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-black shrink-0 shadow-2xs ${
+                    activeTab === 'testimonials'
+                      ? 'bg-rose-300 text-rose-950 font-black ring-1 ring-rose-200'
+                      : 'bg-rose-100 text-rose-950 border border-rose-300 dark:bg-rose-950/90 dark:text-rose-100 dark:border-rose-600'
+                  }`}>
                     {testimonials.length}
                   </span>
                 </button>
 
                 <button
                   onClick={() => setActiveTab('schedule')}
-                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
+                  className={`flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center ${
                     activeTab === 'schedule'
-                      ? 'bg-primary text-primary-foreground shadow-xs'
-                      : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-sm scale-[1.02]'
+                      : 'bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80'
                   }`}
                 >
                   <Settings className="w-3.5 h-3.5 shrink-0 text-slate-500" />
@@ -731,72 +759,289 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 1: VISITS & BOOKINGS MANAGEMENT */}
             {/* ========================================================================= */}
             {activeTab === 'visits' && (
-              <div className="space-y-4 sm:space-y-5">
+              <div className="space-y-4 sm:space-y-5 animate-tab-fade">
                 
-                {/* KPI Metrics */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-between">
+                {/* KPI Metrics - Modern, Clean & High-Contrast Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  
+                  {/* Card 1: Pending Approval */}
+                  <div className="group relative p-4 sm:p-5 rounded-2xl bg-card border border-amber-500/30 dark:border-amber-500/40 shadow-xs hover:shadow-md hover:border-amber-500/60 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between overflow-hidden">
+                    <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-amber-400 to-amber-500" />
                     <div>
-                      <p className="text-[11px] font-medium text-amber-700 dark:text-amber-300">{isFa ? 'در انتظار تایید پزشک' : 'Pending Approval'}</p>
-                      <p className="text-xl sm:text-2xl font-heading font-extrabold text-amber-800 dark:text-amber-200 mt-0.5">{pendingCount}</p>
+                      <p className="text-xs font-bold text-muted-foreground flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shrink-0" />
+                        <span className="text-foreground/90 font-bold">{isFa ? 'در انتظار تایید پزشک' : 'Pending Approval'}</span>
+                      </p>
+                      <p className="text-2xl sm:text-3xl font-heading font-black text-foreground mt-2 tracking-tight">
+                        {pendingCount}
+                      </p>
+                      <p className="text-[10px] text-amber-600 dark:text-amber-400 font-medium mt-0.5">
+                        {isFa ? 'نیازمند بررسی و تایید' : 'Awaiting review'}
+                      </p>
                     </div>
-                    <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 opacity-80 shrink-0" />
+                    <div className="w-11 h-11 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                      <AlertCircle className="w-5 h-5" />
+                    </div>
                   </div>
 
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-between">
+                  {/* Card 2: Confirmed Active */}
+                  <div className="group relative p-4 sm:p-5 rounded-2xl bg-card border border-emerald-500/30 dark:border-emerald-500/40 shadow-xs hover:shadow-md hover:border-emerald-500/60 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between overflow-hidden">
+                    <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500" />
                     <div>
-                      <p className="text-[11px] font-medium text-emerald-700 dark:text-emerald-300">{isFa ? 'تایید شده فعال' : 'Confirmed Active'}</p>
-                      <p className="text-xl sm:text-2xl font-heading font-extrabold text-emerald-800 dark:text-emerald-200 mt-0.5">{confirmedCount}</p>
+                      <p className="text-xs font-bold text-muted-foreground flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                        <span className="text-foreground/90 font-bold">{isFa ? 'تایید شده فعال' : 'Confirmed Active'}</span>
+                      </p>
+                      <p className="text-2xl sm:text-3xl font-heading font-black text-foreground mt-2 tracking-tight">
+                        {confirmedCount}
+                      </p>
+                      <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
+                        {isFa ? 'در برنامه ویزیت مطب' : 'Scheduled active'}
+                      </p>
                     </div>
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 opacity-80 shrink-0" />
+                    <div className="w-11 h-11 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                      <CheckCircle2 className="w-5 h-5" />
+                    </div>
                   </div>
 
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-sky-500/10 border border-sky-500/25 flex items-center justify-between">
+                  {/* Card 3: In-Person Nikan */}
+                  <div className="group relative p-4 sm:p-5 rounded-2xl bg-card border border-sky-500/30 dark:border-sky-500/40 shadow-xs hover:shadow-md hover:border-sky-500/60 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between overflow-hidden">
+                    <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-sky-400 to-blue-500" />
                     <div>
-                      <p className="text-[11px] font-medium text-sky-700 dark:text-sky-300">{isFa ? 'ویزیت‌های حضوری (نیکان)' : 'In-Person (Nikan)'}</p>
-                      <p className="text-xl sm:text-2xl font-heading font-extrabold text-sky-800 dark:text-sky-200 mt-0.5">{inPersonCount}</p>
+                      <p className="text-xs font-bold text-muted-foreground flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-sky-500 shrink-0" />
+                        <span className="text-foreground/90 font-bold">{isFa ? 'ویزیت‌های حضوری (نیکان)' : 'In-Person (Nikan)'}</span>
+                      </p>
+                      <p className="text-2xl sm:text-3xl font-heading font-black text-foreground mt-2 tracking-tight">
+                        {inPersonCount}
+                      </p>
+                      <p className="text-[10px] text-sky-600 dark:text-sky-400 font-medium mt-0.5">
+                        {isFa ? 'بیمارستان نیکان غرب' : 'Nikan Hospital Clinic'}
+                      </p>
                     </div>
-                    <Building2 className="w-5 h-5 text-sky-600 dark:text-sky-400 opacity-80 shrink-0" />
+                    <div className="w-11 h-11 rounded-2xl bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                      <Building2 className="w-5 h-5" />
+                    </div>
                   </div>
 
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-between">
+                  {/* Card 4: Tele-Psychiatry */}
+                  <div className="group relative p-4 sm:p-5 rounded-2xl bg-card border border-teal-500/30 dark:border-teal-500/40 shadow-xs hover:shadow-md hover:border-teal-500/60 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between overflow-hidden">
+                    <div className="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-teal-400 to-emerald-500" />
                     <div>
-                      <p className="text-[11px] font-medium text-purple-700 dark:text-purple-300">{isFa ? 'مشاوره آنلاین تصویری' : 'Tele-Psychiatry'}</p>
-                      <p className="text-xl sm:text-2xl font-heading font-extrabold text-purple-800 dark:text-purple-200 mt-0.5">{onlineCount}</p>
+                      <p className="text-xs font-bold text-muted-foreground flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-teal-500 shrink-0" />
+                        <span className="text-foreground/90 font-bold">{isFa ? 'مشاوره آنلاین تصویری' : 'Online Video'}</span>
+                      </p>
+                      <p className="text-2xl sm:text-3xl font-heading font-black text-foreground mt-2 tracking-tight">
+                        {onlineCount}
+                      </p>
+                      <p className="text-[10px] text-teal-600 dark:text-teal-400 font-medium mt-0.5">
+                        {isFa ? 'اتاق مجازی امن HD' : 'Secure tele-consultation'}
+                      </p>
                     </div>
-                    <Video className="w-5 h-5 text-purple-600 dark:text-purple-400 opacity-80 shrink-0" />
+                    <div className="w-11 h-11 rounded-2xl bg-teal-500/15 text-teal-600 dark:text-teal-400 border border-teal-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                      <Video className="w-5 h-5" />
+                    </div>
                   </div>
+
                 </div>
 
-                {/* Filter & Search Bar */}
-                <div className="rounded-2xl bg-card border border-border/80 p-3 sm:p-4 shadow-2xs space-y-3">
-                  <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
+                {/* Filter & Search Bar - Cohesive & Crystal Clear */}
+                <div className="rounded-2xl bg-card border border-border/80 p-3.5 sm:p-4 shadow-xs space-y-3.5">
+                  <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+                    
+                    {/* Search Input */}
                     <div className="relative flex-1">
-                      <Search className="w-3.5 h-3.5 text-muted-foreground absolute start-3 top-1/2 -translate-y-1/2" />
+                      <Search className="w-4 h-4 text-muted-foreground absolute start-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder={isFa ? 'جستجو بر اساس نام بیمار، شماره تماس یا کدملی...' : 'Search by name, phone or national ID...'}
-                        className="w-full ps-9 pe-3 py-2 rounded-xl border border-border bg-background text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                        className="w-full ps-10 pe-9 py-2.5 rounded-xl border border-border/90 bg-background text-xs font-medium text-foreground placeholder:text-muted-foreground/75 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                       />
+                      {searchQuery && (
+                        <button
+                          type="button"
+                          onClick={() => setSearchQuery('')}
+                          className="absolute end-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs p-0.5 rounded-md hover:bg-muted cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                      )}
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      <select
-                        value={visitTypeFilter}
-                        onChange={(e) => setVisitTypeFilter(e.target.value)}
-                        className="px-3 py-2 rounded-xl border border-border bg-background text-xs font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer"
+                    {/* Custom Animated Visit Type Filter Dropdown */}
+                    <div className="relative shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setIsVisitTypeDropdownOpen(!isVisitTypeDropdownOpen)}
+                        className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer border shadow-2xs ${
+                          isVisitTypeDropdownOpen
+                            ? 'bg-primary/10 border-primary/50 text-primary ring-2 ring-primary/20'
+                            : 'bg-background hover:bg-muted/40 border-border/90 text-foreground'
+                        }`}
                       >
-                        <option value="all">{isFa ? 'تمامی شیوه‌های ویزیت' : 'All Visit Types'}</option>
-                        <option value="in_person">{isFa ? 'حضوری بیمارستان نیکان غرب' : 'In-Person (Nikan)'}</option>
-                        <option value="online">{isFa ? 'مشاوره آنلاین تصویری' : 'Online Video'}</option>
-                      </select>
+                        {visitTypeFilter === 'all' && (
+                          <Layers className="w-4 h-4 text-primary shrink-0" />
+                        )}
+                        {visitTypeFilter === 'in_person' && (
+                          <Building2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" />
+                        )}
+                        {visitTypeFilter === 'online' && (
+                          <Video className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                        )}
+                        
+                        <span className="font-bold">
+                          {visitTypeFilter === 'all' && (isFa ? 'تمامی شیوه‌های ویزیت' : 'All Visit Types')}
+                          {visitTypeFilter === 'in_person' && (isFa ? 'حضوری بیمارستان نیکان غرب' : 'In-Person (Nikan)')}
+                          {visitTypeFilter === 'online' && (isFa ? 'مشاوره آنلاین تصویری' : 'Online Video')}
+                        </span>
+
+                        <span className="px-2 py-0.5 rounded-md bg-muted text-[11px] font-mono font-extrabold text-foreground border border-border/60">
+                          {visitTypeFilter === 'all' ? appointments.length : visitTypeFilter === 'in_person' ? inPersonCount : onlineCount}
+                        </span>
+
+                        <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 ${
+                          isVisitTypeDropdownOpen ? 'rotate-180 text-primary' : ''
+                        }`} />
+                      </button>
+
+                      {/* Dropdown Menu with animation */}
+                      {isVisitTypeDropdownOpen && (
+                        <>
+                          <div
+                            className="fixed inset-0 z-30"
+                            onClick={() => setIsVisitTypeDropdownOpen(false)}
+                          />
+                          <div className="absolute top-full mt-2 end-0 z-40 w-72 sm:w-84 rounded-2xl bg-card border border-border/90 shadow-xl shadow-black/10 p-2 space-y-1.5 animate-in fade-in zoom-in-95 duration-150">
+                            <div className="px-3 py-1.5 text-[11px] font-bold text-muted-foreground flex items-center justify-between border-b border-border/50 mb-1">
+                              <span className="flex items-center gap-1.5">
+                                <Filter className="w-3.5 h-3.5 text-primary" />
+                                <span>{isFa ? 'فیلتر شیوه حضور بیمار' : 'Filter Visit Method'}</span>
+                              </span>
+                              <span className="text-[10px] font-mono font-bold">{appointments.length} {isFa ? 'کل' : 'Total'}</span>
+                            </div>
+
+                            {/* Option: All */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setVisitTypeFilter('all');
+                                setIsVisitTypeDropdownOpen(false);
+                              }}
+                              className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-bold transition-all text-start cursor-pointer border ${
+                                visitTypeFilter === 'all'
+                                  ? 'bg-primary/10 border-primary/40 text-primary shadow-2xs'
+                                  : 'border-transparent hover:bg-muted/70 text-foreground'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                                  visitTypeFilter === 'all'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'bg-muted text-muted-foreground'
+                                }`}>
+                                  <Layers className="w-4 h-4" />
+                                </div>
+                                <div>
+                                  <p className="font-bold text-foreground">{isFa ? 'تمامی شیوه‌های ویزیت' : 'All Visit Types'}</p>
+                                  <p className="text-[10px] text-muted-foreground">
+                                    {isFa ? 'نمایش همزمان حضوری و آنلاین' : 'Both in-person and online'}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-black ${
+                                visitTypeFilter === 'all' 
+                                  ? 'bg-primary text-primary-foreground' 
+                                  : 'bg-muted text-foreground/80 border border-border/60'
+                              }`}>
+                                {appointments.length}
+                              </span>
+                            </button>
+
+                            {/* Option: In Person */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setVisitTypeFilter('in_person');
+                                setIsVisitTypeDropdownOpen(false);
+                              }}
+                              className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-bold transition-all text-start cursor-pointer border ${
+                                visitTypeFilter === 'in_person'
+                                  ? 'bg-sky-500/10 border-sky-500/40 text-sky-700 dark:text-sky-300 shadow-2xs'
+                                  : 'border-transparent hover:bg-muted/70 text-foreground'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                                  visitTypeFilter === 'in_person'
+                                    ? 'bg-sky-600 text-white'
+                                    : 'bg-sky-500/15 text-sky-600 dark:text-sky-400'
+                                }`}>
+                                  <Building2 className="w-4 h-4" />
+                                </div>
+                                <div>
+                                  <p className="font-bold text-foreground">{isFa ? 'حضوری بیمارستان نیکان غرب' : 'In-Person (Nikan Hospital)'}</p>
+                                  <p className="text-[10px] text-muted-foreground">
+                                    {isFa ? 'کلینیک مغز و اعصاب - طبقه ۵' : 'Floor 5, Neuro-Psychiatry clinic'}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-black ${
+                                visitTypeFilter === 'in_person' 
+                                  ? 'bg-sky-600 text-white' 
+                                  : 'bg-sky-100 text-sky-950 dark:bg-sky-950 dark:text-sky-200'
+                              }`}>
+                                {inPersonCount}
+                              </span>
+                            </button>
+
+                            {/* Option: Online Video */}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setVisitTypeFilter('online');
+                                setIsVisitTypeDropdownOpen(false);
+                              }}
+                              className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-bold transition-all text-start cursor-pointer border ${
+                                visitTypeFilter === 'online'
+                                  ? 'bg-teal-500/10 border-teal-500/40 text-teal-700 dark:text-teal-300 shadow-2xs'
+                                  : 'border-transparent hover:bg-muted/70 text-foreground'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                                  visitTypeFilter === 'online'
+                                    ? 'bg-teal-600 text-white'
+                                    : 'bg-teal-500/15 text-teal-600 dark:text-teal-400'
+                                }`}>
+                                  <Video className="w-4 h-4" />
+                                </div>
+                                <div>
+                                  <p className="font-bold text-foreground">{isFa ? 'مشاوره آنلاین تصویری' : 'Online Video Consultations'}</p>
+                                  <p className="text-[10px] text-muted-foreground">
+                                    {isFa ? 'اتاق مجازی امن و وضوح HD' : 'Secure HD encrypted room'}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-black ${
+                                visitTypeFilter === 'online' 
+                                  ? 'bg-teal-600 text-white' 
+                                  : 'bg-teal-100 text-teal-950 dark:bg-teal-950 dark:text-teal-200'
+                              }`}>
+                                {onlineCount}
+                              </span>
+                            </button>
+
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
 
-                  {/* Status Filter Chips - Wrap neatly */}
-                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                  {/* Status Filter Chips - Crisp, High Contrast & Cohesive */}
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
                     {[
                       { id: 'all', label_fa: 'همه نوبت‌ها', label_en: 'All Bookings', count: appointments.length },
                       { id: 'pending_approval', label_fa: 'در انتظار تایید', label_en: 'Pending', count: pendingCount, highlight: true },
@@ -807,17 +1052,19 @@ export const AdminPanel: React.FC = () => {
                       <button
                         key={tab.id}
                         onClick={() => setStatusFilter(tab.id)}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all shrink-0 cursor-pointer ${
+                        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer border ${
                           statusFilter === tab.id
                             ? tab.highlight && tab.count > 0
-                              ? 'bg-amber-600 text-white shadow-2xs'
-                              : 'bg-primary text-primary-foreground shadow-2xs'
-                            : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                              ? 'bg-amber-500 text-white border-amber-600 shadow-xs'
+                              : 'bg-primary text-primary-foreground border-primary shadow-xs'
+                            : 'bg-background hover:bg-muted/70 text-foreground/80 hover:text-foreground border-border/80'
                         }`}
                       >
                         <span>{isFa ? tab.label_fa : tab.label_en}</span>
-                        <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-mono ${
-                          statusFilter === tab.id ? 'bg-black/20 text-white' : 'bg-muted-foreground/15 text-muted-foreground'
+                        <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-mono font-black ${
+                          statusFilter === tab.id 
+                            ? 'bg-white/25 text-white' 
+                            : 'bg-muted text-foreground border border-border/60'
                         }`}>
                           {tab.count}
                         </span>
@@ -884,22 +1131,22 @@ export const AdminPanel: React.FC = () => {
 
                                   {/* Status Badge */}
                                   {isPending && (
-                                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 animate-pulse">
+                                    <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-700 animate-pulse">
                                       {isFa ? 'در انتظار تایید پزشک' : 'Needs Doctor Approval'}
                                     </span>
                                   )}
                                   {isConfirmed && (
-                                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-                                      {isFa ? 'تایید شده' : 'Confirmed'}
+                                    <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700">
+                                      {isFa ? 'تایید شده فعال' : 'Confirmed'}
                                     </span>
                                   )}
                                   {isCompleted && (
-                                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-muted text-muted-foreground border border-border">
+                                    <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-600">
                                       {isFa ? 'انجام شده' : 'Completed'}
                                     </span>
                                   )}
                                   {isCancelled && (
-                                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-destructive/15 text-destructive border border-destructive/25">
+                                    <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-900 dark:text-rose-200 border border-rose-300 dark:border-rose-700">
                                       {isFa ? 'لغو شده' : 'Cancelled'}
                                     </span>
                                   )}
@@ -993,8 +1240,8 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 2: DOCTOR-PATIENT SECURE CHAT HUB */}
             {/* ========================================================================= */}
             {activeTab === 'chat' && (
-              <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-card border border-border/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="space-y-4 animate-tab-fade">
+                <div className="p-4 rounded-2xl bg-card border border-border/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div>
                     <h3 className="font-heading font-bold text-sm sm:text-base text-foreground flex items-center gap-2">
                       <MessageSquare className="w-4 h-4 text-primary" />
@@ -1005,7 +1252,7 @@ export const AdminPanel: React.FC = () => {
                     </p>
                   </div>
 
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 shadow-2xs">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span>{isFa ? 'سامانه آنلاین و آماده پاسخگویی' : 'Live & Active'}</span>
                   </span>
@@ -1020,7 +1267,7 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 3: ELECTRONIC PRESCRIPTION & MEDICAL RX GENERATOR */}
             {/* ========================================================================= */}
             {activeTab === 'prescription' && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-tab-fade">
                 
                 {/* Rx Configuration Form */}
                 <div className="lg:col-span-6 space-y-5">
@@ -1256,7 +1503,7 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 4: CLINIC SCHEDULE & CAPACITY MANAGER */}
             {/* ========================================================================= */}
             {activeTab === 'schedule' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-tab-fade">
                 
                 <div className="rounded-3xl bg-card border border-border/80 p-5 sm:p-6 shadow-xs space-y-5">
                   <div className="flex items-center gap-2 border-b border-border/60 pb-3">
@@ -1367,7 +1614,7 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 5: ARTICLES MANAGEMENT (BLOG POSTS) */}
             {/* ========================================================================= */}
             {activeTab === 'articles' && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-tab-fade">
                 
                 {/* Header & Quick Action */}
                 <div className="p-5 sm:p-6 rounded-3xl bg-card border border-border/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -1538,7 +1785,7 @@ export const AdminPanel: React.FC = () => {
             {/* TAB 6: TESTIMONIALS & REVIEWS MODERATION */}
             {/* ========================================================================= */}
             {activeTab === 'testimonials' && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-tab-fade">
                 
                 {/* Header & Quick Action */}
                 <div className="p-5 sm:p-6 rounded-3xl bg-card border border-border/80 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

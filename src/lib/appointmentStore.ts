@@ -7,7 +7,7 @@ export const APPOINTMENTS_KEY = 'dr_appointments_list';
 // Known Doctor / Admin Phone numbers for instant auto-recognition
 export const DOCTOR_ADMIN_PHONES = ['09121112233', '09120000000', '09129998877'];
 
-export const SLOTS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+export const SLOTS = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
 
 // Helper to get next N work days (excluding Friday=5)
 export function getNextAvailableWorkDays(count = 12) {

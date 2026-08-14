@@ -16,6 +16,7 @@ import { useLanguage } from '../i18n/LanguageProvider';
 import { Reveal } from '../components/Reveal';
 import { SectionHeading } from '../components/site/SectionHeading';
 import { HospitalLocationMap } from '../components/site/HospitalLocationMap';
+import { DOCTOR_NIKAN_URL } from '../lib/siteConstants';
 
 export const Visits: React.FC = () => {
   const { t, lang, isRTL } = useLanguage();
@@ -72,14 +73,15 @@ export const Visits: React.FC = () => {
               </div>
 
               <div className="mt-8 pt-6 border-t border-border/60">
-                <Link
-                  to="/panel"
-                  state={{ visit_type: 'in_person' }}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:opacity-95 transition-all"
+                <a
+                  href={DOCTOR_NIKAN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:opacity-95 transition-all cursor-pointer"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>{t('book_in_person')}</span>
-                </Link>
+                  <span>{lang === 'fa' ? 'نوبت‌دهی در سایت بیمارستان نیکان' : 'Book on Nikan Hospital Site'}</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </Reveal>
@@ -118,11 +120,10 @@ export const Visits: React.FC = () => {
               <div className="mt-8 pt-6 border-t border-border/60">
                 <Link
                   to="/panel"
-                  state={{ visit_type: 'online' }}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:opacity-95 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm shadow-md btn-soft-glow hover:opacity-95 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>{t('book_online')}</span>
+                  <span>{lang === 'fa' ? 'درخواست نوبت و پذیرش آنلاین در سایت' : 'Book Online Consultation (Instant)'}</span>
                 </Link>
               </div>
             </div>

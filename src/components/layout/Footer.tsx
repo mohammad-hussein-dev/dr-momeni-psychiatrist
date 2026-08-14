@@ -13,7 +13,8 @@ import {
   Sparkles,
   Building2,
   Calendar,
-  HeartHandshake
+  HeartHandshake,
+  Car
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
 import { 
@@ -31,7 +32,9 @@ import {
   MEDICAL_COUNCIL_FA,
   MEDICAL_COUNCIL_CODE,
   HOSPITAL_CENTRAL_PHONE_FA,
-  HOSPITAL_CENTRAL_PHONE
+  HOSPITAL_CENTRAL_PHONE,
+  PARKING_NAME_FA,
+  PARKING_NAME_EN
 } from '../../lib/siteConstants';
 import { BrandLogo } from '../site/BrandLogo';
 
@@ -231,6 +234,10 @@ export const Footer: React.FC = () => {
                 <p className="leading-snug text-foreground/90 font-medium">
                   {lang === 'fa' ? ADDRESS_FA : ADDRESS_EN}
                 </p>
+                <div className="flex items-center gap-1 mt-1 text-[11px] text-primary font-medium">
+                  <Car className="w-3 h-3 shrink-0" />
+                  <span>{lang === 'fa' ? PARKING_NAME_FA : PARKING_NAME_EN}</span>
+                </div>
                 
                 {/* Fast App Jump Links */}
                 <div className="flex flex-wrap items-center gap-1.5 mt-2.5">

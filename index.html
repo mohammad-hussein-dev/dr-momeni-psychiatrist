@@ -11,6 +11,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      (function() {
+        try {
+          // Clear any legacy dark default keys
+          var legacyTheme = localStorage.getItem('dr_theme');
+          if (legacyTheme === 'dark' && !localStorage.getItem('dr_momeni_theme_v1')) {
+            localStorage.removeItem('dr_theme');
+          }
+          var saved = localStorage.getItem('dr_momeni_theme_v1');
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.style.colorScheme = 'light';
+            if (!saved) {
+              localStorage.setItem('dr_momeni_theme_v1', 'light');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
     <div id="root"></div>

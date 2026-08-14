@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Phone, 
   Calendar, 
@@ -27,8 +27,10 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [session, setSession] = useState<UserSession | null>(() => getActiveSession());
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isDoctorOrAdmin = session?.role === 'doctor_admin';
+  const isPatientLoggedIn = session?.role === 'patient';
 
   // Listen to auth changes in real-time
   useEffect(() => {
@@ -61,13 +63,12 @@ export const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const handleDoctorLogout = () => {
-    if (window.confirm(lang === 'fa' ? 'آیا مایل به خروج از حساب پزشک هستید؟' : 'Exit doctor session?')) {
-      clearSession();
-      setSession(null);
-      window.dispatchEvent(new Event('auth_state_changed'));
-      window.location.href = '/';
-    }
+  const handleLogoutSession = () => {
+    clearSession();
+    localStorage.removeItem('dr_patient_phone');
+    setSession(null);
+    setMobileMenuOpen(false);
+    navigate('/');
   };
 
   const navLinks = [
@@ -184,16 +185,49 @@ export const Header: React.FC = () => {
                 {/* Fast Doctor Logout Button */}
                 <button
                   type="button"
-                  onClick={handleDoctorLogout}
+                  onClick={handleLogoutSession}
                   title={lang === 'fa' ? 'خروج از حساب پزشک' : 'Exit Doctor Session'}
-                  className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 transition-colors cursor-pointer shrink-0"
+                  className="inline-flex items-center justify-center h-8 px-2.5 rounded-full border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 transition-colors cursor-pointer shrink-0 text-xs font-bold gap-1"
                 >
                   <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden xl:inline">{lang === 'fa' ? 'خروج پزشک' : 'Logout'}</span>
+                </button>
+              </>
+            ) : isPatientLoggedIn ? (
+              <>
+                {/* Patient Logged In: Panel & Visits Link */}
+                <Link
+                  to="/panel"
+                  title={lang === 'fa' ? 'ورود به پنل و پرونده نوبت‌های مراجع' : 'Patient Appointments & File'}
+                  className="inline-flex items-center gap-1.5 h-8 px-3 sm:px-3.5 rounded-full text-xs font-bold border border-primary/30 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all shrink-0"
+                >
+                  <User className="w-3.5 h-3.5 text-primary" />
+                  <span>{session?.name || (lang === 'fa' ? 'پنل مراجع' : 'Patient Panel')}</span>
+                </Link>
+
+                {/* New Booking CTA */}
+                <Link
+                  to="/panel"
+                  className="hidden sm:inline-flex items-center gap-1.5 h-8 px-3 sm:px-4 rounded-full text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20 shadow-xs hover:shadow-sm transition-all active:scale-95 shrink-0 whitespace-nowrap"
+                >
+                  <Calendar className="w-3.5 h-3.5 shrink-0" />
+                  <span>{t('book_now')}</span>
+                </Link>
+
+                {/* Prominent Patient Logout Button in Header */}
+                <button
+                  type="button"
+                  onClick={handleLogoutSession}
+                  title={lang === 'fa' ? 'خروج از حساب مراجع' : 'Logout Patient'}
+                  className="inline-flex items-center justify-center h-8 px-2.5 sm:px-3 rounded-full border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500 hover:text-white text-rose-600 dark:text-rose-400 transition-all cursor-pointer shrink-0 text-xs font-bold gap-1 shadow-2xs"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{lang === 'fa' ? 'خروج مراجع' : 'Logout'}</span>
                 </button>
               </>
             ) : (
               <>
-                {/* Patient Portal Link (نوبت‌های من) */}
+                {/* Guest / Visitor: Patient Portal Link */}
                 <Link
                   to="/panel"
                   title={lang === 'fa' ? 'پیگیری نوبت‌ها و پرونده مراجع' : 'Patient Appointments'}
@@ -296,15 +330,50 @@ export const Header: React.FC = () => {
 
                     <button
                       type="button"
-                      onClick={handleDoctorLogout}
+                      onClick={handleLogoutSession}
                       className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-400 text-xs font-bold transition-colors cursor-pointer"
                     >
                       <LogOut className="w-3.5 h-3.5" />
                       <span>{lang === 'fa' ? 'خروج از حساب پزشک' : 'Logout Doctor Account'}</span>
                     </button>
                   </div>
+                ) : isPatientLoggedIn ? (
+                  /* Logged-In Patient Mobile Drawer Options */
+                  <div className="space-y-2">
+                    <div className="p-3 rounded-2xl bg-primary/10 border border-primary/25 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center text-xs">
+                          {session?.name ? session.name.slice(0, 1) : <User className="w-4 h-4" />}
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-foreground">{session?.name || (lang === 'fa' ? 'مراجع محترم' : 'Patient')}</p>
+                          <p className="text-[10px] text-muted-foreground font-mono" dir="ltr">{session?.phone}</p>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-primary/20 text-primary">
+                        {lang === 'fa' ? 'حساب فعال' : 'Active'}
+                      </span>
+                    </div>
+
+                    <Link
+                      to="/panel"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow-xs"
+                    >
+                      <Calendar className="w-4 h-4" />
+                      <span>{lang === 'fa' ? 'مدیریت و پیگیری نوبت‌های من' : 'My Appointments & Portal'}</span>
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={handleLogoutSession}
+                      className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-400 text-xs font-bold transition-colors cursor-pointer"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      <span>{lang === 'fa' ? 'خروج از حساب مراجع' : 'Logout Patient Account'}</span>
+                    </button>
+                  </div>
                 ) : (
-                  /* Patient / Guest Mobile Drawer Options */
+                  /* Guest Mobile Drawer Options */
                   <>
                     <Link
                       to="/panel"
