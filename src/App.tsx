@@ -14,6 +14,7 @@ import { Testimonials } from './pages/Testimonials';
 import { Contact } from './pages/Contact';
 import { PatientPanel } from './pages/PatientPanel';
 import { AdminPanel } from './pages/AdminPanel';
+import { Developer } from './pages/Developer';
 import { NotFound } from './pages/NotFound';
 
 export default function App() {
@@ -35,6 +36,10 @@ export default function App() {
               <Route path="panel" element={<PatientPanel />} />
               <Route path="admin" element={<AdminPanel />} />
               <Route path="doctor" element={<AdminPanel />} />
+              <Route path="developer" element={<Developer />} />
+              <Route path="dev" element={<Developer />} />
+              <Route path="creator" element={<Developer />} />
+              <Route path="engineer" element={<Developer />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

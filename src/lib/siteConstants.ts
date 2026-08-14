@@ -59,3 +59,21 @@ export const ABOUT_IMG = "/doctor.png";
 export const CLINIC_ROOM_IMG = "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80";
 export const CONSULTATION_IMG = "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80";
 export const MINDFUL_IMG = "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80";
+
+// Official Platform Developer & Software Architect Profile (Mohammad Hussein)
+export const DEVELOPER_NAME_FA = "محمد حسین";
+export const DEVELOPER_NAME_EN = "Mohammad Hussein";
+export const DEVELOPER_ROLE_FA = "مهندس ارشد نرم‌افزار، معمار سامانه‌های تحت وب و طراح پلتفرم‌های سلامت دیجیتال";
+export const DEVELOPER_ROLE_EN = "Senior Software Engineer, Web Architect & Digital Health Systems Specialist";
+export const DEVELOPER_WEBSITE_URL = "https://mohammad-hussein-dev.github.io/mohammad-hussein-dev/";
+export const DEVELOPER_GITHUB_URL = "https://github.com/mohammad-hussein-dev";
+export const DEVELOPER_GITLAB_URL = "https://gitlab.com/mohammad-hussein-dev";
+export const DEVELOPER_LINKEDIN_URL = "https://linkedin.com/in/mohammad-hussein-dev";
+export const DEVELOPER_EMAIL = "king.mohamd.09876@gmail.com";
+export const DEVELOPER_TELEGRAM_URL = "https://t.me/mohammad_hussein_dev";
+export const DEVELOPER_ORDER_WHATSAPP_URL = "https://wa.me/989934420967?text=%D8%B3%D9%84%D8%A7%D9%85%20%D8%AC%D9%86%D8%A7%D8%A8%20%D9%85%D9%87%D9%86%D8%AF%D8%B3%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%AD%D8%B3%DB%8C%D9%86%D8%8C%20%D8%AC%D9%87%D8%AA%20%D8%B3%D9%81%D8%A7%D8%B1%D8%B4%20%D8%B3%D8%A7%DB%8C%D8%AA%20%D9%88%20%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87%20%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C%2F%D8%B3%D8%A7%D8%B2%D9%85%D8%A7%D9%86%DB%8C%20%D9%BE%DB%8C%D8%A7%D9%85%20%D9%85%DB%8C%E2%80%8C%D8%AF%D9%87%D9%85.";
+export const PLATFORM_VERSION = "v2.6.4-production";
+export const PLATFORM_BUILD_DATE = "2026-08";
+export const PLATFORM_SIGNATURE = "MOHAMMAD-HUSSEIN-DEV-SEC-MED-2026-AUTH-9223";
+export const DEVELOPER_PORTRAIT_IMG = "/developer.jpg";
+

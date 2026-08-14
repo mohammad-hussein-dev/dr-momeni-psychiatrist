@@ -38,6 +38,7 @@ export const translations = {
     nav_testimonials: "نظرات مراجعین",
     nav_contact: "تماس",
     nav_panel: "پنل نوبت‌دهی",
+    nav_developer: "توسعه‌دهنده سیستم",
 
     // Common Actions
     book_now: "رزرو نوبت",
@@ -289,6 +290,7 @@ export const translations = {
     nav_testimonials: "Reviews",
     nav_contact: "Contact",
     nav_panel: "Portal",
+    nav_developer: "System Developer",
 
     // Common Actions
     book_now: "Book Visit",

@@ -79,6 +79,7 @@ export const Header: React.FC = () => {
     { to: '/blog', label: t('nav_blog') },
     { to: '/testimonials', label: t('nav_testimonials') },
     { to: '/contact', label: t('nav_contact') },
+    { to: '/developer', label: lang === 'fa' ? 'سازنده سیستم' : 'Developer' },
   ];
 
   return (
