@@ -1,0 +1,6 @@
+{
+  "name": "Dr. Fatemeh Momeni | Psychiatrist",
+  "description": "وب‌سایت رسمی دکتر فاطمه مومنی، متخصص اعصاب و روان (روان‌پزشک) دارای بورد تخصصی - رزرو نوبت حضوری بیمارستان نیکان غرب و نوبت آنلاین",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+@layer base {
+  /* LIGHT MODE (DEFAULT): Warm Clinical Alabaster, Deep Teal & Gentle Sky */
+  :root {
+    --background: 36 54% 97.5%; /* #FCF9F5 */
+    --foreground: 193 9% 19%; /* #2C3335 */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 193 9% 19%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 193 9% 19%;
+    --primary: 192 62% 31%; /* #1E6B7E Deep Teal */
+    --primary-foreground: 36 54% 97.5%;
+    --secondary: 188 46% 68%; /* #88C9D3 Soft Sky */
+    --secondary-foreground: 192 62% 31%;
+    --muted: 188 30% 93%; /* #EAF0F1 */
+    --muted-foreground: 192 10% 42%; /* #6B7A80 */
+    --accent: 188 46% 90%; /* #DBEEF3 */
+    --accent-foreground: 192 62% 25%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 188 24% 87%; /* #D5E0E2 */
+    --input: 188 24% 87%;
+    --ring: 192 62% 31%;
+    --soft-sky: 188 46% 68%;
+    --alabaster: 36 54% 97.5%;
+    --charcoal: 193 9% 19%;
+    --teal-deep: 192 62% 31%;
+    --cream: 36 45% 94%; /* #F7F1E9 */
+    --radius: 1.1rem;
+
+    --font-heading: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --font-body: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --font-display: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* DARK MODE: Deep Neuro-Atmosphere, Midnight Teal & Calming Warm Gold */
+  .dark {
+    --background: 216 28% 7%; /* #0c1017 deep midnight */
+    --foreground: 210 20% 92%; /* #e2e8f0 crisp readable text */
+    --card: 217 24% 11%; /* #141b24 elevated slate-card */
+    --card-foreground: 210 20% 96%;
+    --popover: 217 26% 13%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 187 68% 46%; /* #26b2c4 luminous calming teal for psychiatry */
+    --primary-foreground: 216 28% 7%;
+    --secondary: 217 20% 18%;
+    --secondary-foreground: 187 68% 65%;
+    --muted: 217 22% 14%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 217 24% 16%;
+    --accent-foreground: 187 68% 75%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 20% 18%; /* subtle micro-borders */
+    --input: 217 20% 20%;
+    --ring: 187 68% 46%;
+    --soft-sky: 187 50% 60%;
+    --alabaster: 216 28% 7%;
+    --charcoal: 217 24% 11%;
+    --teal-deep: 187 68% 46%;
+    --cream: 217 26% 9.5%;
+  }
+
+  html[lang="en"] {
+    --font-heading: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-body: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-display: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-skysoft: hsl(var(--soft-sky));
+  --color-alabaster: hsl(var(--alabaster));
+  --color-charcoal: hsl(var(--charcoal));
+  --color-tealdeep: hsl(var(--teal-deep));
+  --color-cream: hsl(var(--cream));
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  @media (min-width: 640px) {
+    body {
+      font-size: 16px;
+    }
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+  }
+}
+
+.glass {
+  background: hsl(var(--background) / 0.82);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid hsl(var(--border) / 0.6);
+}
+
+.glass-card {
+  background: hsl(var(--card) / 0.85);
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  border: 1px solid hsl(var(--border) / 0.7);
+}
+
+.section-pad {
+  padding-top: clamp(3rem, 5.5vw, 5.5rem);
+  padding-bottom: clamp(3rem, 5.5vw, 5.5rem);
+}
+
+.btn-soft-glow {
+  box-shadow: 0 8px 30px -8px hsl(var(--primary) / 0.45);
+}
+
+.breathing-pulse {
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsl(var(--secondary) / 0.35);
+  }
+  50% {
+    transform: scale(1.012);
+    box-shadow: 0 0 0 12px hsl(var(--secondary) / 0);
+  }
+}
+
+.lang-fade {
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+.lang-fade.swapping {
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.in {
+  opacity: 1;
+  transform: none;
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.6s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 16px hsl(var(--primary) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0);
+  }
+}
+
+/* ========================================================================= */
+/* Custom Sleek Scrollbar (Global & .custom-scrollbar) */
+/* ========================================================================= */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.28);
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.55);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.35) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.32);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.65);
+}

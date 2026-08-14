@@ -1,0 +1,574 @@
+export const translations = {
+  fa: {
+    // Branding & Header
+    brand_name: "دکتر فاطمه مومنی",
+    brand_role: "پزشک و متخصص اعصاب و روان (روانپزشک)",
+    board_certified: "دارای بورد تخصصی روان‌پزشکی",
+    therapist_title: "روان‌درمانگر و روانپزشک",
+    cities_exp: "سابقه فعالیت در شهر رشت، شیراز و تهران",
+    hospital: "بیمارستان نیکان غرب",
+    hospital_url_label: "وب‌سایت بیمارستان نیکان",
+    hospital_doctor_profile: "پروفایل در سایت بیمارستان نیکان",
+    medical_council: "کد نظام پزشکی: ۱۳۳۴۳۹",
+    medical_council_code: "۱۳۳۴۳۹",
+    hospital_central_phone: "۰۲۱-۲۹۱۲۹",
+    hospital_central_phone_label: "تلفن گویای بیمارستان نیکان",
+    tehran: "تهران",
+    phone: "۰۹۹۳۴۴۲۰۹۶۷",
+    phone_label: "شماره تماس مطب",
+    
+    // Navigation Apps
+    nav_apps_title: "مسیریابی هوشمند در اپلیکیشن‌های نقشه",
+    nav_apps_desc: "جهت مسیریابی آسان به بیمارستان نیکان غرب، اپلیکیشن مورد نظر خود را انتخاب نمایید:",
+    nav_google_maps: "گوگل مپ (Google Maps)",
+    nav_waze: "ویز (Waze)",
+    nav_neshan: "نشان (Neshan)",
+    nav_balad: "بلد (Balad)",
+    nav_apple: "اپل مپ (Apple Maps)",
+    nav_copy_address: "کپی آدرس دقیق",
+    nav_copied: "آدرس با موفقیت کپی شد",
+    nav_coordinates: "مختصات دقیق (GPS)",
+
+    // Navigation
+    nav_home: "خانه",
+    nav_about: "درباره پزشک",
+    nav_services: "خدمات تخصصی",
+    nav_visits: "نحوه ویزیت",
+    nav_blog: "مقالات",
+    nav_testimonials: "نظرات مراجعین",
+    nav_contact: "تماس",
+    nav_panel: "پنل نوبت‌دهی",
+
+    // Common Actions
+    book_now: "رزرو نوبت",
+    book_in_person: "رزرو نوبت حضوری",
+    book_online: "رزرو نوبت آنلاین",
+    call_direct: "تماس مستقیم با مطب",
+    whatsapp: "ارتباط در واتس‌اپ",
+    view_services: "مشاهده تمام خدمات",
+    read_more: "مطالعه بیشتر",
+    view_all_posts: "مشاهده همه مقالات",
+    view_all_testimonials: "مشاهده همه نظرات",
+    send_message: "ارسال پیام به مطب",
+    book_this_service: "رزرو این خدمت",
+    back_to_blog: "بازگشت به مقالات",
+    back_home: "بازگشت به صفحه اصلی",
+    contact_us: "تماس با ما",
+    learn_more: "اطلاعات بیشتر",
+    search: "جستجو...",
+    close: "بستن",
+    all: "همه",
+    lang_switch: "English",
+    made_with: "طراحی شده با استانداردهای نظام پزشکی",
+    loading: "در حال بارگذاری...",
+
+    // Hero Section
+    hero_kicker: "پزشک و روان‌پزشک متخصص • دارای بورد تخصصی کشوری",
+    hero_title: "روان‌پزشکی پیشرفته، درمان‌های نوین مغز و روان‌درمانی تحلیلی",
+    hero_subtitle: "دکتر فاطمه مومنی، متخصص اعصاب و روان با تجربه گسترده بالینی و دانشگاهی در رشت، شیراز و تهران — همراهی علمی، محرمانه و بدون قضاوت برای درمان ریشه‌ای اختلالات خلقی، اضطراب، خواب و چالش‌های روان‌شناختی به‌صورت حضوری (بیمارستان نیکان غرب) و آنلاین سراسری.",
+    hero_badge: "دارای بورد تخصصی اعصاب و روان",
+    hero_cities_badge: "رشت • شیراز • تهران",
+    hero_card_inperson_title: "ویزیت حضوری",
+    hero_card_inperson_desc: "در محیطی امن و آرام در بیمارستان نیکان غرب تهران",
+    hero_card_online_title: "ویزیت آنلاین و تصویری",
+    hero_card_online_desc: "مشاوره تخصصی و نسخه‌نویسی آنلاین برای مراجعین سراسر کشور و خارج از ایران",
+
+    // Trust Factors
+    trust_kicker: "معیارهای تخصص و اطمینان",
+    trust_board: "دارای بورد تخصصی",
+    trust_board_desc: "متخصص اعصاب و روان با گواهینامه معتبر بورد تخصصی کشوری",
+    trust_cities: "سابقه طبابت در ۳ کلان‌شهر",
+    trust_cities_desc: "تجربه درخشان درمانی و دانشگاهی در شهرهای رشت، شیراز و تهران",
+    trust_exp: "روان‌پزشک و روان‌درمانگر",
+    trust_exp_desc: "تلفیق دانش دارودرمانی، تکنولوژی‌های نوین مغز و روان‌درمانی‌های تحلیلی و فردی",
+    trust_hospital: "بیمارستان نیکان غرب",
+    trust_hospital_desc: "محیط مجهز بالینی، امکانات تشخیصی پیشرفته و دسترسی سریع",
+    trust_online: "ویزیت آنلاین امن",
+    trust_online_desc: "جلسات تصویری محرمانه و کدگذاری شده با حفظ کامل رازداری پزشکی",
+
+    // Services Section
+    services_kicker: "خدمات تشخیصی و درمانی",
+    services_title: "خدمات تخصصی اعصاب، روان و روان‌درمانی",
+    services_intro: "ارزیابی جامع بالینی، تنظیم دارویی دقیق، ارزیابی‌های پیشرفته امواج مغز و جلسات روان‌درمانی هدفمند بر اساس پروتکل‌های معتبر بین‌المللی",
+    
+    // 9 Detailed Services
+    service_depression_title: "درمان اختلالات افسردگی و دوقطبی",
+    service_depression_desc: "تشخیص و درمان انواع افسردگی اساسی، اختلال دوقطبی (تیپ ۱ و ۲)، افسردگی فصلی، بی‌انگیزگی و اختلالات خلقی پایدار با متدهای تلفیقی.",
+    
+    service_anxiety_title: "درمان اختلالات اضطرابی و وسواسی",
+    service_anxiety_desc: "کنترل و درمان حملات پانیک، اضطراب فراگیر (GAD)، وسواس‌های فکری و عملی (OCD)، فوبیاهای خاص، اضطراب اجتماعی و استرس پس از تروما (PTSD).",
+
+    service_cognitive_title: "درمان اختلال شناختی و سالمندان (آلزایمر، دمانس و پارکینسون)",
+    service_cognitive_desc: "ارزیابی تخصصی حافظه، پیشگیری و کندسازی روند آلزایمر، مدیریت علائم روان‌پزشکی دمانس و بیماری پارکینسون و بهبود کیفیت زندگی سالمندان.",
+
+    service_child_title: "درمان اختلالات کودک و نوجوان",
+    service_child_desc: "تشخیص و درمان بیش‌فعالی و عدم تمرکز (ADHD)، طیف اوتیسم، اختلال یادگیری، شب‌ادراری، پرخاشگری، اضطراب جدایی و چالش‌های خلقی بلوغ.",
+
+    service_personality_title: "درمان اختلالات شخصیت",
+    service_personality_desc: "روان‌درمانی و مدیریت دارویی اختلال شخصیت مرزی (BPD)، خودشیفته (NPD)، وابسته، وسواسی-جبری و الگوهای رفتاری آسیب‌رسان.",
+
+    service_sleep_title: "درمان اختلالات خواب",
+    service_sleep_desc: "بررسی ریشه‌ای و درمان بی‌خوابی مزمن (Insomnia)، پرخوابی، کابوس‌های شبانه مکرر، سندروم پای بی‌قرار و اختلالات ریتم خواب و بیداری.",
+
+    service_sexual_title: "درمان اختلالات جنسی و زناشویی",
+    service_sexual_desc: "درمان تخصصی زودانزالی، اختلال نعوظ، واژینیسموس، کاهش میل جنسی، وسواس‌های جنسی و مشاوره تخصصی در اختلالات هویت جنسی.",
+
+    service_non_pharma_title: "درمان‌های غیردارویی و تکنولوژی‌های مغزی (EEG, QEEG, rTMS, tDCS)",
+    service_non_pharma_desc: "انجام و تفسیر نوار مغز (EEG)، نقشه رنگی مغزی (QEEG)، نوروفیدبک، تحریک مغناطیسی مغز (rTMS) و تحریک الکتریکی مغز (tDCS).",
+
+    service_psychotherapy_title: "روان‌درمانی فردی، خانواده‌درمانی و زوج‌درمانی",
+    service_psychotherapy_desc: "جلسات روان‌درمانی بینش‌مدار، طرحواره‌درمانی، درمان شناختی-رفتاری (CBT)، حل تعارضات زناشویی و خانواده‌درمانی تحلیلی.",
+
+    // About Section
+    about_kicker: "معرفی و سوابق علمی",
+    about_title: "دکتر فاطمه مومنی؛ تخصص، تجربه و تعهد اخلاقی",
+    about_p1: "دکتر فاطمه مومنی، پزشک و متخصص اعصاب و روان (روانپزشک) و دارای بورد تخصصی کشوری هستند. ایشان با سابقه درخشان فعالیت بالینی، دانشگاهی و مشاوره‌ای در شهرهای رشت، شیراز و تهران، سال‌هاست که در تشخیص دقیق و درمان جامع اختلالات روان‌پزشکی و روان‌درمانی فعالیت دارند.",
+    about_p2: "دیدگاه درمانی دکتر مومنی بر پایه رویکرد چندبعدی زیستی-روانی-اجتماعی بنا شده است؛ به این معنا که علاوه بر به‌کارگیری پیشرفته‌ترین متدهای دارودرمانی و ابزارهای غیردارویی (نظیر نقشه مغزی و نورومدولاسیون)، به روان‌درمانی عمیق، درک ریشه‌های روانی و همراهی صبورانه با مراجع اهمیت بنیادین می‌دهند.",
+    about_cities_title: "سابقه فعالیت در شهرهای رشت، شیراز و تهران",
+    about_cities_desc: "بهره‌گیری از تجارب بالینی متنوع در قطب‌های پزشکی کشور و تعامل گسترده با مراجعین با پیشینه‌های گوناگون فرهنگی و روان‌شناختی.",
+    about_philo_title: "فلسفه درمان و رویکرد بالینی",
+    about_philo_p: "سلامت ذهن و مغز، پیوند ناگسستنی با ساختار عصب‌شناختی و جهان درونی روان دارد. در اتاق درمان ما، دارو نقش تثبیت‌کننده و کاهنده رنج زیستی را دارد و همراه با روان‌درمانی و تکنیک‌های غیردارویی، بستری ایمن برای کشف خویشتن، التیام آسیب‌ها و بازگشت آرامش پایدار مهیا می‌گردد.",
+    about_creds_title: "مدارک، سوابق و شایستگی‌ها",
+    about_creds_edu: "دکترای حرفه‌ای پزشکی و تخصص اعصاب و روان",
+    about_creds_board: "دارای بورد تخصصی روان‌پزشکی کشور",
+    about_creds_cities: "سابقه طبابت بالینی در رشت، شیراز و تهران",
+    about_creds_therapist: "روان‌درمانگر، زوج‌درمانگر و مشاور فردی",
+    about_creds_hospital: "فعالیت در بیمارستان تخصصی نیکان غرب تهران",
+    about_creds_neuro: "مسلط به درمان‌های غیردارویی، EEG، QEEG و تکنولوژی‌های مغزی",
+    about_creds_online: "ارائه ویزیت آنلاین به مراجعین سراسر ایران و هموطنان خارج از کشور",
+    about_why_title: "چرا مراجعین به دکتر مومنی اعتماد می‌کنند؟",
+    about_why_p: "رازداری بی‌قیدوشرط پزشکی، ارزیابی بدون قضاوت، تسلط بر هر دو بال درمان (دارودرمانی + روان‌درمانی و روش‌های غیردارویی) و پیگیری دلسوزانه مراجعین تا بهبودی کامل.",
+
+    // Visits Section
+    visits_kicker: "نحوه دریافت نوبت و ویزیت",
+    visits_title: "ویزیت حضوری و مشاوره آنلاین تصویری",
+    visits_intro: "امکان دریافت خدمات تخصصی روان‌پزشکی و روان‌درمانی برای ساکنان تهران به صورت حضوری در بیمارستان نیکان غرب، و برای ساکنان شهرستان‌ها (از جمله رشت و شیراز) و خارج از کشور به صورت آنلاین فراهم است.",
+    visit_inperson_title: "ویزیت حضوری در بیمارستان نیکان غرب",
+    visit_inperson_desc: "محیطی آرام، مجهز و دارای بالاترین استانداردهای کلینیکی در غرب تهران جهت معاینه دقیق، ارزیابی‌های پاراکلینیک و نوار مغز.",
+    visit_inperson_steps: [
+      "رزرو نوبت از طریق سایت، پنل مراجعین یا تماس تلفنی با مطب",
+      "حضور در کلینیک بیمارستان نیکان غرب در زمان مقرر",
+      "ارزیابی تشخیصی، مصاحبه بالینی جامع، بررسی‌های پاراکلینیک و تجویز الکترونیک"
+    ],
+    visit_online_title: "ویزیت آنلاین و مشاوره ویدیویی",
+    visit_online_desc: "ارتباط تصویری محرمانه بر بستر پلتفرم اختصاصی و رمزنگاری‌شده بدون نیاز به رفت‌وآمد برای بیماران سراسر کشور و خارج از کشور.",
+    visit_online_steps: [
+      "ثبت مشخصات و انتخاب ویزیت آنلاین در بخش رزرواسیون سایت",
+      "دریافت لینک اختصاصی ورود به جلسه تصویری در پیام‌رسان واتس‌اپ",
+      "حضور در جلسه و دریافت مشاوره، برنامه درمانی و نسخه الکترونیک"
+    ],
+    visit_address_title: "آدرس مطب حضوری",
+    visit_address: "تهران، بزرگراه همت غرب، نرسیده به میدان دریاچه شهدای خلیج فارس، بیمارستان نیکان غرب، طبقه کلینیک‌های اعصاب و روان",
+    visit_online_security_title: "امنیت و رازداری پزشکی در ویزیت آنلاین",
+    visit_online_security_desc: "جلسات تصویری در محیطی کاملاً خصوصی، محرمانه و بدون هیچ‌گونه ضبط صوتی یا تصویری برگزار می‌گردد.",
+    visit_map_hint: "دسترسی آسان از بزرگراه‌های همت، حکیم و آزادگان با پارکینگ اختصاصی بیمارستان",
+
+    // Blog Section
+    blog_kicker: "آموزش و آگاهی‌بخشی",
+    blog_title: "مقالات تخصصی روان‌پزشکی و سلامت ذهن",
+    blog_intro: "نوشته‌ها و یادداشت‌های علمی و کاربردی دکتر فاطمه مومنی در جهت ارتقای سواد سلامت روان و پاسخ به پرسش‌های شایع مراجعین.",
+    blog_read_min: "دقیقه مطالعه",
+    blog_category_all: "همه مقالات",
+    blog_related: "مقالات مرتبط",
+    blog_empty: "مقاله‌ای در این دسته‌بندی یافت نشد.",
+
+    // Testimonials
+    testi_kicker: "دیدگاه‌ها و تجربیات مراجعین",
+    testi_title: "روایت‌هایی از مسیر بازیابی سلامت و آرامش",
+    testi_intro: "نظرات ثبت‌شده توسط مراجعینی که تجربه درمان دارویی، روان‌درمانی و مشاوره‌های دکتر مومنی را داشته‌اند.",
+    testi_empty: "هنوز نظری ثبت نشده است.",
+    testi_privacy_note: "به منظور حفظ کامل هویت و محرمانگی، نام مراجعین با حروف اختصاری ذکر شده است.",
+
+    // Contact
+    contact_kicker: "تماس و هماهنگی",
+    contact_title: "راه‌های ارتباطی با مطب دکتر فاطمه مومنی",
+    contact_intro: "برای رزرو نوبت، راهنمایی در خصوص جلسات یا اطلاعات بیشتر، همکاران ما آماده پاسخگویی هستند.",
+    contact_phone_title: "شماره تماس مستقیم",
+    contact_whatsapp_title: "ارتباط و پشتیبانی واتس‌اپ",
+    contact_address_title: "آدرس کلینیک حضوری",
+    contact_address_val: "تهران، بزرگراه همت غرب، بیمارستان نیکان غرب، بخش کلینیک‌های اعصاب و روان",
+    contact_hours_title: "ساعات پاسخگویی مطب",
+    contact_hours_val: "شنبه تا چهارشنبه: از ساعت ۹:۰۰ الی ۱۸:۰۰",
+    contact_form_name: "نام و نام خانوادگی",
+    contact_form_phone: "شماره تلفن همراه",
+    contact_form_message: "شرح کوتاه پیام یا درخواست شما",
+    contact_form_send: "ارسال پیام",
+    contact_success: "پیام شما دریافت شد. در اسرع وقت از سوی مطب با شما تماس گرفته خواهد شد.",
+
+    // Patient Panel & Booking
+    panel_kicker: "سامانه اختصاصی نوبت‌دهی",
+    panel_title: "پنل مراجعین دکتر فاطمه مومنی",
+    panel_login_title: "ورود به سامانه نوبت‌دهی",
+    panel_login_desc: "شماره تلفن همراه خود را جهت دریافت کد تایید و دسترسی به سامانه وارد کنید.",
+    panel_phone_label: "شماره موبایل (مثال: 09934420967)",
+    panel_send_otp: "دریافت کد ورود پیامکی",
+    panel_otp_label: "کد تایید ۴ رقمی",
+    panel_verify_otp: "تایید و ورود به حساب",
+    panel_otp_hint: "کد تایید تستی برای ورود آنی:",
+    panel_resend: "ارسال مجدد کد",
+    panel_wrong_code: "کد وارد شده صحیح نمی‌باشد. لطفاً مجدداً امتحان نمایید.",
+    panel_welcome: "خوش آمدید",
+    panel_upcoming: "نوبت‌های فعال شما",
+    panel_history: "سوابق نوبت‌های گذشته",
+    panel_new_appointment: "ثبت نوبت جدید",
+    panel_no_upcoming: "نوبت فعالی ثبت نشده است.",
+    panel_no_history: "سابقه‌ای در سیستم وجود ندارد.",
+    panel_cancel: "لغو نوبت",
+    panel_cancel_confirm: "آیا از لغو این نوبت اطمینان دارید؟",
+    panel_logout: "خروج از حساب کاربری",
+
+    // Booking Stepper
+    bk_step_service: "۱. انتخاب خدمت تخصصی",
+    bk_step_type: "۲. شیوه ویزیت",
+    bk_step_time: "۳. تاریخ و ساعت",
+    bk_step_confirm: "۴. تایید نهایی",
+    bk_select_service: "لطفاً نوع خدمت درخواستی را مشخص فرمایید:",
+    bk_select_type: "مایل به ویزیت به چه صورتی هستید؟",
+    bk_select_date: "انتخاب روز ویزیت:",
+    bk_select_slot: "ساعت‌های در دسترس برای رزرو:",
+    bk_confirm_summary: "خلاصه مشخصات نوبت رزرو شده:",
+    bk_service: "خدمت درمانی",
+    bk_type: "نوع ویزیت",
+    bk_date: "تاریخ انتخابی",
+    bk_time: "ساعت",
+    bk_name: "نام و نام خانوادگی بیمار",
+    bk_confirm_btn: "تایید و ثبت نهایی نوبت",
+    bk_next: "مرحله بعدی",
+    bk_back: "مرحله قبلی",
+    bk_success: "نوبت شما با موفقیت در سیستم ثبت گردید. جهت هماهنگی نهایی با شما تماس گرفته خواهد شد.",
+    bk_next_available: "نزدیک‌ترین زمان‌های در دسترس",
+
+    // Footer
+    footer_about: "دکتر فاطمه مومنی؛ متخصص اعصاب و روان، دارای بورد تخصصی و روان‌درمانگر با سابقه فعالیت بالینی در رشت، شیراز و تهران. ارائه خدمات جامع تشخیصی، دارودرمانی، تکنولوژی‌های نوین مغزی و روان‌درمانی در محیطی امن و کاملاً محرمانه.",
+    footer_quick: "دسترسی سریع",
+    footer_services_title: "خدمات بالینی و تخصصی",
+    footer_contact: "اطلاعات تماس و نشانی",
+    footer_privacy: "حفظ حریم خصوصی و رازداری پزشکی بالاترین تعهد اخلاقی ماست.",
+    footer_rights: "تمامی حقوق مادی و معنوی برای وب‌سایت رسمی دکتر فاطمه مومنی محفوظ است.",
+    footer_privacy_note: "ارائه خدمات با رعایت کامل اصول رازداری و کدهای اخلاقی سازمان نظام پزشکی."
+  },
+
+  en: {
+    // Branding & Header
+    brand_name: "Dr. Fatemeh Momeni",
+    brand_role: "Psychiatrist & Psychotherapist (M.D., Board Certified)",
+    board_certified: "Board Certified in Psychiatry",
+    therapist_title: "Psychotherapist & Psychiatrist",
+    cities_exp: "Clinical Practice Background in Rasht, Shiraz & Tehran",
+    hospital: "Nikan Gharb Hospital",
+    hospital_url_label: "Nikan Hospital Website",
+    hospital_doctor_profile: "Profile at Nikan Hospital",
+    medical_council: "Medical Council No: 00133439",
+    medical_council_code: "00133439",
+    hospital_central_phone: "+982129129",
+    hospital_central_phone_label: "Nikan Hospital Central Call Center",
+    tehran: "Tehran",
+    phone: "+989934420967",
+    phone_label: "Clinic Phone",
+
+    // Navigation Apps
+    nav_apps_title: "Smart Navigation in Map Apps",
+    nav_apps_desc: "Choose your preferred mapping application for live directions to Nikan Gharb Hospital:",
+    nav_google_maps: "Google Maps",
+    nav_waze: "Waze",
+    nav_neshan: "Neshan",
+    nav_balad: "Balad",
+    nav_apple: "Apple Maps",
+    nav_copy_address: "Copy Address",
+    nav_copied: "Address Copied to Clipboard!",
+    nav_coordinates: "GPS Coordinates",
+
+    // Navigation
+    nav_home: "Home",
+    nav_about: "About",
+    nav_services: "Services",
+    nav_visits: "Visits",
+    nav_blog: "Articles",
+    nav_testimonials: "Reviews",
+    nav_contact: "Contact",
+    nav_panel: "Portal",
+
+    // Common Actions
+    book_now: "Book Visit",
+    book_in_person: "Book In-Person",
+    book_online: "Book Online",
+    call_direct: "Call Clinic",
+    whatsapp: "WhatsApp Chat",
+    view_services: "View All Services",
+    read_more: "Read Article",
+    view_all_posts: "View All Articles",
+    view_all_testimonials: "View All Testimonials",
+    send_message: "Send Message",
+    book_this_service: "Book This Service",
+    back_to_blog: "Back to Articles",
+    back_home: "Back to Home",
+    contact_us: "Contact Us",
+    learn_more: "Learn More",
+    search: "Search...",
+    close: "Close",
+    all: "All",
+    lang_switch: "فارسی",
+    made_with: "Designed to Medical Standards",
+    loading: "Loading...",
+
+    // Hero Section
+    hero_kicker: "Medical Doctor, Board-Certified Psychiatrist & Psychotherapist",
+    hero_title: "Advanced Psychiatry, Modern Neurotherapies & Integrative Psychotherapy",
+    hero_subtitle: "Dr. Fatemeh Momeni, National Board-Certified Psychiatrist with clinical experience across Rasht, Shiraz, and Tehran — Evidence-based diagnostic precision, neuromodulation, and personalized psychotherapy in a safe, confidential setting (In-Person at Nikan Gharb Hospital & Nationwide Online).",
+    hero_badge: "National Board Certified in Psychiatry",
+    hero_cities_badge: "Rasht • Shiraz • Tehran",
+    hero_card_inperson_title: "In-Person Consultation",
+    hero_card_inperson_desc: "A calm, confidential clinic environment at Nikan Gharb Hospital, Tehran",
+    hero_card_online_title: "Online Video Telehealth",
+    hero_card_online_desc: "Encrypted, confidential video sessions available across Iran and worldwide",
+
+    // Trust Factors
+    trust_kicker: "Core Clinical Credentials",
+    trust_board: "Board Certified Psychiatrist",
+    trust_board_desc: "Medical Doctor with National Board Certification in Psychiatry",
+    trust_cities: "Experience in 3 Major Cities",
+    trust_cities_desc: "Extensive clinical background across Rasht, Shiraz, and Tehran",
+    trust_exp: "Dual Expertise",
+    trust_exp_desc: "Mastery of psychopharmacology, brain neuromodulation, and psychotherapy",
+    trust_hospital: "Nikan Gharb Hospital",
+    trust_hospital_desc: "Modern hospital diagnostic facilities in West Tehran",
+    trust_online: "Secure Telepsychiatry",
+    trust_online_desc: "Encrypted peer-to-peer video sessions with strict confidentiality",
+
+    // Services Section
+    services_kicker: "Clinical Specialties",
+    services_title: "Comprehensive Psychiatric & Therapy Services",
+    services_intro: "Precise clinical diagnosis, personalized medication management, brain wave analysis, and structured psychotherapy following international APA & CANMAT guidelines.",
+
+    // 9 Detailed Services
+    service_depression_title: "Depression & Bipolar Disorders Treatment",
+    service_depression_desc: "Comprehensive evaluation and treatment for Major Depressive Disorder, Bipolar I & II, seasonal affective disorder, dysthymia, and treatment-resistant mood episodes.",
+
+    service_anxiety_title: "Anxiety & OCD Disorders Treatment",
+    service_anxiety_desc: "Targeted medical and therapeutic care for Panic Disorder, Generalized Anxiety (GAD), Obsessive-Compulsive Disorder (OCD), phobias, and PTSD.",
+
+    service_cognitive_title: "Cognitive & Geriatric Disorders (Alzheimer's, Dementia, Parkinson's)",
+    service_cognitive_desc: "Specialized memory evaluation, cognitive preservation, management of psychiatric symptoms in Alzheimer's, Dementia, and Parkinson's disease.",
+
+    service_child_title: "Child & Adolescent Psychiatric Care",
+    service_child_desc: "Diagnosis and care for ADHD, Autism Spectrum, learning difficulties, nocturnal enuresis (bedwetting), aggression, and adolescent emotional challenges.",
+
+    service_personality_title: "Personality Disorders Therapy",
+    service_personality_desc: "Specialized psychotherapy and pharmacotherapy for Borderline Personality Disorder (BPD), Narcissistic (NPD), Dependent, and Avoidant patterns.",
+
+    service_sleep_title: "Sleep Disorders Management",
+    service_sleep_desc: "Diagnostic assessment and evidence-based treatment for chronic insomnia, frequent nightmares, circadian rhythm disruption, and restless legs syndrome.",
+
+    service_sexual_title: "Sexual Dysfunction & Gender Identity Support",
+    service_sexual_desc: "Confidential medical care for premature ejaculation, erectile dysfunction, vaginismus, hypoactive sexual desire, and gender dysphoria/identity guidance.",
+
+    service_non_pharma_title: "Non-Pharmacological Brain Tech (EEG, QEEG, rTMS, tDCS)",
+    service_non_pharma_desc: "Electroencephalography (EEG), Quantitative Brain Mapping (QEEG), Neurofeedback, Repetitive Transcranial Magnetic Stimulation (rTMS), and tDCS.",
+
+    service_psychotherapy_title: "Individual, Couples & Family Psychotherapy",
+    service_psychotherapy_desc: "Insight-oriented psychotherapy, Schema Therapy, Cognitive Behavioral Therapy (CBT), Gottman-informed couples counseling, and family conflict resolution.",
+
+    // About Section
+    about_kicker: "About Dr. Fatemeh Momeni",
+    about_title: "Expertise, Compassion & Ethical Dedication",
+    about_p1: "Dr. Fatemeh Momeni is a Board-Certified Psychiatrist, Medical Doctor, and Psychotherapist with a distinguished clinical background practicing in Rasht, Shiraz, and Tehran. She brings years of specialized hospital and outpatient experience in diagnosing and treating complex psychiatric conditions.",
+    about_p2: "Her clinical philosophy is anchored in a comprehensive Bio-Psycho-Social approach: combining state-of-the-art psychopharmacology, non-invasive neurotechnologies (QEEG, rTMS, tDCS), and deep psychotherapeutic modalities to support each patient's healing.",
+    about_cities_title: "Clinical Practice in Rasht, Shiraz & Tehran",
+    about_cities_desc: "Broad clinical background gained in top medical centers across Iran's major healthcare hubs.",
+    about_philo_title: "Treatment Philosophy",
+    about_philo_p: "We believe mental health is an intricate harmony between neurobiology and human emotional experience. Medication acts as a stabilizing foundation, while psychotherapy and non-pharmacological brain technologies nurture enduring recovery, insight, and resilience.",
+    about_creds_title: "Credentials & Academic Background",
+    about_creds_edu: "Doctor of Medicine (M.D.) & Specialty in Psychiatry",
+    about_creds_board: "National Specialty Board Diploma in Psychiatry",
+    about_creds_cities: "Clinical Practice History in Rasht, Shiraz & Tehran",
+    about_creds_therapist: "Psychotherapist & Couples Counselor",
+    about_creds_hospital: "Attending Specialist at Nikan Gharb Hospital",
+    about_creds_neuro: "Certified in Non-Pharmacological Brain Technologies (EEG, QEEG, rTMS, tDCS)",
+    about_creds_online: "Comprehensive Telepsychiatry across Iran & Globally",
+    about_why_title: "Why Patients Trust Dr. Momeni",
+    about_why_p: "Unwavering medical confidentiality, non-judgmental empathy, integrative care combining both medication and psychotherapy, and dedicated patient follow-up.",
+
+    // Visits Section
+    visits_kicker: "Consultation Formats",
+    visits_title: "In-Person & Online Telepsychiatry",
+    visits_intro: "In-person consultations are available at Nikan Gharb Hospital in Tehran, and encrypted online video sessions are available for patients in Rasht, Shiraz, other provinces, and abroad.",
+    visit_inperson_title: "In-Person Visits at Nikan Gharb Hospital",
+    visit_inperson_desc: "Conducted in a private clinical suite in West Tehran. Ideal for comprehensive baseline evaluations, neuromodulation, and EEG assessments.",
+    visit_inperson_steps: [
+      "Book your slot online or via direct clinic phone call",
+      "Arrive at Nikan Gharb Hospital Psychiatry Clinic at your appointed time",
+      "Comprehensive clinical interview, paraclinical review, and electronic prescription"
+    ],
+    visit_online_title: "Online Video Consultations (Telehealth)",
+    visit_online_desc: "Encrypted, confidential video sessions from the comfort of your home for patients across Iran and internationally.",
+    visit_online_steps: [
+      "Select the Online option during booking on our portal",
+      "Receive your secure session link via WhatsApp confirmation",
+      "Join the session on time and receive digital prescriptions and follow-up guidance"
+    ],
+    visit_address_title: "Clinic Location",
+    visit_address: "Tehran, Shahid Hemmat Expressway West, near Chitgar Lake, Nikan Gharb Hospital, Psychiatry Clinics",
+    visit_online_security_title: "Confidentiality in Telepsychiatry",
+    visit_online_security_desc: "All video consultations use end-to-end encrypted protocols. No recording is performed.",
+    visit_map_hint: "Convenient expressway access via Hemmat, Hakim, and Azadegan with hospital parking.",
+
+    // Blog Section
+    blog_kicker: "Psychoeducation & Knowledge",
+    blog_title: "Psychiatric Insights & Mind Health",
+    blog_intro: "Evidence-based articles written by Dr. Fatemeh Momeni to demystify psychiatric conditions and foster well-being.",
+    blog_read_min: "min read",
+    blog_category_all: "All Articles",
+    blog_related: "Related Articles",
+    blog_empty: "No articles found in this category.",
+
+    // Testimonials
+    testi_kicker: "Patient Testimonials",
+    testi_title: "Stories of Healing & Clarity",
+    testi_intro: "Genuine reflections from patients who have navigated their recovery with Dr. Momeni's medical and therapeutic guidance.",
+    testi_empty: "No testimonials available yet.",
+    testi_privacy_note: "To maintain medical privacy, patient names are shown as initials.",
+
+    // Contact
+    contact_kicker: "Contact & Appointments",
+    contact_title: "Connect with Dr. Fatemeh Momeni's Clinic",
+    contact_intro: "For appointment coordination, consultations, and queries, our team is ready to assist you.",
+    contact_phone_title: "Direct Clinic Phone",
+    contact_whatsapp_title: "WhatsApp Coordination",
+    contact_address_title: "Clinic Address",
+    contact_address_val: "Tehran, Shahid Hemmat Expressway West, Nikan Gharb Hospital, Department of Psychiatry",
+    contact_hours_title: "Office Hours",
+    contact_hours_val: "Saturday to Wednesday: 09:00 AM – 06:00 PM",
+    contact_form_name: "Full Name",
+    contact_form_phone: "Mobile Phone Number",
+    contact_form_message: "Short Description of Request",
+    contact_form_send: "Send Message",
+    contact_success: "Your message has been received. Our clinic staff will contact you shortly.",
+
+    // Patient Panel & Booking
+    panel_kicker: "Patient Portal",
+    panel_title: "Appointment Booking & Management",
+    panel_login_title: "Patient Sign In",
+    panel_login_desc: "Enter your mobile phone number to sign in or schedule a new appointment.",
+    panel_phone_label: "Mobile Number (e.g., 09934420967)",
+    panel_send_otp: "Send SMS Verification Code",
+    panel_otp_label: "4-Digit Code",
+    panel_verify_otp: "Verify & Enter Portal",
+    panel_otp_hint: "Demo verification code:",
+    panel_resend: "Resend Code",
+    panel_wrong_code: "The code entered is invalid. Please try again.",
+    panel_welcome: "Welcome",
+    panel_upcoming: "Upcoming Appointments",
+    panel_history: "Appointment History",
+    panel_new_appointment: "Book New Appointment",
+    panel_no_upcoming: "No upcoming appointments found.",
+    panel_no_history: "No appointment history found.",
+    panel_cancel: "Cancel Appointment",
+    panel_cancel_confirm: "Are you sure you want to cancel this booking?",
+    panel_logout: "Sign Out",
+
+    // Booking Stepper
+    bk_step_service: "1. Clinical Service",
+    bk_step_type: "2. Visit Format",
+    bk_step_time: "3. Date & Time",
+    bk_step_confirm: "4. Confirmation",
+    bk_select_service: "Select the required specialized service:",
+    bk_select_type: "Choose your consultation format:",
+    bk_select_date: "Choose appointment date:",
+    bk_select_slot: "Available time slots:",
+    bk_confirm_summary: "Appointment Summary:",
+    bk_service: "Selected Service",
+    bk_type: "Format",
+    bk_date: "Date",
+    bk_time: "Time",
+    bk_name: "Patient Name",
+    bk_confirm_btn: "Confirm & Finalize Booking",
+    bk_next: "Next Step",
+    bk_back: "Previous Step",
+    bk_success: "Your appointment has been registered successfully! Our clinic coordinator will contact you shortly.",
+    bk_next_available: "Next Available Slots",
+
+    // Footer
+    footer_about: "Dr. Fatemeh Momeni; Board-Certified Psychiatrist and Psychotherapist with extensive clinical background across Rasht, Shiraz, and Tehran. Offering comprehensive diagnosis, psychopharmacology, brain neuromodulation, and psychotherapy in an ethical, confidential environment.",
+    footer_quick: "Quick Links",
+    footer_services_title: "Clinical Specialties",
+    footer_contact: "Contact & Location",
+    footer_privacy: "Preserving patient confidentiality and medical ethics is our paramount commitment.",
+    footer_rights: "All rights reserved for Dr. Fatemeh Momeni Medical Practice.",
+    footer_privacy_note: "All clinical practices adhere strictly to national and international medical ethics codes."
+  }
+};
+
+export const serviceKeys = [
+  { 
+    key: "depression", 
+    titleKey: "service_depression_title", 
+    descKey: "service_depression_desc", 
+    icon: "CloudRain", 
+    badge_fa: "افسردگی و دوقطبی",
+    badge_en: "Depression & Bipolar" 
+  },
+  { 
+    key: "anxiety", 
+    titleKey: "service_anxiety_title", 
+    descKey: "service_anxiety_desc", 
+    icon: "Wind", 
+    badge_fa: "اضطراب، پانیک و وسواس",
+    badge_en: "Anxiety & OCD" 
+  },
+  { 
+    key: "cognitive", 
+    titleKey: "service_cognitive_title", 
+    descKey: "service_cognitive_desc", 
+    icon: "Brain", 
+    badge_fa: "آلزایمر، دمانس، پارکینسون",
+    badge_en: "Alzheimer's & Dementia" 
+  },
+  { 
+    key: "child", 
+    titleKey: "service_child_title", 
+    descKey: "service_child_desc", 
+    icon: "Baby", 
+    badge_fa: "بیش‌فعالی، اوتیسم، یادگیری",
+    badge_en: "ADHD, Autism, Child" 
+  },
+  { 
+    key: "personality", 
+    titleKey: "service_personality_title", 
+    descKey: "service_personality_desc", 
+    icon: "Sparkles", 
+    badge_fa: "شخصیت مرزی، خودشیفته، وابسته",
+    badge_en: "Personality Disorders" 
+  },
+  { 
+    key: "sleep", 
+    titleKey: "service_sleep_title", 
+    descKey: "service_sleep_desc", 
+    icon: "Moon", 
+    badge_fa: "بی‌خوابی، کابوس، ریتم خواب",
+    badge_en: "Insomnia & Sleep" 
+  },
+  { 
+    key: "sexual", 
+    titleKey: "service_sexual_title", 
+    descKey: "service_sexual_desc", 
+    icon: "HeartHandshake", 
+    badge_fa: "زودانزالی، نعوظ، هویت جنسی",
+    badge_en: "Sexual Dysfunctions" 
+  },
+  { 
+    key: "non_pharma", 
+    titleKey: "service_non_pharma_title", 
+    descKey: "service_non_pharma_desc", 
+    icon: "Activity", 
+    badge_fa: "EEG, QEEG, rTMS, tDCS",
+    badge_en: "EEG, QEEG, rTMS, tDCS" 
+  },
+  { 
+    key: "psychotherapy", 
+    titleKey: "service_psychotherapy_title", 
+    descKey: "service_psychotherapy_desc", 
+    icon: "Users", 
+    badge_fa: "فردی، خانواده و زوج‌درمانی",
+    badge_en: "Individual, Couples, Family" 
+  }
+] as const;
