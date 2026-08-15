@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { 
   Phone, 
   MessageCircle, 
@@ -11,8 +10,7 @@ import {
   ShieldCheck, 
   ExternalLink,
   Sparkles,
-  Award,
-  Calendar
+  Award
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
 import { 
@@ -185,15 +183,6 @@ export const FloatingCareBar: React.FC = () => {
       {/* Floating Action Trigger Bar */}
       <div className="flex items-center gap-1.5 p-1 rounded-full glass border border-primary/30 shadow-xl backdrop-blur-md">
         
-        {/* Direct Appointment / Admission CTA */}
-        <Link
-          to="/panel"
-          className="group relative flex items-center gap-1.5 px-3.5 h-10 rounded-full bg-primary text-primary-foreground shadow-md btn-soft-glow transition-all duration-300 hover:scale-105 active:scale-95 text-xs font-bold whitespace-nowrap"
-        >
-          <Calendar className="w-4 h-4 shrink-0" />
-          <span>{lang === 'fa' ? 'درخواست نوبت و پذیرش' : 'Book Visit'}</span>
-        </Link>
-
         {/* WhatsApp Fast Button */}
         <a
           href={WHATSAPP_URL}
@@ -214,12 +203,12 @@ export const FloatingCareBar: React.FC = () => {
         <button
           onClick={() => setExpanded(!expanded)}
           aria-label={t('call_direct')}
-          className={`group relative flex items-center gap-1.5 px-3 h-10 rounded-full bg-card text-foreground border border-border/80 shadow-md transition-all duration-300 hover:border-primary hover:text-primary active:scale-95 ${
-            expanded ? 'ring-2 ring-primary/50 text-primary' : ''
+          className={`group relative flex items-center gap-1.5 px-3 h-10 rounded-full bg-primary text-primary-foreground shadow-md btn-soft-glow transition-all duration-300 hover:scale-105 active:scale-95 ${
+            expanded ? 'ring-2 ring-primary/50' : 'animate-pulse-ring'
           }`}
         >
           <div className="relative flex items-center justify-center">
-            <Phone className="w-4 h-4 fill-current text-primary" />
+            <Phone className="w-4 h-4 fill-current" />
             <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>

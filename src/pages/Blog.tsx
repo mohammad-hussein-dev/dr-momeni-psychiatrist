@@ -241,10 +241,6 @@ export const Blog: React.FC = () => {
                         alt={pick(post, 'title')}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
-                        onError={(e) => {
-                          // Fallback to local clinical photo if offline or blocked
-                          e.currentTarget.src = "/doctor.png";
-                        }}
                       />
                       <span className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full text-xs font-semibold bg-card/90 text-primary backdrop-blur-xs shadow-2xs">
                         {pick(post, 'category')}

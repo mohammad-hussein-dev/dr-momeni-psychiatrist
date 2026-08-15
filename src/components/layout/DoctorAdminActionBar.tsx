@@ -110,19 +110,6 @@ export const DoctorAdminActionBar: React.FC<DoctorAdminActionBarProps> = ({
 
         <button
           type="button"
-          onClick={() => {
-            clearSession();
-            setSession(null);
-          }}
-          title={isFa ? 'خروج از حساب پزشک' : 'Logout Doctor'}
-          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white transition-all font-semibold cursor-pointer"
-        >
-          <LogOut className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">{isFa ? 'خروج' : 'Logout'}</span>
-        </button>
-
-        <button
-          type="button"
           onClick={() => setIsDismissed(true)}
           title={isFa ? 'بستن موقت این نوار' : 'Close'}
           className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"

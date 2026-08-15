@@ -14,9 +14,7 @@ import {
   MapPin,
   Activity,
   Brain,
-  ExternalLink,
-  ChevronLeft,
-  ChevronRight
+  ExternalLink
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageProvider';
 import { Reveal } from '../components/Reveal';
@@ -29,9 +27,7 @@ import {
   DOCTOR_NIKAN_URL,
   HOSPITAL_URL,
   MEDICAL_COUNCIL_FA,
-  MEDICAL_COUNCIL_CODE,
-  DEVELOPER_NAME_FA,
-  DEVELOPER_NAME_EN
+  MEDICAL_COUNCIL_CODE
 } from '../lib/siteConstants';
 
 export const About: React.FC = () => {
@@ -307,40 +303,6 @@ export const About: React.FC = () => {
             </p>
           </Reveal>
         </div>
-      </section>
-
-      {/* 5. DIGITAL HEALTH ARCHITECTURE & DEVELOPER ENDORSEMENT */}
-      <section className="py-12 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="rounded-3xl p-6 sm:p-8 bg-card border-2 border-primary/20 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center md:text-start">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{lang === 'fa' ? 'طراحی و مهندسی نرم‌افزار پلتفرم' : 'Software Engineering & Design'}</span>
-              </div>
-              <h3 className="font-heading font-bold text-foreground text-lg sm:text-xl">
-                {lang === 'fa' 
-                  ? `معماری سیستم و توسعه اختصاصی: مهندس ${DEVELOPER_NAME_FA}` 
-                  : `Digital Architecture & Engineering: ${DEVELOPER_NAME_EN}`
-                }
-              </h3>
-              <p className="text-muted-foreground text-xs sm:text-sm max-w-2xl leading-relaxed">
-                {lang === 'fa'
-                  ? 'این سامانه درمانی با رعایت استانداردهای محرمانگی پزشکی، نوبت‌دهی آنلاین هوشمند و تجربه کاربری آرامش‌بخش پیاده‌سازی شده است. همکاران محترم پزشک و کلینیک‌ها می‌توانند جهت سفارش سامانه مشابه یا مشاهده مشخصات فنی به صفحه توسعه‌دهنده مراجعه نمایند.'
-                  : 'Engineered with medical-grade data confidentiality and smart appointment automation. Physicians and healthcare institutions can review technical specifications or order custom platforms on the developer profile.'
-                }
-              </p>
-            </div>
-
-            <Link
-              to="/developer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:opacity-90 transition-all shadow-md shrink-0 whitespace-nowrap active:scale-95"
-            >
-              <span>{lang === 'fa' ? 'شناسنامه فنی و سفارش سامانه' : 'View Developer & Order'}</span>
-              {isRTL ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-            </Link>
-          </div>
-        </Reveal>
       </section>
 
     </div>

@@ -14,10 +14,9 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light';
-    const saved = localStorage.getItem('dr_momeni_theme_v1');
+    const saved = localStorage.getItem('dr_theme');
     if (saved === 'dark' || saved === 'light') return saved;
-    // Strictly default to crisp, professional clinical Light Mode
-    return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   const isDark = theme === 'dark';
@@ -33,9 +32,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       root.style.colorScheme = 'light';
     }
     try {
-      localStorage.setItem('dr_momeni_theme_v1', theme);
-      // Clean up old legacy keys
-      localStorage.removeItem('dr_theme');
+      localStorage.setItem('dr_theme', theme);
     } catch (e) {}
   }, [theme]);
 

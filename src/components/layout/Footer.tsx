@@ -6,16 +6,14 @@ import {
   Clock, 
   ShieldCheck, 
   Award, 
-  MessageCircle, 
-  ExternalLink, 
-  ChevronLeft, 
-  ChevronRight, 
-  Sparkles, 
-  Building2, 
-  Calendar, 
-  HeartHandshake, 
-  Car,
-  Code2
+  MessageCircle,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  Building2,
+  Calendar,
+  HeartHandshake
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
 import { 
@@ -33,12 +31,7 @@ import {
   MEDICAL_COUNCIL_FA,
   MEDICAL_COUNCIL_CODE,
   HOSPITAL_CENTRAL_PHONE_FA,
-  HOSPITAL_CENTRAL_PHONE,
-  PARKING_NAME_FA,
-  PARKING_NAME_EN,
-  DEVELOPER_NAME_FA,
-  DEVELOPER_NAME_EN,
-  DEVELOPER_PORTRAIT_IMG
+  HOSPITAL_CENTRAL_PHONE
 } from '../../lib/siteConstants';
 import { BrandLogo } from '../site/BrandLogo';
 
@@ -63,7 +56,6 @@ export const Footer: React.FC = () => {
     { to: '/testimonials', label: t('nav_testimonials') },
     { to: '/contact', label: t('nav_contact') },
     { to: '/panel', label: t('nav_panel') },
-    { to: '/developer', label: lang === 'fa' ? 'شناسنامه فنی و سازنده سیستم (محمد حسین)' : 'System Architect (Mohammad Hussein)' },
     { to: '/admin', label: lang === 'fa' ? 'پنل مدیریت پزشک (تایید/لغو نوبت‌ها)' : 'Doctor Management Portal' }
   ];
 
@@ -239,10 +231,6 @@ export const Footer: React.FC = () => {
                 <p className="leading-snug text-foreground/90 font-medium">
                   {lang === 'fa' ? ADDRESS_FA : ADDRESS_EN}
                 </p>
-                <div className="flex items-center gap-1 mt-1 text-[11px] text-primary font-medium">
-                  <Car className="w-3 h-3 shrink-0" />
-                  <span>{lang === 'fa' ? PARKING_NAME_FA : PARKING_NAME_EN}</span>
-                </div>
                 
                 {/* Fast App Jump Links */}
                 <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
@@ -311,53 +299,8 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* 3. Developer & Engineering Showcase Banner */}
-        <div className="mt-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-primary/10 via-card to-secondary/10 border border-primary/25 flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-2xs">
-          <div className="flex items-center gap-3.5 text-center md:text-start">
-            
-            {/* Circular Developer Avatar with glowing aura */}
-            <div className="relative w-12 h-12 rounded-full shrink-0 flex items-center justify-center">
-              <div 
-                className="absolute -inset-1 rounded-full developer-conic-spin opacity-80 pointer-events-none"
-                style={{
-                  background: 'conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--secondary)), #f59e0b, hsl(var(--primary)))',
-                  filter: 'blur(2px)'
-                }}
-              />
-              <div className="relative w-full h-full rounded-full p-0.5 bg-card z-10">
-                <img 
-                  src={DEVELOPER_PORTRAIT_IMG} 
-                  alt={lang === 'fa' ? DEVELOPER_NAME_FA : DEVELOPER_NAME_EN} 
-                  className="w-full h-full rounded-full object-cover"
-                />
-              </div>
-            </div>
-
-            <div>
-              <p className="font-bold text-foreground flex items-center gap-1.5 justify-center md:justify-start">
-                <span>{lang === 'fa' ? 'طراحی، معماری نرم‌افزار و مهندسی سامانه:' : 'Software Architecture & Engineering:'}</span>
-                <span className="text-primary font-extrabold">{lang === 'fa' ? DEVELOPER_NAME_FA : DEVELOPER_NAME_EN}</span>
-              </p>
-              <p className="text-[11px] text-muted-foreground mt-0.5">
-                {lang === 'fa' 
-                  ? 'دارای تاییدیه رسمی پزشک • توسعه وب‌سایت‌ها و پلتفرم‌های تخصصی سلامت دیجیتال، مطب و سامانه‌های سازمانی' 
-                  : 'Certified by Dr. Momeni • Medical, Clinical & Enterprise Web Systems Specialist'
-                }
-              </p>
-            </div>
-          </div>
-
-          <Link
-            to="/developer"
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:opacity-90 transition-all shadow-xs shrink-0 whitespace-nowrap active:scale-95 cursor-pointer"
-          >
-            <span>{lang === 'fa' ? 'مشاهده شناسنامه فنی و سفارش پروژه' : 'View Tech Certificate & Order'}</span>
-            {isRTL ? <ChevronLeft className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
-          </Link>
-        </div>
-
-        {/* 4. Bottom Copyright & Medical Ethics Bar */}
-        <div className="mt-6 pt-5 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+        {/* 3. Bottom Copyright & Medical Ethics Bar */}
+        <div className="mt-10 pt-5 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <p className="text-center sm:text-start">{t('footer_rights')}</p>
           <div className="flex items-center gap-2 font-medium">
             <HeartHandshake className="w-3.5 h-3.5 text-primary" />

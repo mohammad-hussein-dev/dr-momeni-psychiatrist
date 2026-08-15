@@ -38,7 +38,6 @@ export const translations = {
     nav_testimonials: "نظرات مراجعین",
     nav_contact: "تماس",
     nav_panel: "پنل نوبت‌دهی",
-    nav_developer: "توسعه‌دهنده سیستم",
 
     // Common Actions
     book_now: "رزرو نوبت",
@@ -159,10 +158,10 @@ export const translations = {
       "حضور در جلسه و دریافت مشاوره، برنامه درمانی و نسخه الکترونیک"
     ],
     visit_address_title: "آدرس مطب حضوری",
-    visit_address: "تهران، بزرگراه همت غرب، روبروی بوستان جوانمردان (نرسیده به میدان المپیک)، بیمارستان فوق تخصصی نیکان غرب، طبقه کلینیک‌های اعصاب و روان",
+    visit_address: "تهران، بزرگراه همت غرب، نرسیده به میدان دریاچه شهدای خلیج فارس، بیمارستان نیکان غرب، طبقه کلینیک‌های اعصاب و روان",
     visit_online_security_title: "امنیت و رازداری پزشکی در ویزیت آنلاین",
     visit_online_security_desc: "جلسات تصویری در محیطی کاملاً خصوصی، محرمانه و بدون هیچ‌گونه ضبط صوتی یا تصویری برگزار می‌گردد.",
-    visit_map_hint: "دسترسی آسان از بزرگراه‌های همت، حکیم، باکری و آزادگان با پارکینگ اختصاصی بیمارستان",
+    visit_map_hint: "دسترسی آسان از بزرگراه‌های همت، حکیم و آزادگان با پارکینگ اختصاصی بیمارستان",
 
     // Blog Section
     blog_kicker: "آموزش و آگاهی‌بخشی",
@@ -187,7 +186,7 @@ export const translations = {
     contact_phone_title: "شماره تماس مستقیم",
     contact_whatsapp_title: "ارتباط و پشتیبانی واتس‌اپ",
     contact_address_title: "آدرس کلینیک حضوری",
-    contact_address_val: "تهران، بزرگراه همت غرب، روبروی بوستان جوانمردان (نرسیده به میدان المپیک)، بیمارستان فوق تخصصی نیکان غرب، بخش کلینیک‌های تخصصی اعصاب و روان",
+    contact_address_val: "تهران، بزرگراه همت غرب، بیمارستان نیکان غرب، بخش کلینیک‌های اعصاب و روان",
     contact_hours_title: "ساعات پاسخگویی مطب",
     contact_hours_val: "شنبه تا چهارشنبه: از ساعت ۹:۰۰ الی ۱۸:۰۰",
     contact_form_name: "نام و نام خانوادگی",
@@ -221,24 +220,22 @@ export const translations = {
     // Booking Stepper
     bk_step_service: "۱. انتخاب خدمت تخصصی",
     bk_step_type: "۲. شیوه ویزیت",
-    bk_step_date: "۳. زمان مشاوره آنلاین",
-    bk_step_time: "۳. زمان مشاوره آنلاین",
-    bk_step_info: "۴. ثبت مشخصات و پذیرش",
-    bk_step_confirm: "۴. ثبت مشخصات و پذیرش",
+    bk_step_time: "۳. تاریخ و ساعت",
+    bk_step_confirm: "۴. تایید نهایی",
     bk_select_service: "لطفاً نوع خدمت درخواستی را مشخص فرمایید:",
     bk_select_type: "مایل به ویزیت به چه صورتی هستید؟",
-    bk_select_date: "انتخاب روز مشاوره آنلاین:",
-    bk_select_slot: "ساعت‌های در دسترس برای رزرو آنلاین:",
+    bk_select_date: "انتخاب روز ویزیت:",
+    bk_select_slot: "ساعت‌های در دسترس برای رزرو:",
     bk_confirm_summary: "خلاصه مشخصات نوبت رزرو شده:",
     bk_service: "خدمت درمانی",
     bk_type: "نوع ویزیت",
     bk_date: "تاریخ انتخابی",
     bk_time: "ساعت",
     bk_name: "نام و نام خانوادگی بیمار",
-    bk_confirm_btn: "تایید نهایی و ثبت نوبت در سایت",
+    bk_confirm_btn: "تایید و ثبت نهایی نوبت",
     bk_next: "مرحله بعدی",
     bk_back: "مرحله قبلی",
-    bk_success: "نوبت مشاوره آنلاین شما با موفقیت در سایت ثبت و پذیرش شد. پزشک و کادر مطب آماده همراهی شما هستند.",
+    bk_success: "نوبت شما با موفقیت در سیستم ثبت گردید. جهت هماهنگی نهایی با شما تماس گرفته خواهد شد.",
     bk_next_available: "نزدیک‌ترین زمان‌های در دسترس",
 
     // Footer
@@ -290,7 +287,6 @@ export const translations = {
     nav_testimonials: "Reviews",
     nav_contact: "Contact",
     nav_panel: "Portal",
-    nav_developer: "System Developer",
 
     // Common Actions
     book_now: "Book Visit",
@@ -411,10 +407,10 @@ export const translations = {
       "Join the session on time and receive digital prescriptions and follow-up guidance"
     ],
     visit_address_title: "Clinic Location",
-    visit_address: "Tehran, Shahid Hemmat Expressway West, opposite Javanmardan Park (before Olympic Square), Nikan Gharb Hospital, Psychiatry Clinics",
+    visit_address: "Tehran, Shahid Hemmat Expressway West, near Chitgar Lake, Nikan Gharb Hospital, Psychiatry Clinics",
     visit_online_security_title: "Confidentiality in Telepsychiatry",
     visit_online_security_desc: "All video consultations use end-to-end encrypted protocols. No recording is performed.",
-    visit_map_hint: "Convenient expressway access via Hemmat, Hakim, Bakeri, and Azadegan with dedicated hospital parking.",
+    visit_map_hint: "Convenient expressway access via Hemmat, Hakim, and Azadegan with hospital parking.",
 
     // Blog Section
     blog_kicker: "Psychoeducation & Knowledge",
@@ -439,7 +435,7 @@ export const translations = {
     contact_phone_title: "Direct Clinic Phone",
     contact_whatsapp_title: "WhatsApp Coordination",
     contact_address_title: "Clinic Address",
-    contact_address_val: "Tehran, Shahid Hemmat Expressway West, opposite Javanmardan Park (before Olympic Square), Nikan Gharb Hospital, Department of Psychiatry",
+    contact_address_val: "Tehran, Shahid Hemmat Expressway West, Nikan Gharb Hospital, Department of Psychiatry",
     contact_hours_title: "Office Hours",
     contact_hours_val: "Saturday to Wednesday: 09:00 AM – 06:00 PM",
     contact_form_name: "Full Name",
@@ -473,24 +469,22 @@ export const translations = {
     // Booking Stepper
     bk_step_service: "1. Clinical Service",
     bk_step_type: "2. Visit Format",
-    bk_step_date: "3. Online Session Time",
-    bk_step_time: "3. Online Session Time",
-    bk_step_info: "4. Patient Info & Admission",
-    bk_step_confirm: "4. Patient Info & Admission",
+    bk_step_time: "3. Date & Time",
+    bk_step_confirm: "4. Confirmation",
     bk_select_service: "Select the required specialized service:",
     bk_select_type: "Choose your consultation format:",
-    bk_select_date: "Choose online consultation date:",
-    bk_select_slot: "Available online time slots:",
+    bk_select_date: "Choose appointment date:",
+    bk_select_slot: "Available time slots:",
     bk_confirm_summary: "Appointment Summary:",
     bk_service: "Selected Service",
     bk_type: "Format",
     bk_date: "Date",
     bk_time: "Time",
     bk_name: "Patient Name",
-    bk_confirm_btn: "Confirm & Finalize Online Booking",
+    bk_confirm_btn: "Confirm & Finalize Booking",
     bk_next: "Next Step",
     bk_back: "Previous Step",
-    bk_success: "Your online consultation has been booked and accepted successfully! Our clinic team is ready to assist you.",
+    bk_success: "Your appointment has been registered successfully! Our clinic coordinator will contact you shortly.",
     bk_next_available: "Next Available Slots",
 
     // Footer
