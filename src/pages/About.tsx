@@ -22,6 +22,11 @@ import { SectionHeading } from '../components/site/SectionHeading';
 import { ClinicalStatsBanner } from '../components/site/ClinicalStatsBanner';
 import { 
   ABOUT_IMG, 
+  ABOUT_IMG_FALLBACK,
+  PHILOSOPHY_IMG,
+  PHILOSOPHY_FALLBACK,
+  CLINICAL_PATHWAY_IMG,
+  CLINICAL_PATHWAY_FALLBACK,
   PHONE, 
   PHONE_TEL,
   DOCTOR_NIKAN_URL,
@@ -51,8 +56,8 @@ export const About: React.FC = () => {
                   loading="eager"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.includes('unsplash')) {
-                      target.src = "https://images.unsplash.com/photo-1594824813590-78965a3962b1?auto=format&fit=crop&w=1000&q=80";
+                    if (target.src !== ABOUT_IMG_FALLBACK) {
+                      target.src = ABOUT_IMG_FALLBACK;
                     }
                   }}
                 />
@@ -158,20 +163,55 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. TREATMENT PHILOSOPHY */}
+      {/* 2. TREATMENT PHILOSOPHY & CLINICAL APPROACH */}
       <section className="py-14 bg-cream/60 border-y border-border/60">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="rounded-2xl bg-card border border-border/80 p-6 sm:p-10 shadow-xs">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
-                <Compass className="w-5 h-5" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-card border border-border/80 p-6 sm:p-10 shadow-xs">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
+                  {t('about_philo_title')}
+                </h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {t('about_philo_p')}
+                </p>
+                <div className="pt-2 flex flex-wrap gap-2 text-xs">
+                  <span className="px-3 py-1 rounded-full bg-accent/60 text-primary font-semibold border border-primary/20">
+                    {lang === 'fa' ? 'مدل زیستی-روانی-اجتماعی' : 'Biopsychosocial Model'}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-secondary/20 text-secondary-foreground font-semibold border border-secondary/30">
+                    {lang === 'fa' ? 'طب مبتنی بر شواهد (EBM)' : 'Evidence-Based Medicine'}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-muted text-foreground font-semibold border border-border">
+                    {lang === 'fa' ? 'همدلی بدون قضاوت' : 'Non-Judgmental Empathy'}
+                  </span>
+                </div>
               </div>
-              <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground mb-3">
-                {t('about_philo_title')}
-              </h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {t('about_philo_p')}
-              </p>
+
+              {/* Treatment Philosophy Diagram / Asset */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-sm rounded-2xl overflow-hidden border border-border/60 shadow-md bg-muted/40 aspect-[4/3] group">
+                  <img
+                    src={PHILOSOPHY_IMG}
+                    alt={lang === 'fa' ? 'فلسفه درمان و مدل زیستی روانی اجتماعی' : 'Treatment Philosophy Diagram'}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target.src !== PHILOSOPHY_FALLBACK) {
+                        target.src = PHILOSOPHY_FALLBACK;
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                    <span className="text-white text-xs font-semibold">
+                      {lang === 'fa' ? 'فلسفه بالینی: مدل زیستی، روانی و اجتماعی' : 'Clinical Model: Biopsychosocial Architecture'}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="goldSeal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Medical Certification Seal -->
+  <circle cx="200" cy="200" r="180" fill="#0F172A" stroke="url(#goldSeal)" stroke-width="8" />
+  <circle cx="200" cy="200" r="155" fill="none" stroke="#D97706" stroke-width="2" stroke-dasharray="6 4" />
+
+  <!-- Medical Caduceus Staff & Serpent -->
+  <g transform="translate(200, 175)">
+    <!-- Rod of Asclepius -->
+    <line x1="0" y1="-70" x2="0" y2="70" stroke="url(#goldSeal)" stroke-width="6" stroke-linecap="round" />
+    <circle cx="0" cy="-75" r="10" fill="url(#goldSeal)" />
+    <!-- Coiling Serpent -->
+    <path d="M-20,-40 C15,-50 20,-30 0,-15 C-20,0 20,15 0,35 C-20,50 15,55 0,65" fill="none" stroke="#FDE68A" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- Seal Text -->
+  <text x="200" y="290" text-anchor="middle" fill="#FFFFFF" font-family="'Vazirmatn', sans-serif" font-size="14" font-weight="bold">
+    دارای بورد تخصصی اعصاب و روان
+  </text>
+  <text x="200" y="315" text-anchor="middle" fill="#FCD34D" font-family="'Vazirmatn', sans-serif" font-size="12">
+    نظام پزشکی: ۱۳۳۴۳۹
+  </text>
+  <text x="200" y="335" text-anchor="middle" fill="#94A3B8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">
+    BOARD CERTIFIED PSYCHIATRIST
+  </text>
+</svg>

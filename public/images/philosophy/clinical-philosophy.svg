@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="philoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b131b" />
+      <stop offset="50%" stop-color="#11222c" />
+      <stop offset="100%" stop-color="#081017" />
+    </linearGradient>
+
+    <!-- Pillar Gradients -->
+    <!-- Biological (Teal/Emerald) -->
+    <linearGradient id="bioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Psychological (Sky/Cyan) -->
+    <linearGradient id="psychoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <!-- Social / Relational (Amber/Rose) -->
+    <linearGradient id="socialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <!-- Center Core Glow -->
+    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#26b2c4" />
+      <stop offset="50%" stop-color="#1e6b7e" />
+      <stop offset="100%" stop-color="#0f3d48" />
+    </linearGradient>
+
+    <filter id="philoGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="boxShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#philoBg)" rx="24" />
+
+  <!-- Ambient background energy orbs -->
+  <circle cx="600" cy="400" r="280" fill="#26b2c4" opacity="0.08" filter="url(#philoGlow)" />
+  <circle cx="280" cy="300" r="180" fill="#10b981" opacity="0.07" filter="url(#philoGlow)" />
+  <circle cx="920" cy="300" r="180" fill="#38bdf8" opacity="0.07" filter="url(#philoGlow)" />
+  <circle cx="600" cy="650" r="180" fill="#f59e0b" opacity="0.07" filter="url(#philoGlow)" />
+
+  <!-- Title Header -->
+  <g transform="translate(600, 70)" text-anchor="middle">
+    <rect x="-180" y="-20" width="360" height="36" rx="18" fill="#1e293b" stroke="#26b2c4" stroke-width="1.2" opacity="0.9" />
+    <text y="4" fill="#38bdf8" font-family="'Vazirmatn', system-ui, sans-serif" font-size="13" font-weight="bold">مدل جامع زیستی - روانی - اجتماعی</text>
+    <text y="52" fill="#F8FAFC" font-family="'Vazirmatn', system-ui, sans-serif" font-size="28" font-weight="900">فلسفه درمان و رویکرد بالینی دکتر فاطمه مومنی</text>
+    <text y="80" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14">Integrative Bio-Psycho-Social Psychiatric Model</text>
+  </g>
+
+  <!-- Intersecting Tri-Orb Venn Equilibrium -->
+  <g id="VennOrbs" transform="translate(0, 40)">
+    
+    <!-- Connecting Synaptic Pulses -->
+    <path d="M400,320 L800,320 L600,560 Z" fill="none" stroke="#334155" stroke-width="3" stroke-dasharray="8 6" />
+    
+    <!-- 1. Bio Sphere (Top Left) -->
+    <circle cx="400" cy="320" r="140" fill="#0f291e" fill-opacity="0.75" stroke="url(#bioGrad)" stroke-width="2.5" filter="url(#boxShadow)" />
+    
+    <!-- 2. Psycho Sphere (Top Right) -->
+    <circle cx="800" cy="320" r="140" fill="#0c2338" fill-opacity="0.75" stroke="url(#psychoGrad)" stroke-width="2.5" filter="url(#boxShadow)" />
+    
+    <!-- 3. Social Sphere (Bottom Center) -->
+    <circle cx="600" cy="560" r="140" fill="#2d2208" fill-opacity="0.75" stroke="url(#socialGrad)" stroke-width="2.5" filter="url(#boxShadow)" />
+
+    <!-- Center Core: Therapeutic Nexus -->
+    <circle cx="600" cy="400" r="85" fill="url(#coreGrad)" stroke="#E0F2FE" stroke-width="3" filter="url(#boxShadow)" />
+    
+    <!-- Center Core Text -->
+    <g transform="translate(600, 390)" text-anchor="middle">
+      <circle cx="0" cy="-8" r="18" fill="#FFFFFF" fill-opacity="0.15" />
+      <path d="M-8,-8 L8,-8 M0,-16 L0,0" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+      <text y="18" fill="#FFFFFF" font-family="'Vazirmatn', system-ui, sans-serif" font-size="14" font-weight="bold">تعادل و بهبود پایدار</text>
+      <text y="34" fill="#BAE6FD" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600">Optimal Recovery</text>
+    </g>
+
+    <!-- 1. Content: Biological Pillar (Left) -->
+    <g transform="translate(400, 270)" text-anchor="middle">
+      <!-- Icon (DNA/Brain) -->
+      <circle cx="0" cy="-20" r="22" fill="url(#bioGrad)" />
+      <path d="M-8,-20 Q0,-30 8,-20 Q0,-10 -8,-20 Z" fill="#FFFFFF" />
+      <text y="20" fill="#34D399" font-family="'Vazirmatn', system-ui, sans-serif" font-size="16" font-weight="bold">۱. بعد زیستی (Biological)</text>
+      <text y="42" fill="#E2E8F0" font-family="'Vazirmatn', system-ui, sans-serif" font-size="11">تنظیم نوروترانسمیترهای مغز</text>
+      <text y="58" fill="#94A3B8" font-family="'Vazirmatn', system-ui, sans-serif" font-size="10">حداقل دوز مؤثر دارویی و سلامت جسم</text>
+    </g>
+
+    <!-- 2. Content: Psychological Pillar (Right) -->
+    <g transform="translate(800, 270)" text-anchor="middle">
+      <!-- Icon (Mind/Thought) -->
+      <circle cx="0" cy="-20" r="22" fill="url(#psychoGrad)" />
+      <path d="M-8,-20 A8,8 0 0,1 8,-20 A8,8 0 0,1 -8,-20 Z" fill="#FFFFFF" />
+      <text y="20" fill="#38BDF8" font-family="'Vazirmatn', system-ui, sans-serif" font-size="16" font-weight="bold">۲. بعد روانی (Psychological)</text>
+      <text y="42" fill="#E2E8F0" font-family="'Vazirmatn', system-ui, sans-serif" font-size="11">روان‌درمانی فردی و شناختی (CBT)</text>
+      <text y="58" fill="#94A3B8" font-family="'Vazirmatn', system-ui, sans-serif" font-size="10">اصلاح الگوهای فکری و تنظیم هیجان</text>
+    </g>
+
+    <!-- 3. Content: Social Pillar (Bottom) -->
+    <g transform="translate(600, 530)" text-anchor="middle">
+      <!-- Icon (Relationship/Heart) -->
+      <circle cx="0" cy="-20" r="22" fill="url(#socialGrad)" />
+      <path d="M-6,-24 C-10,-28 -14,-22 -14,-18 C-14,-12 -6,-6 0,0 C6,-6 14,-12 14,-18 C14,-22 10,-28 6,-24 Z" fill="#FFFFFF" transform="translate(0, -18) scale(0.65)" />
+      <text y="20" fill="#FBBF24" font-family="'Vazirmatn', system-ui, sans-serif" font-size="16" font-weight="bold">۳. بعد اجتماعی و محیطی (Social)</text>
+      <text y="42" fill="#E2E8F0" font-family="'Vazirmatn', system-ui, sans-serif" font-size="11">روابط بین‌فردی، خانواده و شغل</text>
+      <text y="58" fill="#94A3B8" font-family="'Vazirmatn', system-ui, sans-serif" font-size="10">حمایت محیطی و پیشگیری از عود</text>
+    </g>
+
+  </g>
+
+  <!-- Bottom Quote Bar -->
+  <g transform="translate(600, 740)" text-anchor="middle">
+    <rect x="-420" y="-20" width="840" height="42" rx="21" fill="#131c26" stroke="#1e3a47" stroke-width="1.5" />
+    <text y="6" fill="#E2E8F0" font-family="'Vazirmatn', system-ui, sans-serif" font-size="13" font-weight="500">
+      «درمان اصیل زمانی رخ می‌دهد که انسان به عنوان یک کل یکپارچه نگریسته شود، نه صرفاً مجموعه‌ای از علائم.»
+    </text>
+  </g>
+</svg>

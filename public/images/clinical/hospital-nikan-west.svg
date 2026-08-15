@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F1F2C" />
+      <stop offset="60%" stop-color="#1B394E" />
+      <stop offset="100%" stop-color="#2D5A7B" />
+    </linearGradient>
+    <linearGradient id="glassFacade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#0284C7" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0369A1" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="675" fill="url(#skyGrad)" rx="20" />
+
+  <!-- Modern Hospital Architectural Silhouette (Nikan Gharb Hospital) -->
+  <g id="HospitalBuilding" transform="translate(200, 100)">
+    
+    <!-- Main Tower -->
+    <rect x="200" y="80" width="400" height="420" rx="12" fill="url(#glassFacade)" stroke="#BAE6FD" stroke-width="2" />
+    
+    <!-- Left Wing -->
+    <rect x="50" y="200" width="150" height="300" rx="8" fill="#1E293B" stroke="#475569" stroke-width="2" />
+    
+    <!-- Right Wing -->
+    <rect x="600" y="220" width="160" height="280" rx="8" fill="#1E293B" stroke="#475569" stroke-width="2" />
+
+    <!-- Architectural Glass Windows Grid -->
+    <g fill="#E0F2FE" opacity="0.35">
+      <rect x="230" y="120" width="60" height="30" rx="3" />
+      <rect x="310" y="120" width="60" height="30" rx="3" />
+      <rect x="390" y="120" width="60" height="30" rx="3" />
+      <rect x="470" y="120" width="60" height="30" rx="3" />
+
+      <rect x="230" y="170" width="60" height="30" rx="3" />
+      <rect x="310" y="170" width="60" height="30" rx="3" />
+      <rect x="390" y="170" width="60" height="30" rx="3" />
+      <rect x="470" y="170" width="60" height="30" rx="3" />
+
+      <rect x="230" y="220" width="60" height="30" rx="3" />
+      <rect x="310" y="220" width="60" height="30" rx="3" />
+      <rect x="390" y="220" width="60" height="30" rx="3" />
+      <rect x="470" y="220" width="60" height="30" rx="3" />
+
+      <rect x="230" y="270" width="60" height="30" rx="3" />
+      <rect x="310" y="270" width="60" height="30" rx="3" />
+      <rect x="390" y="270" width="60" height="30" rx="3" />
+      <rect x="470" y="270" width="60" height="30" rx="3" />
+    </g>
+
+    <!-- Glowing Hospital Red/Teal Cross Header -->
+    <rect x="350" y="20" width="100" height="48" rx="8" fill="#FFFFFF" />
+    <!-- Medical Cross -->
+    <path d="M388,32 L412,32 M400,24 L400,40" stroke="#E11D48" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Hospital Signage -->
+    <rect x="240" y="340" width="320" height="48" rx="10" fill="#0F172A" stroke="#38BDF8" stroke-width="1.5" />
+    <text x="400" y="370" text-anchor="middle" fill="#FFFFFF" font-family="'Vazirmatn', sans-serif" font-size="16" font-weight="900">
+      بیمارستان فوق تخصصی نیکان غرب
+    </text>
+  </g>
+
+  <!-- Ground / Plaza -->
+  <rect y="580" width="1200" height="95" fill="#0B131B" />
+  <line x1="0" y1="580" x2="1200" y2="580" stroke="#26B2C4" stroke-width="3" />
+
+  <!-- Location Badge on Overlay -->
+  <g transform="translate(600, 620)" text-anchor="middle">
+    <text y="5" fill="#BAE6FD" font-family="'Vazirmatn', sans-serif" font-size="13">
+      تهران، بزرگراه همت غرب، روبروی بوستان جوانمردان • کلینیک اعصاب و روان دکتر فاطمه مومنی
+    </text>
+  </g>
+</svg>

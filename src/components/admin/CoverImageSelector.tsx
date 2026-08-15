@@ -491,7 +491,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
               {isFa ? 'آدرس اینترنتی یا مسیر فایل در پوشه public' : 'Direct Image URL or Public Path'}
             </label>
             <p className="text-[11px] text-muted-foreground mb-2">
-              {isFa ? 'می‌توانید مسیر فایل‌های public مثل /developer.jpg یا /covers/anxiety-panic.svg یا هر لینک معتبر اینترنتی را وارد نمایید.' : 'Enter URL like /developer.jpg or https://...'}
+              {isFa ? 'می‌توانید مسیر فایل‌های استاندارد مثل /images/doctor/portrait-main.svg یا /images/covers/anxiety-panic.svg را وارد نمایید.' : 'Enter path like /images/doctor/portrait-main.svg or /images/covers/anxiety-panic.svg'}
             </p>
 
             <div className="flex gap-2">
@@ -499,7 +499,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
                 type="text"
                 value={urlInput}
                 onChange={(e) => setUrlInput(e.target.value)}
-                placeholder="/developer.jpg یا https://images.unsplash.com/..."
+                placeholder="/images/covers/anxiety-panic.svg"
                 className="flex-1 px-3.5 py-2.5 rounded-xl border border-border/80 bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/40 focus:outline-none"
                 dir="ltr"
               />
@@ -516,29 +516,36 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
           {/* Quick shortcuts for public folder assets */}
           <div className="pt-2">
             <span className="text-[11px] font-semibold text-muted-foreground block mb-1.5">
-              {isFa ? 'میانبرهای سریع فایل‌های عمومی:' : 'Quick shortcuts:'}
+              {isFa ? 'میانبرهای سریع فایل‌های تصاویر استاندارد:' : 'Standard Asset Shortcuts:'}
             </span>
             <div className="flex flex-wrap gap-1.5 text-xs">
               <button
                 type="button"
-                onClick={() => { setUrlInput('/developer.jpg'); onSelectCover('/developer.jpg'); }}
+                onClick={() => { setUrlInput('/images/doctor/portrait-main.svg'); onSelectCover('/images/doctor/portrait-main.svg'); }}
                 className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
               >
-                /developer.jpg
+                /images/doctor/portrait-main.svg
               </button>
               <button
                 type="button"
-                onClick={() => { setUrlInput('/covers/anxiety-panic.svg'); onSelectCover('/covers/anxiety-panic.svg'); }}
+                onClick={() => { setUrlInput('/images/covers/anxiety-panic.svg'); onSelectCover('/images/covers/anxiety-panic.svg'); }}
                 className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
               >
-                /covers/anxiety-panic.svg
+                /images/covers/anxiety-panic.svg
               </button>
               <button
                 type="button"
-                onClick={() => { setUrlInput('/covers/depression-mood.svg'); onSelectCover('/covers/depression-mood.svg'); }}
+                onClick={() => { setUrlInput('/images/covers/depression-mood.svg'); onSelectCover('/images/covers/depression-mood.svg'); }}
                 className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
               >
-                /covers/depression-mood.svg
+                /images/covers/depression-mood.svg
+              </button>
+              <button
+                type="button"
+                onClick={() => { setUrlInput('/images/philosophy/treatment-philosophy.svg'); onSelectCover('/images/philosophy/treatment-philosophy.svg'); }}
+                className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
+              >
+                /images/philosophy/treatment-philosophy.svg
               </button>
             </div>
           </div>

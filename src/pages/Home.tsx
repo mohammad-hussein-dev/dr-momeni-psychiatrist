@@ -25,7 +25,9 @@ import {
   PHONE, 
   PHONE_TEL, 
   HERO_IMG, 
+  HERO_IMG_FALLBACK,
   CLINIC_ROOM_IMG, 
+  CLINIC_ROOM_FALLBACK,
   CONSULTATION_IMG,
   DOCTOR_NIKAN_URL,
   HOSPITAL_URL,
@@ -151,10 +153,10 @@ export const Home: React.FC = () => {
                     loading="eager"
                     className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
                     onError={(e) => {
-                      // Graceful fallback in case external CDN is blocked
+                      // Graceful fallback
                       const target = e.target as HTMLImageElement;
-                      if (!target.src.includes('unsplash')) {
-                        target.src = "https://images.unsplash.com/photo-1594824813590-78965a3962b1?auto=format&fit=crop&w=1000&q=80";
+                      if (target.src !== HERO_IMG_FALLBACK) {
+                        target.src = HERO_IMG_FALLBACK;
                       }
                     }}
                   />
@@ -317,6 +319,12 @@ export const Home: React.FC = () => {
                     alt="Clinical Consulting Room"
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (target.src !== CLINIC_ROOM_FALLBACK) {
+                        target.src = CLINIC_ROOM_FALLBACK;
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-primary/10 pointer-events-none" />
                 </div>

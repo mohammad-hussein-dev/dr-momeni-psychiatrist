@@ -21,6 +21,7 @@ import {
   Activity
 } from 'lucide-react';
 import { Reveal } from '../Reveal';
+import { DEVELOPER_IMG, DEVELOPER_FALLBACK } from '../../lib/siteConstants';
 
 interface DeveloperHeroProps {
   isFa: boolean;
@@ -137,10 +138,16 @@ export const DeveloperHero: React.FC<DeveloperHeroProps> = ({ isFa }) => {
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-card border-2 border-background z-10">
                   {!avatarError ? (
                     <img
-                      src="/developer.jpg"
+                      src={DEVELOPER_IMG}
                       alt="Mohammad Hussein - Senior Full-Stack Software Engineer"
                       className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                      onError={() => setAvatarError(true)}
+                      onError={(e) => {
+                        if (e.currentTarget.src !== DEVELOPER_FALLBACK) {
+                          e.currentTarget.src = DEVELOPER_FALLBACK;
+                        } else {
+                          setAvatarError(true);
+                        }
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary/30 to-secondary/30 flex flex-col items-center justify-center text-primary">

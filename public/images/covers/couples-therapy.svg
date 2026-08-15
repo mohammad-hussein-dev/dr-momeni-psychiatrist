@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c0519" />
+      <stop offset="50%" stop-color="#1c1917" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bgGrad)" />
+
+  <!-- Interlocking Hearts / Dialogue Rings -->
+  <circle cx="550" cy="290" r="90" fill="none" stroke="#fb7185" stroke-width="5" opacity="0.8" />
+  <circle cx="650" cy="290" r="90" fill="none" stroke="#fda4af" stroke-width="5" opacity="0.8" />
+
+  <rect x="420" y="470" width="360" height="46" rx="23" fill="#1c1917" stroke="#fb7185" stroke-width="1.5" />
+  <text x="600" y="499" text-anchor="middle" fill="#ffe4e6" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">
+    روان‌درمانی فردی و زوج‌درمانی بالینی
+  </text>
+  
+  <text x="600" y="550" text-anchor="middle" fill="#fda4af" font-family="system-ui, sans-serif" font-size="14" opacity="0.8">
+    Couples &amp; Psychotherapy • Dr. Fatemeh Momeni
+  </text>
+</svg>

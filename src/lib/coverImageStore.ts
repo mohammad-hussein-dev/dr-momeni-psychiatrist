@@ -18,7 +18,7 @@ export const UPLOADED_COVERS_STORAGE_KEY = 'dr_uploaded_cover_images_v1';
 export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   {
     id: 'cov-preset-1',
-    url: '/covers/anxiety-panic.svg',
+    url: '/images/covers/anxiety-panic.svg',
     label_fa: 'اضطراب و مهار پانیک',
     label_en: 'Anxiety & Panic Management',
     category: 'anxiety',
@@ -26,7 +26,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-2',
-    url: '/covers/depression-mood.svg',
+    url: '/images/covers/depression-mood.svg',
     label_fa: 'افسردگی و تنظیم خلق',
     label_en: 'Depression & Mood Therapy',
     category: 'depression',
@@ -34,7 +34,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-3',
-    url: '/covers/adhd-focus.svg',
+    url: '/images/covers/adhd-focus.svg',
     label_fa: 'بیش‌فعالی (ADHD) و تمرکز',
     label_en: 'Adult ADHD & Focus',
     category: 'adhd',
@@ -42,7 +42,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-4',
-    url: '/covers/sleep-rhythm.svg',
+    url: '/images/covers/sleep-rhythm.svg',
     label_fa: 'بهداشت و معماری خواب',
     label_en: 'Sleep Hygiene & Rhythm',
     category: 'sleep',
@@ -50,7 +50,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-5',
-    url: '/covers/ocd-mindfulness.svg',
+    url: '/images/covers/ocd-mindfulness.svg',
     label_fa: 'وسواس (OCD) و ذهن‌آگاهی',
     label_en: 'OCD & Mindfulness',
     category: 'ocd',
@@ -58,7 +58,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-6',
-    url: '/covers/bipolar-spectrum.svg',
+    url: '/images/covers/bipolar-spectrum.svg',
     label_fa: 'طیف اختلالات دوقطبی',
     label_en: 'Bipolar Spectrum',
     category: 'bipolar',
@@ -66,7 +66,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-7',
-    url: '/covers/psychosomatic.svg',
+    url: '/images/covers/psychosomatic.svg',
     label_fa: 'روان‌تنی و استرس گوارشی (IBS)',
     label_en: 'Psychosomatic Medicine',
     category: 'psychosomatic',
@@ -74,7 +74,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-8',
-    url: '/covers/burnout-stress.svg',
+    url: '/images/covers/burnout-stress.svg',
     label_fa: 'فرسودگی شغلی و استرس',
     label_en: 'Occupational Burnout',
     category: 'burnout',
@@ -82,7 +82,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-9',
-    url: '/covers/child-adolescent.svg',
+    url: '/images/covers/child-adolescent.svg',
     label_fa: 'روان‌پزشکی کودک و نوجوان',
     label_en: 'Child & Adolescent Psychiatry',
     category: 'children',
@@ -90,7 +90,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-10',
-    url: '/covers/couples-therapy.svg',
+    url: '/images/covers/couples-therapy.svg',
     label_fa: 'روان‌درمانی و زوج‌درمانی',
     label_en: 'Couples & Psychotherapy',
     category: 'couples',
@@ -98,7 +98,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-11',
-    url: '/covers/general-psychiatry.svg',
+    url: '/images/covers/general-psychiatry.svg',
     label_fa: 'مفاهیم پایه و دارودرمانی',
     label_en: 'General Psychiatry & Medications',
     category: 'general',
@@ -106,24 +106,56 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-preset-12',
-    url: '/developer.jpg',
-    label_fa: 'تصویر اختصاصی پزشک (Public)',
-    label_en: 'Doctor Portrait (Public)',
+    url: '/images/doctor/dr-fatemeh-momeni-portrait.svg',
+    label_fa: 'پرتره رسمی دکتر فاطمه مومنی',
+    label_en: 'Dr. Fatemeh Momeni Official Portrait',
     category: 'doctor',
     source: 'preset'
   },
-  // High-resolution medical photography presets
+  {
+    id: 'cov-preset-13',
+    url: '/images/philosophy/clinical-philosophy.svg',
+    label_fa: 'مدل جامع فلسفه درمان (زیستی-روانی-اجتماعی)',
+    label_en: 'Bio-Psycho-Social Treatment Model',
+    category: 'philosophy',
+    source: 'preset'
+  },
+  {
+    id: 'cov-preset-14',
+    url: '/images/philosophy/biopsychosocial-approach.svg',
+    label_fa: 'مسیر و رویکرد ۴ مرحله‌ای درمان بالینی',
+    label_en: '4-Step Clinical Care Roadmap',
+    category: 'philosophy',
+    source: 'preset'
+  },
+  {
+    id: 'cov-preset-15',
+    url: '/images/clinical/psychiatric-consulting-room.svg',
+    label_fa: 'اتاق ویزیت و فضای درمانی بیمارستان',
+    label_en: 'Consulting Suite & Therapeutic Space',
+    category: 'clinical',
+    source: 'preset'
+  },
+  {
+    id: 'cov-preset-16',
+    url: '/images/clinical/hospital-nikan-west.svg',
+    label_fa: 'بیمارستان فوق‌تخصصی نیکان غرب تهران',
+    label_en: 'Nikan Gharb Hospital Center',
+    category: 'clinical',
+    source: 'preset'
+  },
+  // Standardized clinical and therapeutic presets
   {
     id: 'cov-photo-1',
-    url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-    label_fa: 'مطب بالینی و پرونده پزشکی',
+    url: '/images/clinical/consulting-room.svg',
+    label_fa: 'مطب بالینی و فضای درمانی',
     label_en: 'Clinical Consultation',
     category: 'general',
     source: 'preset'
   },
   {
     id: 'cov-photo-2',
-    url: 'https://images.unsplash.com/photo-1508847154043-be5407fcaa5a?auto=format&fit=crop&w=1200&q=80',
+    url: '/images/covers/anxiety-panic.svg',
     label_fa: 'آرامش، مدیتیشن و تنفس',
     label_en: 'Serenity & Breathing',
     category: 'anxiety',
@@ -131,7 +163,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-photo-3',
-    url: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80',
+    url: '/images/covers/depression-mood.svg',
     label_fa: 'دارودرمانی و علوم اعصاب',
     label_en: 'Neuroscience & Medication',
     category: 'general',
@@ -139,7 +171,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   },
   {
     id: 'cov-photo-4',
-    url: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80',
+    url: '/images/covers/sleep-rhythm.svg',
     label_fa: 'خواب و آرامش شبانه',
     label_en: 'Restorative Sleep',
     category: 'sleep',
