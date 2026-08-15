@@ -9,7 +9,6 @@ import {
   User, 
   ShieldCheck, 
   Lock,
-  LogOut,
   Sparkles,
   BookOpen,
   MessageSquare
@@ -18,7 +17,7 @@ import { useLanguage } from '../../i18n/LanguageProvider';
 import { PHONE, PHONE_TEL } from '../../lib/siteConstants';
 import { BrandLogo } from '../site/BrandLogo';
 import { ThemeToggle } from '../site/ThemeToggle';
-import { getActiveSession, clearSession } from '../../lib/appointmentStore';
+import { getActiveSession } from '../../lib/appointmentStore';
 import { UserSession } from '../../types';
 
 export const Header: React.FC = () => {
@@ -60,15 +59,6 @@ export const Header: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
-
-  const handleDoctorLogout = () => {
-    if (window.confirm(lang === 'fa' ? 'آیا مایل به خروج از حساب پزشک هستید؟' : 'Exit doctor session?')) {
-      clearSession();
-      setSession(null);
-      window.dispatchEvent(new Event('auth_state_changed'));
-      window.location.href = '/';
-    }
-  };
 
   const navLinks = [
     { to: '/', label: t('nav_home') },
@@ -161,16 +151,6 @@ export const Header: React.FC = () => {
             {/* DOCTOR LOGGED-IN ACTIONS vs PATIENT ACTIONS */}
             {isDoctorOrAdmin ? (
               <>
-                {/* Doctor Appointments & Hub Link */}
-                <Link
-                  to="/admin"
-                  title={lang === 'fa' ? 'میز کار و مدیریت نوبت‌های بیماران' : 'Doctor Appointments Hub'}
-                  className="hidden sm:inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-xs font-bold border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 transition-all shrink-0"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <span className="text-[11px] font-bold">{lang === 'fa' ? 'میز کار نوبت‌ها' : 'Doctor Hub'}</span>
-                </Link>
-
                 {/* Doctor Admin Dashboard CTA */}
                 <Link
                   to="/admin"
@@ -180,16 +160,6 @@ export const Header: React.FC = () => {
                   <ShieldCheck className="w-3.5 h-3.5 shrink-0 text-emerald-300" />
                   <span>{lang === 'fa' ? 'پنل مدیریت کلینیک' : 'Doctor Admin'}</span>
                 </Link>
-
-                {/* Fast Doctor Logout Button */}
-                <button
-                  type="button"
-                  onClick={handleDoctorLogout}
-                  title={lang === 'fa' ? 'خروج از حساب پزشک' : 'Exit Doctor Session'}
-                  className="hidden md:inline-flex items-center justify-center h-8 w-8 rounded-full border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 transition-colors cursor-pointer shrink-0"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
               </>
             ) : (
               <>
@@ -293,15 +263,6 @@ export const Header: React.FC = () => {
                         <span>{lang === 'fa' ? 'نظرات مراجعین' : 'Manage Reviews'}</span>
                       </Link>
                     </div>
-
-                    <button
-                      type="button"
-                      onClick={handleDoctorLogout}
-                      className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-400 text-xs font-bold transition-colors cursor-pointer"
-                    >
-                      <LogOut className="w-3.5 h-3.5" />
-                      <span>{lang === 'fa' ? 'خروج از حساب پزشک' : 'Logout Doctor Account'}</span>
-                    </button>
                   </div>
                 ) : (
                   /* Patient / Guest Mobile Drawer Options */

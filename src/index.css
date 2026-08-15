@@ -29,10 +29,10 @@
     --cream: 36 45% 94%; /* #F7F1E9 */
     --radius: 1.1rem;
 
-    --font-heading: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-    --font-body: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-    --font-display: 'Vazirmatn', 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-heading: 'Vazirmatn', 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-body: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-display: 'Vazirmatn', 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
   /* DARK MODE: Deep Neuro-Atmosphere, Midnight Teal & Calming Warm Gold */
@@ -64,9 +64,10 @@
   }
 
   html[lang="en"] {
-    --font-heading: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
-    --font-body: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
-    --font-display: 'Hanken Grotesk', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'Outfit', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    --font-display: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   }
 }
 
@@ -259,3 +260,228 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary) / 0.65);
 }
+
+/* ========================================================================= */
+/* Senior Developer Avatar Glowing Conic Ring & Halo Effects */
+/* ========================================================================= */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes spin-reverse-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 18s linear infinite;
+}
+
+/* ========================================================================= */
+/* Senior Developer Signature: Refined Ambient Breath & Specular Light Sweep */
+/* ========================================================================= */
+@keyframes ambient-glow-breath {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes specular-sweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.developer-avatar-halo {
+  position: relative;
+}
+
+.developer-avatar-halo::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.9),
+    #06b6d4,
+    hsl(var(--secondary) / 0.8),
+    #10b981
+  );
+  opacity: 0.75;
+  filter: blur(10px);
+  z-index: 0;
+  animation: ambient-glow-breath 4s ease-in-out infinite;
+}
+
+.developer-avatar-halo::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    #38bdf8,
+    hsl(var(--secondary))
+  );
+  z-index: 1;
+}
+
+/* Footer Senior Developer Shortcut Badge (Clean, Luxury & Non-Spinning) */
+.footer-dev-badge-wrap {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-dev-badge-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.5),
+    #38bdf8 / 0.4,
+    hsl(var(--secondary) / 0.4),
+    hsl(var(--border) / 0.6)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.footer-dev-badge-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-150%) skewX(-20deg);
+}
+
+.footer-dev-badge-wrap:hover::after {
+  animation: specular-sweep 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.footer-dev-badge-wrap:hover {
+  border-color: hsl(var(--primary) / 0.6);
+  box-shadow: 0 10px 25px -5px hsl(var(--primary) / 0.15), 0 0 12px hsl(var(--primary) / 0.1);
+}
+
+/* ========================================================================= */
+/* Senior High-Tech Visual Effects: Code Matrix, Signal Pulses & Laser Grid  */
+/* ========================================================================= */
+@keyframes signal-flow {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-signal-flow {
+  animation: signal-flow 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes signal-flow-rtl {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-signal-flow-rtl {
+  animation: signal-flow-rtl 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes laser-glow {
+  0%, 100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.4));
+  }
+  50% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 18px hsl(var(--primary) / 0.8));
+  }
+}
+
+.animate-laser-glow {
+  animation: laser-glow 3s ease-in-out infinite;
+}
+
+@keyframes terminal-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-terminal-cursor {
+  animation: terminal-cursor 0.9s infinite;
+}
+
+.tech-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, hsl(var(--border) / 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border) / 0.45) 1px, transparent 1px);
+}
+
+.tech-cyber-glow {
+  box-shadow: 0 0 35px -5px hsl(var(--primary) / 0.15), 0 0 15px -3px hsl(var(--secondary) / 0.2);
+}
+
+
+
+

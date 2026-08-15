@@ -13,7 +13,8 @@ import {
   Sparkles,
   Building2,
   Calendar,
-  HeartHandshake
+  HeartHandshake,
+  Code2
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
 import { 
@@ -56,7 +57,8 @@ export const Footer: React.FC = () => {
     { to: '/testimonials', label: t('nav_testimonials') },
     { to: '/contact', label: t('nav_contact') },
     { to: '/panel', label: t('nav_panel') },
-    { to: '/admin', label: lang === 'fa' ? 'پنل مدیریت پزشک (تایید/لغو نوبت‌ها)' : 'Doctor Management Portal' }
+    { to: '/admin', label: lang === 'fa' ? 'پنل مدیریت پزشک' : 'Doctor Admin Portal' },
+    { to: '/developer', label: lang === 'fa' ? 'توسعه‌دهنده و سفارش سامانه (محمدحسین)' : 'Developer & Systems (Mohammad Hussein)' }
   ];
 
   return (
@@ -299,10 +301,55 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* 3. Bottom Copyright & Medical Ethics Bar */}
-        <div className="mt-10 pt-5 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <p className="text-center sm:text-start">{t('footer_rights')}</p>
-          <div className="flex items-center gap-2 font-medium">
+        {/* 3. Bottom Copyright & Developer Signature Bar */}
+        <div className="mt-12 pt-6 border-t border-border/60 flex flex-col md:flex-row items-center justify-between gap-5 text-xs text-muted-foreground">
+          <p className="text-center md:text-start order-2 md:order-1">{t('footer_rights')}</p>
+          
+          {/* Subtle & Prestigious Developer Signature Shortcut Badge (Exclusive gateway to /developer) */}
+          <div className="order-1 md:order-2 flex justify-center">
+            <Link
+              to="/developer"
+              className="footer-dev-badge-wrap group relative inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card/95 hover:bg-card border border-border/80 text-foreground transition-all duration-200 transform hover:-translate-y-0.5 shadow-xs hover:shadow-md cursor-pointer select-none"
+              title={lang === 'fa' ? 'مشاهده معماری فنی، مشخصات مهندسی و پورتفولیو محمدحسین' : 'View Senior Engineering Architecture & Portfolio'}
+            >
+              {/* Avatar Image with Calm Clean Ring */}
+              <div className="relative w-6 h-6 rounded-full overflow-hidden border border-primary/40 bg-card shrink-0 shadow-2xs">
+                <img
+                  src="/developer.jpg"
+                  alt="Mohammad Hussein - Senior Full-Stack Engineer"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                <Code2 className="w-3.5 h-3.5 text-primary absolute inset-0 m-auto -z-1" />
+              </div>
+
+              {/* Steady Emerald Active Beacon */}
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+
+              {/* Signature Copy */}
+              <div className="flex items-center gap-1.5 text-[11px]">
+                <span className="text-muted-foreground">
+                  {lang === 'fa' ? 'طراحی و توسعه اختصاصی:' : 'Engineered by:'}
+                </span>
+                <span className="font-bold text-foreground group-hover:text-primary transition-colors">
+                  {lang === 'fa' ? 'محمدحسین' : 'Mohammad Hussein'}
+                </span>
+              </div>
+
+              {/* Refined Mini Chip */}
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 group-hover:bg-primary text-primary group-hover:text-primary-foreground border border-primary/20 text-[10px] font-semibold transition-all">
+                <span>{lang === 'fa' ? 'پروفایل و سفارش سامانه' : 'Portfolio & Inquiry'}</span>
+                <Sparkles className="w-2.5 h-2.5" />
+              </span>
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-2 font-medium order-3">
             <HeartHandshake className="w-3.5 h-3.5 text-primary" />
             <span>{t('made_with')}</span>
           </div>
