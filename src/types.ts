@@ -99,6 +99,38 @@ export interface PatientThread {
   isOnline?: boolean;
 }
 
+export type BlogCategoryKey = 
+  | 'anxiety' 
+  | 'depression' 
+  | 'adhd' 
+  | 'sleep' 
+  | 'bipolar' 
+  | 'ocd' 
+  | 'couples' 
+  | 'children' 
+  | 'burnout' 
+  | 'psychosomatic' 
+  | 'general';
+
+export type BlogAttachmentType = 'pdf' | 'image' | 'audio' | 'document' | 'guide';
+
+export interface BlogAttachment {
+  id: string;
+  name: string;
+  type: BlogAttachmentType;
+  url: string; // Base64 dataURL or URL link
+  sizeStr?: string;
+  description?: string;
+  downloadName?: string;
+}
+
+export interface BlogFAQItem {
+  question_fa: string;
+  question_en?: string;
+  answer_fa: string;
+  answer_en?: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -108,7 +140,7 @@ export interface BlogPost {
   excerpt_en: string;
   body_fa: string;
   body_en: string;
-  category: 'anxiety' | 'depression' | 'relationships' | 'children' | 'general';
+  category: BlogCategoryKey | string;
   category_fa: string;
   category_en: string;
   image_url: string;
@@ -116,6 +148,19 @@ export interface BlogPost {
   published_date: string;
   author_fa: string;
   author_en: string;
+  tags?: string[];
+  featured?: boolean;
+  clinical_pearl_fa?: string;
+  clinical_pearl_en?: string;
+  target_audience_fa?: string;
+  target_audience_en?: string;
+  audio_guide_url?: string;
+  audio_guide_title?: string;
+  audio_duration_seconds?: number;
+  attachments?: BlogAttachment[];
+  faq_items?: BlogFAQItem[];
+  scientific_references?: string[];
+  verified_medical_review?: boolean;
 }
 
 export interface Testimonial {

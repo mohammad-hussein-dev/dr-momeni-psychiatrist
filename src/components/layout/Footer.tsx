@@ -237,6 +237,24 @@ export const Footer: React.FC = () => {
                 {/* Fast App Jump Links */}
                 <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
                   <a
+                    href={NESHAN_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 text-[10px] font-bold transition-colors shadow-2xs"
+                  >
+                    <span>{lang === 'fa' ? 'نشان (مسیریابی مستقیم)' : 'Neshan (Direct)'}</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-80" />
+                  </a>
+                  <a
+                    href={BALAD_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
+                  >
+                    <span>{lang === 'fa' ? 'بلد' : 'Balad'}</span>
+                    <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                  </a>
+                  <a
                     href={GOOGLE_MAPS_URL}
                     target="_blank"
                     rel="noreferrer"
@@ -252,24 +270,6 @@ export const Footer: React.FC = () => {
                     className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
                   >
                     <span>Waze</span>
-                    <ExternalLink className="w-2.5 h-2.5 opacity-60" />
-                  </a>
-                  <a
-                    href={NESHAN_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
-                  >
-                    <span>{lang === 'fa' ? 'نشان' : 'Neshan'}</span>
-                    <ExternalLink className="w-2.5 h-2.5 opacity-60" />
-                  </a>
-                  <a
-                    href={BALAD_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
-                  >
-                    <span>{lang === 'fa' ? 'بلد' : 'Balad'}</span>
                     <ExternalLink className="w-2.5 h-2.5 opacity-60" />
                   </a>
                 </div>
