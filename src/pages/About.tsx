@@ -65,9 +65,7 @@ export const About: React.FC = () => {
 
               {/* Top Verified Badge */}
               <div
-                className={`absolute top-3 sm:top-4 ${
-                  isRTL ? 'right-2 sm:right-3' : 'left-2 sm:left-3'
-                } glass-card rounded-full px-3.5 py-1.5 shadow-md border border-primary/25 bg-card/95 backdrop-blur-md flex items-center gap-1.5 text-xs font-semibold text-primary z-10`}
+                className="absolute top-3 sm:top-4 start-2 sm:start-3 glass-card rounded-full px-3.5 py-1.5 shadow-md border border-primary/25 bg-card/95 backdrop-blur-md flex items-center gap-1.5 text-xs font-semibold text-primary z-10"
               >
                 <Award className="w-4 h-4 text-primary" />
                 <span>{t('board_certified')}</span>
@@ -75,9 +73,7 @@ export const About: React.FC = () => {
 
               {/* Bottom Floating Hospital Card */}
               <div
-                className={`absolute -bottom-3 sm:-bottom-4 ${
-                  isRTL ? 'left-2 sm:left-3' : 'right-2 sm:right-3'
-                } glass-card rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 shadow-xl border border-border/80 bg-card/95 backdrop-blur-md flex items-center gap-3 z-10`}
+                className="absolute -bottom-3 sm:-bottom-4 end-2 sm:end-3 glass-card rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 shadow-xl border border-border/80 bg-card/95 backdrop-blur-md flex items-center gap-3 z-10 max-w-[calc(100%-1rem)]"
               >
                 <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                   <Building2 className="w-4.5 h-4.5 text-primary" />

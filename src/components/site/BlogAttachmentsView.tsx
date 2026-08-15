@@ -199,7 +199,7 @@ export const BlogAttachmentsView: React.FC<BlogAttachmentsViewProps> = ({
               </button>
             </div>
 
-            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-muted/20 min-h-[300px]">
+            <div className="flex-1 overflow-auto custom-scrollbar p-4 flex items-center justify-center bg-muted/20 min-h-[300px]">
               {previewAttachment.type === 'image' ? (
                 <img
                   src={previewAttachment.url}

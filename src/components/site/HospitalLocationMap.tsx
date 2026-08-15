@@ -228,7 +228,7 @@ export const HospitalLocationMap: React.FC<HospitalLocationMapProps> = ({
           />
 
           {/* Pulsating Location Badge Overlay */}
-          <div className="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 left-auto z-10 pointer-events-none">
+          <div className="absolute top-2.5 sm:top-3.5 end-2.5 sm:end-3.5 z-10 pointer-events-none">
             <div className="bg-background/95 backdrop-blur-md rounded-xl sm:rounded-2xl border border-primary/30 p-2 sm:p-2.5 shadow-md flex items-center gap-2.5">
               <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shrink-0 shadow-xs">
                 <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -249,7 +249,7 @@ export const HospitalLocationMap: React.FC<HospitalLocationMapProps> = ({
           </div>
 
           {/* Quick Direct Neshan Floating Action */}
-          <div className="absolute bottom-2.5 left-2.5 sm:left-3.5 z-10 flex items-center gap-2">
+          <div className="absolute bottom-2.5 start-2.5 sm:start-3.5 z-10 flex items-center gap-2">
             <a
               href={NESHAN_SHORT_URL}
               target="_blank"

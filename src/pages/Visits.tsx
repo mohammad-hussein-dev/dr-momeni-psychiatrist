@@ -20,8 +20,29 @@ import { HospitalLocationMap } from '../components/site/HospitalLocationMap';
 export const Visits: React.FC = () => {
   const { t, lang, isRTL } = useLanguage();
 
-  const inPersonSteps = (t('visit_inperson_steps') as unknown as string[]) || [];
-  const onlineSteps = (t('visit_online_steps') as unknown as string[]) || [];
+  const inPersonSteps = lang === 'fa'
+    ? [
+        'رزرو آنلاین یا تلفنی و دریافت پیامک تایید زمان ویزیت',
+        'مراجعه به کلینیک تخصصی بیمارستان نیکان غرب',
+        'مصاحبه بالینی جامع، ارزیابی تشخیصی و تنظیم برنامه درمان فردی'
+      ]
+    : [
+        'Online/phone booking and SMS appointment confirmation',
+        'Check-in at Nikan West Hospital Specialty Clinic',
+        'Comprehensive psychiatric interview & personalized therapy plan'
+      ];
+
+  const onlineSteps = lang === 'fa'
+    ? [
+        'انتخاب زمان مناسب و تکمیل رزرو اینترنتی',
+        'دریافت لینک اتاق امن و اختصاصی مشاوره ویدیویی',
+        'ویزیت ویدیویی، ارزیابی بالینی و صدور نسخه الکترونیک معتبر'
+      ]
+    : [
+        'Select preferred time slot and confirm booking',
+        'Receive secure end-to-end encrypted video consultation link',
+        'Live video consultation, clinical assessment & verified e-prescription'
+      ];
 
   return (
     <div className="pt-20 sm:pt-28 pb-16 overflow-hidden">

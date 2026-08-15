@@ -174,7 +174,7 @@ export const TestimonialEditorModal: React.FC<TestimonialEditorModalProps> = ({
         </div>
 
         {/* Form Body */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-5">
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-5 sm:p-7 space-y-5">
           {errorMsg && (
             <div className="p-3.5 rounded-2xl bg-destructive/10 border border-destructive/30 text-destructive text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />

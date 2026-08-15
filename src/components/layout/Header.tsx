@@ -176,7 +176,7 @@ export const Header: React.FC = () => {
                 {/* Prominent Booking CTA Button */}
                 <Link
                   to="/panel"
-                  className="inline-flex items-center gap-1.5 h-8 px-3 sm:px-4 rounded-full text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20 shadow-xs hover:shadow-sm transition-all active:scale-95 shrink-0 whitespace-nowrap"
+                  className="hidden sm:inline-flex items-center gap-1.5 h-8 px-3 sm:px-4 rounded-full text-xs font-bold bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20 shadow-xs hover:shadow-sm transition-all active:scale-95 shrink-0 whitespace-nowrap"
                 >
                   <Calendar className="w-3.5 h-3.5 shrink-0" />
                   <span>{t('book_now')}</span>
@@ -202,10 +202,10 @@ export const Header: React.FC = () => {
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 w-full z-50 animate-in fade-in slide-in-from-top-2 duration-200">
           <div 
-            className="fixed inset-0 top-[52px] bg-charcoal/40 backdrop-blur-xs transition-opacity -z-10"
+            className="fixed inset-0 bg-charcoal/40 backdrop-blur-xs transition-opacity -z-10"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="bg-background/98 backdrop-blur-xl border-b border-border/70 shadow-2xl px-4 sm:px-6 py-4 overflow-y-auto max-h-[80vh] space-y-3">
+          <div className="bg-background/98 backdrop-blur-xl border-b border-border/70 shadow-2xl px-4 sm:px-6 py-4 overflow-y-auto custom-scrollbar max-h-[80vh] space-y-3">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <NavLink

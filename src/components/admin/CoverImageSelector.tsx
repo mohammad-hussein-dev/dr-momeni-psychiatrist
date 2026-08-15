@@ -365,7 +365,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-72 overflow-y-auto p-1">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-72 overflow-y-auto custom-scrollbar-dense p-1">
             {filteredPresets.map((preset) => {
               const isSelected = currentImageUrl === preset.url;
               return (
@@ -431,7 +431,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-72 overflow-y-auto p-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-72 overflow-y-auto custom-scrollbar-dense p-1">
               {uploadedLibrary.map((item) => {
                 const isSelected = currentImageUrl === item.url;
                 return (

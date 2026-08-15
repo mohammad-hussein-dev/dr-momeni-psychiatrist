@@ -1735,7 +1735,7 @@ export const AdminPanel: React.FC = () => {
         {/* ========================================================================= */}
         {selectedAppt && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto">
-            <div className="rounded-3xl bg-card border border-border/80 w-full max-w-2xl max-h-[92vh] overflow-y-auto shadow-2xl p-6 sm:p-7 relative space-y-5 my-8">
+            <div className="rounded-3xl bg-card border border-border/80 w-full max-w-2xl max-h-[92vh] overflow-y-auto custom-scrollbar shadow-2xl p-6 sm:p-7 relative space-y-5 my-8">
               
               {/* Modal Header */}
               <div className="flex items-start justify-between gap-3 border-b border-border/60 pb-4">

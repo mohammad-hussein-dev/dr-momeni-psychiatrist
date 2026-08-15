@@ -269,7 +269,7 @@ export async function evaluatePsychiatricSymptom(userQuery: string) {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="rounded-2xl bg-zinc-950 border border-zinc-800 p-4 font-mono text-xs overflow-x-auto shadow-inner text-zinc-200" dir="ltr">
+            <div className="rounded-2xl bg-zinc-950 border border-zinc-800 p-4 font-mono text-xs overflow-x-auto custom-scrollbar shadow-inner text-zinc-200" dir="ltr">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800 text-[11px] text-zinc-400">
                 <span className="flex items-center gap-1.5 text-primary">
                   <FileCode className="w-3.5 h-3.5" />

@@ -63,9 +63,7 @@ export const FloatingCareBar: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className={`fixed bottom-4 sm:bottom-5 z-40 transition-all duration-500 ease-out ${
-        isRTL ? 'left-3 sm:left-6' : 'right-3 sm:right-6'
-      } ${
+      className={`fixed bottom-4 sm:bottom-5 end-3 sm:end-6 z-40 transition-all duration-500 ease-out ${
         visible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-8 pointer-events-none'
