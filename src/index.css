@@ -1,49 +1,74 @@
 @import "tailwindcss";
 
+/* ========================================================================= */
+/*  DR. FATEMEH MOMENI — Clinical Design System                              */
+/*  Lead Developer: Mohammad Hossein                                         */
+/*  Domain: drfatemehmomeni.ir                                               */
+/*  Architecture: Light-Mode Default with Optional Dark Mode Toggle          */
+/* ========================================================================= */
+
 @layer base {
-  /* LIGHT MODE (DEFAULT): Warm Clinical Alabaster, Deep Teal & Gentle Sky */
+  /* ─── LIGHT MODE (DEFAULT): Warm Clinical Alabaster ─────────────────── */
   :root {
-    --background: 36 54% 97.5%; /* #FCF9F5 */
-    --foreground: 193 9% 19%; /* #2C3335 */
-    --card: 0 0% 100%; /* #FFFFFF */
+    /* Core Surfaces */
+    --background: 36 54% 97.5%;           /* #FCF9F5 Warm Clinical Alabaster */
+    --foreground: 193 9% 19%;             /* #2C3335 Deep Charcoal */
+    --card: 0 0% 100%;                    /* #FFFFFF Pure Clinical White */
     --card-foreground: 193 9% 19%;
     --popover: 0 0% 100%;
     --popover-foreground: 193 9% 19%;
-    --primary: 192 62% 31%; /* #1E6B7E Deep Teal */
+
+    /* Primary Brand: Deep Healing Teal (Psychiatric Trust) */
+    --primary: 192 62% 31%;               /* #1E6B7E */
     --primary-foreground: 36 54% 97.5%;
-    --secondary: 188 46% 68%; /* #88C9D3 Soft Sky */
+
+    /* Secondary: Calming Sky Blue */
+    --secondary: 188 46% 68%;             /* #88C9D3 */
     --secondary-foreground: 192 62% 31%;
-    --muted: 188 30% 93%; /* #EAF0F1 */
-    --muted-foreground: 192 10% 42%; /* #6B7A80 */
-    --accent: 188 46% 90%; /* #DBEEF3 */
+
+    /* Muted & Accent */
+    --muted: 188 30% 93%;                 /* #EAF0F1 Soft Mist */
+    --muted-foreground: 192 10% 42%;      /* #6B7A80 Slate Gray */
+    --accent: 188 46% 90%;                /* #DBEEF3 Pale Cyan */
     --accent-foreground: 192 62% 25%;
-    --destructive: 0 72% 48%;
+
+    /* Semantic Validation Colors */
+    --destructive: 0 72% 48%;             /* Rose-600 — Error / Critical */
     --destructive-foreground: 0 0% 98%;
-    --border: 188 24% 87%; /* #D5E0E2 */
+    --success: 158 64% 42%;               /* Emerald-600 — Confirmation */
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;                /* Amber-500 — Attention */
+    --warning-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 188 24% 87%;                /* #D5E0E2 */
     --input: 188 24% 87%;
     --ring: 192 62% 31%;
+
+    /* Extended Palette (Clinical Decorative) */
     --soft-sky: 188 46% 68%;
     --alabaster: 36 54% 97.5%;
     --charcoal: 193 9% 19%;
     --teal-deep: 192 62% 31%;
-    --cream: 36 45% 94%; /* #F7F1E9 */
-    --radius: 1.1rem;
+    --cream: 36 45% 94%;                  /* #F7F1E9 */
 
+    /* Typography Scale */
+    --radius: 1.1rem;
     --font-heading: 'Vazirmatn', 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
     --font-body: 'Vazirmatn', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-display: 'Vazirmatn', 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
-  /* DARK MODE: Deep Neuro-Atmosphere, Midnight Teal & Calming Warm Gold */
+  /* ─── DARK MODE (OPTIONAL): Deep Neuro-Atmosphere ───────────────────── */
   .dark {
-    --background: 216 28% 7%; /* #0c1017 deep midnight */
-    --foreground: 210 20% 92%; /* #e2e8f0 crisp readable text */
-    --card: 217 24% 11%; /* #141b24 elevated slate-card */
+    --background: 216 28% 7%;             /* #0c1017 deep midnight */
+    --foreground: 210 20% 92%;            /* #e2e8f0 crisp readable text */
+    --card: 217 24% 11%;                  /* #141b24 elevated slate-card */
     --card-foreground: 210 20% 96%;
     --popover: 217 26% 13%;
     --popover-foreground: 210 20% 96%;
-    --primary: 187 68% 46%; /* #26b2c4 luminous calming teal for psychiatry */
+    --primary: 187 68% 46%;               /* #26b2c4 luminous calming teal */
     --primary-foreground: 216 28% 7%;
     --secondary: 217 20% 18%;
     --secondary-foreground: 187 68% 65%;
@@ -53,7 +78,11 @@
     --accent-foreground: 187 68% 75%;
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 217 20% 18%; /* subtle micro-borders */
+    --success: 158 64% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --border: 217 20% 18%;                /* subtle micro-borders */
     --input: 217 20% 20%;
     --ring: 187 68% 46%;
     --soft-sky: 187 50% 60%;
@@ -63,6 +92,7 @@
     --cream: 217 26% 9.5%;
   }
 
+  /* ─── English Language Font Override ────────────────────────────────── */
   html[lang="en"] {
     --font-heading: 'Plus Jakarta Sans', 'Outfit', 'Vazirmatn', system-ui, -apple-system, sans-serif;
     --font-body: 'Plus Jakarta Sans', 'Vazirmatn', system-ui, -apple-system, sans-serif;
@@ -71,13 +101,19 @@
   }
 }
 
+/* ========================================================================= */
+/*  Tailwind v4 Theme Token Binding                                          */
+/* ========================================================================= */
 @theme {
+  /* Core Surfaces */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
+
+  /* Brand Colors */
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-secondary: hsl(var(--secondary));
@@ -86,28 +122,45 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
+
+  /* Semantic Validation */
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+
+  /* Borders & Inputs */
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+
+  /* Extended Clinical Palette */
   --color-skysoft: hsl(var(--soft-sky));
   --color-alabaster: hsl(var(--alabaster));
   --color-charcoal: hsl(var(--charcoal));
   --color-tealdeep: hsl(var(--teal-deep));
   --color-cream: hsl(var(--cream));
+
+  /* Radius Scale */
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 4px);
   --radius-sm: calc(var(--radius) - 8px);
 }
 
+/* ========================================================================= */
+/*  Base Layer: Typography, Selection & Smooth Scroll                        */
+/* ========================================================================= */
 @layer base {
   * {
     border-color: hsl(var(--border));
   }
+
   html {
     scroll-behavior: smooth;
   }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
@@ -118,21 +171,27 @@
     text-rendering: optimizeLegibility;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
+
   @media (min-width: 640px) {
     body {
       font-size: 16px;
     }
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
     line-height: 1.3;
   }
+
   ::selection {
     background: hsl(var(--primary) / 0.2);
   }
 }
 
+/* ========================================================================= */
+/*  Glass Morphism Utilities                                                 */
+/* ========================================================================= */
 .glass {
   background: hsl(var(--background) / 0.82);
   backdrop-filter: blur(18px) saturate(140%);
@@ -147,6 +206,9 @@
   border: 1px solid hsl(var(--border) / 0.7);
 }
 
+/* ========================================================================= */
+/*  Section Padding & Button Effects                                         */
+/* ========================================================================= */
 .section-pad {
   padding-top: clamp(3rem, 5.5vw, 5.5rem);
   padding-bottom: clamp(3rem, 5.5vw, 5.5rem);
@@ -156,6 +218,9 @@
   box-shadow: 0 8px 30px -8px hsl(var(--primary) / 0.45);
 }
 
+/* ========================================================================= */
+/*  Breathing Pulse Animation (Clinical Calm)                                */
+/* ========================================================================= */
 .breathing-pulse {
   animation: breathe 6s ease-in-out infinite;
 }
@@ -171,56 +236,61 @@
   }
 }
 
+/* ========================================================================= */
+/*  Language Swap Fade Transition                                            */
+/* ========================================================================= */
 .lang-fade {
   transition: opacity 0.32s ease, transform 0.32s ease;
 }
+
 .lang-fade.swapping {
   opacity: 0;
   transform: scale(0.985);
 }
 
+/* ========================================================================= */
+/*  Fade-Up Reveal Animation (Intersection Observer)                         */
+/* ========================================================================= */
 .fade-up {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .fade-up.in {
   opacity: 1;
   transform: none;
 }
 
+/* ========================================================================= */
+/*  Float Slow Animation (Decorative Elements)                               */
+/* ========================================================================= */
 .animate-float-slow {
   animation: float-slow 7s ease-in-out infinite;
 }
 
 @keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
+/* ========================================================================= */
+/*  Pulse Ring Animation (CTA Emphasis)                                      */
+/* ========================================================================= */
 .animate-pulse-ring {
   animation: pulse-ring 2.6s ease-out infinite;
 }
 
 @keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45);
-  }
-  70% {
-    box-shadow: 0 0 0 16px hsl(var(--primary) / 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 hsl(var(--primary) / 0);
-  }
+  0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.45); }
+  70% { box-shadow: 0 0 0 16px hsl(var(--primary) / 0); }
+  100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
 }
 
 /* ========================================================================= */
-/* Refined Clinical & Minimalist Scrollbar Architecture                      */
-/* Cross-browser (Chromium / Firefox), Theme-aware (Light / Dark)            */
+/*  Refined Clinical Scrollbar Architecture                                  */
+/*  Cross-browser (Chromium / Firefox), Theme-aware (Light & Dark)           */
 /* ========================================================================= */
 
 /* 1. Global Document Scrollbar (Firefox) */
@@ -237,11 +307,7 @@
     width: 9px;
     height: 9px;
   }
-  
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
     background-color: hsl(var(--primary) / 0.28);
     border-radius: 9999px;
@@ -249,36 +315,20 @@
     background-clip: padding-box;
     transition: background-color 0.2s ease;
   }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--primary) / 0.52);
-  }
-  
-  ::-webkit-scrollbar-thumb:active {
-    background-color: hsl(var(--primary) / 0.72);
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: transparent;
-  }
+  ::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--primary) / 0.52); }
+  ::-webkit-scrollbar-thumb:active { background-color: hsl(var(--primary) / 0.72); }
+  ::-webkit-scrollbar-corner { background: transparent; }
 }
 
-/* 3. Nested Application Panels / Modals / Chat Scrollbars (Standard: 6px) */
+/* 3. Nested Application Panels / Modals / Chat Scrollbars (6px) */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--primary) / 0.32) transparent;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
+  .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: hsl(var(--primary) / 0.3);
     border-radius: 9999px;
@@ -286,14 +336,8 @@
     background-clip: padding-box;
     transition: background-color 0.2s ease;
   }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--primary) / 0.58);
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:active {
-    background-color: hsl(var(--primary) / 0.75);
-  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--primary) / 0.58); }
+  .custom-scrollbar::-webkit-scrollbar-thumb:active { background-color: hsl(var(--primary) / 0.75); }
 }
 
 /* 4. Dense UI Scrollbar (Grids, compact selectors: 5px) */
@@ -303,15 +347,8 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .custom-scrollbar-dense::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-  
-  .custom-scrollbar-dense::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
+  .custom-scrollbar-dense::-webkit-scrollbar { width: 5px; height: 5px; }
+  .custom-scrollbar-dense::-webkit-scrollbar-track { background: transparent; }
   .custom-scrollbar-dense::-webkit-scrollbar-thumb {
     background-color: hsl(var(--primary) / 0.26);
     border-radius: 9999px;
@@ -319,14 +356,8 @@
     background-clip: padding-box;
     transition: background-color 0.2s ease;
   }
-  
-  .custom-scrollbar-dense::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--primary) / 0.52);
-  }
-  
-  .custom-scrollbar-dense::-webkit-scrollbar-thumb:active {
-    background-color: hsl(var(--primary) / 0.70);
-  }
+  .custom-scrollbar-dense::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--primary) / 0.52); }
+  .custom-scrollbar-dense::-webkit-scrollbar-thumb:active { background-color: hsl(var(--primary) / 0.70); }
 }
 
 /* 5. Accessible reduced motion override */
@@ -339,65 +370,36 @@
 }
 
 /* ========================================================================= */
-/* Senior Developer Avatar Glowing Conic Ring & Halo Effects */
+/*  Senior Developer Avatar Glowing Conic Ring & Halo Effects                */
+/*  (Mohammad Hossein — Portfolio Signature)                                 */
 /* ========================================================================= */
 @keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-
-.animate-spin-slow {
-  animation: spin-slow 12s linear infinite;
-}
+.animate-spin-slow { animation: spin-slow 12s linear infinite; }
 
 @keyframes spin-reverse-slow {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
-
-.animate-spin-reverse-slow {
-  animation: spin-reverse-slow 18s linear infinite;
-}
+.animate-spin-reverse-slow { animation: spin-reverse-slow 18s linear infinite; }
 
 /* ========================================================================= */
-/* Senior Developer Signature: Refined Ambient Breath & Specular Light Sweep */
+/*  Senior Developer Signature: Ambient Breath & Specular Sweep              */
 /* ========================================================================= */
 @keyframes ambient-glow-breath {
-  0%, 100% {
-    opacity: 0.35;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 0.75;
-    transform: scale(1.02);
-  }
+  0%, 100% { opacity: 0.35; transform: scale(0.98); }
+  50% { opacity: 0.75; transform: scale(1.02); }
 }
 
 @keyframes specular-sweep {
-  0% {
-    transform: translateX(-150%) skewX(-20deg);
-    opacity: 0;
-  }
-  30% {
-    opacity: 0.75;
-  }
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-    opacity: 0;
-  }
+  0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
+  30% { opacity: 0.75; }
+  100% { transform: translateX(250%) skewX(-20deg); opacity: 0; }
 }
 
-.developer-avatar-halo {
-  position: relative;
-}
+.developer-avatar-halo { position: relative; }
 
 .developer-avatar-halo::before {
   content: '';
@@ -407,9 +409,9 @@
   background: linear-gradient(
     135deg,
     hsl(var(--primary) / 0.9),
-    #06b6d4,
-    hsl(var(--secondary) / 0.8),
-    #10b981
+                              #06b6d4,
+                              hsl(var(--secondary) / 0.8),
+                              #10b981
   );
   opacity: 0.75;
   filter: blur(10px);
@@ -425,8 +427,8 @@
   background: linear-gradient(
     135deg,
     hsl(var(--primary)),
-    #38bdf8,
-    hsl(var(--secondary))
+                              #38bdf8,
+                              hsl(var(--secondary))
   );
   z-index: 1;
 }
@@ -448,9 +450,9 @@
   background: linear-gradient(
     135deg,
     hsl(var(--primary) / 0.5),
-    #38bdf8 / 0.4,
-    hsl(var(--secondary) / 0.4),
-    hsl(var(--border) / 0.6)
+                              #38bdf8 / 0.4,
+                              hsl(var(--secondary) / 0.4),
+                              hsl(var(--border) / 0.6)
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -465,12 +467,7 @@
   left: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.45),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
   pointer-events: none;
   opacity: 0;
   transform: translateX(-150%) skewX(-20deg);
@@ -482,44 +479,27 @@
 
 .footer-dev-badge-wrap:hover {
   border-color: hsl(var(--primary) / 0.6);
-  box-shadow: 0 10px 25px -5px hsl(var(--primary) / 0.15), 0 0 12px hsl(var(--primary) / 0.1);
+  box-shadow: 0 10px 25px -5px hsl(var(--primary) / 0.15),
+  0 0 12px hsl(var(--primary) / 0.1);
 }
 
 /* ========================================================================= */
-/* Senior High-Tech Visual Effects: Code Matrix, Signal Pulses & Laser Grid  */
+/*  Senior High-Tech Visual Effects: Code Matrix & Laser Grid                */
 /* ========================================================================= */
 @keyframes signal-flow {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
 }
-
 .animate-signal-flow {
   animation: signal-flow 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes signal-flow-rtl {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
+  0% { transform: translateX(100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0; }
 }
-
 .animate-signal-flow-rtl {
   animation: signal-flow-rtl 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
@@ -534,31 +514,22 @@
     filter: drop-shadow(0 0 18px hsl(var(--primary) / 0.8));
   }
 }
-
-.animate-laser-glow {
-  animation: laser-glow 3s ease-in-out infinite;
-}
+.animate-laser-glow { animation: laser-glow 3s ease-in-out infinite; }
 
 @keyframes terminal-cursor {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-
-.animate-terminal-cursor {
-  animation: terminal-cursor 0.9s infinite;
-}
+.animate-terminal-cursor { animation: terminal-cursor 0.9s infinite; }
 
 .tech-grid-pattern {
   background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, hsl(var(--border) / 0.45) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--border) / 0.45) 1px, transparent 1px);
+  background-image:
+  linear-gradient(to right, hsl(var(--border) / 0.45) 1px, transparent 1px),
+  linear-gradient(to bottom, hsl(var(--border) / 0.45) 1px, transparent 1px);
 }
 
 .tech-cyber-glow {
-  box-shadow: 0 0 35px -5px hsl(var(--primary) / 0.15), 0 0 15px -3px hsl(var(--secondary) / 0.2);
+  box-shadow: 0 0 35px -5px hsl(var(--primary) / 0.15),
+  0 0 15px -3px hsl(var(--secondary) / 0.2);
 }
-
-
-
-

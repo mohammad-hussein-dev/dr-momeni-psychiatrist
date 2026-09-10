@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+/**
+ * @file Theme provider with Light mode as default.
+ * Users can toggle to Dark mode, and preference is saved in localStorage.
+ * No automatic system theme detection.
+ */
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -14,40 +19,54 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light';
+
+    // DECISION: Always default to 'light' for clinical trustworthiness
+    // Only use saved preference if user explicitly chose dark mode
     const saved = localStorage.getItem('dr_theme');
-    if (saved === 'dark' || saved === 'light') return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (saved === 'dark') return 'dark';
+
+    return 'light'; // Default is always light
   });
 
   const isDark = theme === 'dark';
 
-  // Apply theme immediately to HTML root element
+  // Apply theme to HTML root element
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.style.colorScheme = 'dark';
-    } else {
-      root.classList.remove('dark');
-      root.style.colorScheme = 'light';
-    }
+
+    // Remove both classes first
+    root.classList.remove('light', 'dark');
+
+    // Add current theme class
+    root.classList.add(theme);
+
+    // Set data-theme attribute
+    root.setAttribute('data-theme', theme);
+
+    // Set color-scheme for native elements
+    root.style.colorScheme = theme;
+
+    // Save to localStorage
     try {
       localStorage.setItem('dr_theme', theme);
-    } catch (e) {}
+    } catch (e) {
+      // Silent fail if localStorage is unavailable
+    }
   }, [theme]);
 
-  // Fast, instant, lag-free toggle
+  // Toggle between light and dark
   const toggleTheme = useCallback(() => {
     setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   }, []);
 
+  // Set specific theme
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme);
   }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme, isDark }}>
-      {children}
+    {children}
     </ThemeContext.Provider>
   );
 };
