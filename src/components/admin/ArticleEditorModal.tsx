@@ -28,6 +28,7 @@ import { useLanguage } from '../../i18n/LanguageProvider';
 import { FileUploadDropzone } from './FileUploadDropzone';
 import { CoverImageSelector } from './CoverImageSelector';
 import { AudioPlayerWidget } from '../site/AudioPlayerWidget';
+import { AppImage } from '../ui/AppImage';
 import { BlogAttachmentsView } from '../site/BlogAttachmentsView';
 
 interface ArticleEditorModalProps {
@@ -810,10 +811,11 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
           {activeTab === 'preview' && (
             <div className="space-y-6 max-w-3xl mx-auto text-start">
               <div className="aspect-[16/9] rounded-2xl overflow-hidden bg-muted border border-border">
-                <img
+                <AppImage
                   src={customImageInput || imageUrl}
                   alt={titleFa || 'پیش‌نمایش'}
                   className="w-full h-full object-cover"
+                  fallbackText="پیش‌نمایش کاور مقاله"
                 />
               </div>
 

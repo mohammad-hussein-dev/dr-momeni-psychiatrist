@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { BlogAttachment } from '../../types';
 import { useLanguage } from '../../i18n/LanguageProvider';
+import { AppImage } from '../ui/AppImage';
 
 interface BlogAttachmentsViewProps {
   attachments: BlogAttachment[];
@@ -201,10 +202,11 @@ export const BlogAttachmentsView: React.FC<BlogAttachmentsViewProps> = ({
 
             <div className="flex-1 overflow-auto custom-scrollbar p-4 flex items-center justify-center bg-muted/20 min-h-[300px]">
               {previewAttachment.type === 'image' ? (
-                <img
+                <AppImage
                   src={previewAttachment.url}
                   alt={previewAttachment.name}
                   className="max-h-[60vh] max-w-full rounded-2xl object-contain shadow-md"
+                  fallbackText="پیوست تصویری"
                 />
               ) : previewAttachment.type === 'pdf' || previewAttachment.type === 'guide' ? (
                 <div className="text-center p-8 space-y-4 max-w-md">

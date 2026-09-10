@@ -53,7 +53,7 @@ export const DOCTOR_ASSETS = {
   portrait: {
     id: 'doc-portrait-primary',
     src: '/images/doctor/dr-fatemeh-momeni.jpg',
-    fallbackSrc: 'https://media.base44.com/images/public/6a74f2a2d4d291dc08716b22/5d3e24f0f_______________.jpg',
+    fallbackSrc: '/doctor.jpg',
     altFa: 'دکتر فاطمه مومنی، متخصص اعصاب و روان (روانپزشک) دارای بورد تخصصی',
     altEn: 'Dr. Fatemeh Momeni, Board Certified Psychiatrist',
     category: 'doctor',
@@ -65,7 +65,7 @@ export const DOCTOR_ASSETS = {
   about: {
     id: 'doc-about-portrait',
     src: '/images/doctor/dr-fatemeh-momeni.jpg',
-    fallbackSrc: 'https://media.base44.com/images/public/6a74f2a2d4d291dc08716b22/5d3e24f0f_______________.jpg',
+    fallbackSrc: '/doctor.jpg',
     altFa: 'دکتر فاطمه مومنی در کلینیک تخصصی اعصاب و روان بیمارستان نیکان غرب',
     altEn: 'Dr. Fatemeh Momeni, Psychiatric Consultation Room at Nikan Gharb Hospital',
     category: 'doctor',
@@ -87,7 +87,7 @@ export const PHILOSOPHY_ASSETS = {
   bioPsychoSocialModel: {
     id: 'philo-biopsychosocial-triad',
     src: '/images/clinical/consulting-room.jpg',
-    fallbackSrc: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
+    fallbackSrc: '/consulting-room.jpg',
     altFa: 'محیط آرام‌بخش اتاق درمان و مشاوره بالینی - دکتر فاطمه مومنی',
     altEn: 'Integrative Psychiatric Consultation Environment - Dr. Fatemeh Momeni',
     category: 'philosophy',
@@ -99,7 +99,7 @@ export const PHILOSOPHY_ASSETS = {
   clinicalFlowPathway: {
     id: 'philo-care-pathway',
     src: '/images/philosophy/biopsychosocial-approach.svg',
-    fallbackSrc: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
+    fallbackSrc: '/consulting-room.jpg',
     altFa: 'فرآیند ۴ مرحله‌ای درمان شخصی‌سازی‌شده و هم‌افزایی دارودرمانی با روان‌درمانی',
     altEn: 'Four-Step Personalized Psychiatric Care & Psychotherapy Roadmap',
     category: 'philosophy',
@@ -121,7 +121,7 @@ export const CLINICAL_ASSETS = {
   consultingRoom: {
     id: 'clinic-consulting-room',
     src: '/images/clinical/consulting-room.jpg',
-    fallbackSrc: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
+    fallbackSrc: '/consulting-room.jpg',
     altFa: 'اتاق ویزیت و مشاوره آرام‌بخش و محرمانه روان‌پزشکی',
     altEn: 'Serene & Confidential Psychiatric Consultation Suite',
     category: 'clinical',
@@ -133,7 +133,7 @@ export const CLINICAL_ASSETS = {
   hospitalFacade: {
     id: 'clinic-hospital-nikan',
     src: '/images/clinical/hospital-nikan-west.svg',
-    fallbackSrc: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80',
+    fallbackSrc: '/consulting-room.jpg',
     altFa: 'نمای بیمارستان فوق‌تخصصی نیکان غرب تهران، کلینیک اعصاب و روان',
     altEn: 'Nikan Gharb Super-Specialty Hospital, Tehran, Psychiatry Clinic',
     category: 'clinical',
@@ -145,7 +145,7 @@ export const CLINICAL_ASSETS = {
   patientDialogue: {
     id: 'clinic-consultation-dialogue',
     src: '/images/clinical/psychiatric-consulting-room.svg',
-    fallbackSrc: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80',
+    fallbackSrc: '/consulting-room.jpg',
     altFa: 'گفت‌وگوی همدلانه و ارزیابی تشخیصی در اتاق درمان',
     altEn: 'Empathetic Clinical Dialogue & Diagnostic Assessment',
     category: 'clinical',

@@ -16,6 +16,7 @@ import {
     IBookingService,
 } from '../types/booking';
 import { sendTelegramNotification } from './telegramService';
+import { sendToGoogleSheets } from './sheetsService';
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -125,52 +126,7 @@ const sendSheetsNotification = async (
     data: IBookingRequest,
     bookingId: string
 ): Promise<IBookingResponse> => {
-    const webhookUrl = import.meta.env.VITE_SHEETS_WEBHOOK_URL;
-
-    // Guard clause: skip gracefully if not configured
-    if (!webhookUrl) {
-        console.warn('[BookingService] VITE_SHEETS_WEBHOOK_URL not set. Skipping Sheets sync.');
-        return {
-            success: true,
-            message: 'ذخیره در گوگل شیت (غیرفعال)',
-        };
-    }
-
-    try {
-        const response = await fetch(webhookUrl, {
-            method: 'POST',
-            mode: 'no-cors', // Required for Google Apps Script Web Apps
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                bookingId,
-                fullName: data.fullName,
-                phone: data.phone,
-                email: data.email || '',
-                date: data.date,
-                time: data.time,
-                visitType: data.visitType,
-                insurance: data.insurance || 'آزاد',
-                description: data.description || '',
-                status: 'pending',
-                createdAt: new Date().toISOString(),
-            }),
-        });
-
-        // Note: no-cors mode returns opaque response, so we assume success if no exception
-        console.log('[BookingService] ✅ Booking synced to Google Sheets.');
-        return {
-            success: true,
-            message: 'نوبت در گوگل شیت ثبت شد',
-        };
-    } catch (error) {
-        console.error('[BookingService] ❌ Google Sheets error:', error);
-        return {
-            success: false,
-            message: 'خطا در ذخیره نوبت در گوگل شیت',
-        };
-    }
+    return sendToGoogleSheets(data, bookingId);
 };
 
 // ─── Main Service Implementation ────────────────────────────────────────────

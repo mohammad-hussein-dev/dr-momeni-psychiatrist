@@ -20,6 +20,7 @@ import { useLanguage } from '../i18n/LanguageProvider';
 import { Reveal } from '../components/Reveal';
 import { SectionHeading } from '../components/site/SectionHeading';
 import { ClinicalStatsBanner } from '../components/site/ClinicalStatsBanner';
+import { AppImage } from '../components/ui/AppImage';
 import { 
   ABOUT_IMG, 
   ABOUT_IMG_FALLBACK,
@@ -49,17 +50,12 @@ export const About: React.FC = () => {
           <div className="lg:col-span-5 flex justify-center">
             <Reveal className="relative w-full max-w-sm sm:max-w-md">
               <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-card aspect-[4/5] bg-muted">
-                <img
+                <AppImage
                   src={ABOUT_IMG}
                   alt={t('brand_name')}
                   className="w-full h-full object-cover"
                   loading="eager"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    if (target.src !== ABOUT_IMG_FALLBACK) {
-                      target.src = ABOUT_IMG_FALLBACK;
-                    }
-                  }}
+                  fallbackText="تصویر دکتر فاطمه مومنی"
                 />
               </div>
 
@@ -190,16 +186,11 @@ export const About: React.FC = () => {
               {/* Treatment Philosophy Diagram / Asset */}
               <div className="lg:col-span-5 flex justify-center">
                 <div className="relative w-full max-w-sm rounded-2xl overflow-hidden border border-border/60 shadow-md bg-muted/40 aspect-[4/3] group">
-                  <img
+                  <AppImage
                     src={PHILOSOPHY_IMG}
                     alt={lang === 'fa' ? 'فلسفه درمان و مدل زیستی روانی اجتماعی' : 'Treatment Philosophy Diagram'}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      if (target.src !== PHILOSOPHY_FALLBACK) {
-                        target.src = PHILOSOPHY_FALLBACK;
-                      }
-                    }}
+                    fallbackText="مدل زیستی، روانی و اجتماعی"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                     <span className="text-white text-xs font-semibold">

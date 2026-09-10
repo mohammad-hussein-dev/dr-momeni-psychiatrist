@@ -23,6 +23,7 @@ import {
   processAndCompressImage 
 } from '../../lib/coverImageStore';
 import { useLanguage } from '../../i18n/LanguageProvider';
+import { AppImage } from '../ui/AppImage';
 
 interface CoverImageSelectorProps {
   currentImageUrl: string;
@@ -144,14 +145,11 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
       {/* 1. CURRENT SELECTED COVER PREVIEW */}
       <div className="flex flex-col sm:flex-row items-center gap-4 p-3.5 rounded-2xl bg-muted/30 border border-border/70">
         <div className="relative w-full sm:w-48 aspect-[16/10] rounded-xl overflow-hidden bg-muted border border-border shrink-0 shadow-xs">
-          <img
+          <AppImage
             src={currentImageUrl || '/covers/anxiety-panic.svg'}
             alt="Current Cover"
             className="w-full h-full object-cover"
-            onError={(e) => {
-              // fallback if broken
-              (e.currentTarget as HTMLImageElement).src = '/developer.jpg';
-            }}
+            fallbackText="کاور مقاله"
           />
           <span className="absolute bottom-1 right-1 text-[9px] font-bold px-2 py-0.5 rounded-md bg-black/75 text-white backdrop-blur-xs">
             16:9 Cover
@@ -286,10 +284,11 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
             <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 space-y-4">
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <div className="w-full sm:w-48 aspect-[16/10] rounded-xl overflow-hidden bg-black/20 border border-primary/40 shrink-0">
-                  <img
+                  <AppImage
                     src={uploadedPreview.dataUrl}
                     alt="Preview"
                     className="w-full h-full object-cover"
+                    fallbackText="پیش‌نمایش تصویر"
                   />
                 </div>
 
@@ -379,13 +378,11 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
                       : 'border-border/80 hover:border-primary/50 opacity-90 hover:opacity-100'
                   }`}
                 >
-                  <img
+                  <AppImage
                     src={preset.url}
                     alt={preset.label_fa}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/developer.jpg';
-                    }}
+                    fallbackText={preset.label_fa}
                   />
                   
                   {isSelected && (
@@ -444,10 +441,11 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
                         : 'border-border/80 hover:border-primary/50'
                     }`}
                   >
-                    <img
+                    <AppImage
                       src={item.url}
                       alt={item.label_fa}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      fallbackText={item.label_fa}
                     />
 
                     {/* Delete button */}

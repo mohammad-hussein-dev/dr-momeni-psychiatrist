@@ -79,6 +79,8 @@ import { getAllTestimonials, deleteTestimonial, toggleTestimonialVerified } from
 import { ArticleEditorModal } from '../components/admin/ArticleEditorModal';
 import { TestimonialEditorModal } from '../components/admin/TestimonialEditorModal';
 import { ShadowAvatar } from '../components/ShadowAvatar';
+import { AppImage } from '../components/ui/AppImage';
+import { DemoBadge } from '../components/ui/DemoBadge';
 
 export const AdminPanel: React.FC = () => {
   const { t, lang, isRTL } = useLanguage();
@@ -471,10 +473,13 @@ export const AdminPanel: React.FC = () => {
 
               {/* Quick Demo Access Bar */}
               <div className="mb-6 p-3.5 rounded-2xl bg-accent/40 border border-primary/20 text-start">
-                <p className="text-xs font-semibold text-primary mb-1 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{isFa ? 'ورود یک‌کلیکه پزشک (تست سریع):' : 'One-Click Doctor Login:'}</span>
-                </p>
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <p className="text-xs font-semibold text-primary flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{isFa ? 'ورود یک‌کلیکه پزشک (تست سریع):' : 'One-Click Doctor Login:'}</span>
+                  </p>
+                  <DemoBadge text={isFa ? 'دمو' : 'Demo'} size="sm" />
+                </div>
                 <p className="text-[11px] text-muted-foreground mb-2.5">
                   {isFa ? 'ورود مستقیم و بدون وقفه به عنوان دکتر فاطمه مومنی:' : 'Click below to access Dr. Momeni’s full workspace:'}
                 </p>
@@ -568,8 +573,8 @@ export const AdminPanel: React.FC = () => {
               )}
 
               <div className="mt-6 pt-5 border-t border-border/60 text-center">
-                <Link to="/panel" className="text-xs text-primary hover:underline font-medium">
-                  {isFa ? 'ورود به پنل مراجعین و رزرو نوبت بیمار' : 'Switch to Patient Portal'}
+                <Link to="/booking" className="text-xs text-primary hover:underline font-medium">
+                  {isFa ? 'ورود به سامانه نوبت‌دهی و رزرو ویزیت' : 'Go to Patient Booking'}
                 </Link>
               </div>
 
@@ -1460,10 +1465,11 @@ export const AdminPanel: React.FC = () => {
                       >
                         <div>
                           <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-                            <img
+                            <AppImage
                               src={post.image_url}
                               alt={post.title_fa}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              fallbackText={post.title_fa}
                             />
                             <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-black/70 text-white backdrop-blur-xs">
                               {post.category_fa || post.category}

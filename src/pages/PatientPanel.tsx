@@ -36,6 +36,7 @@ import { useLanguage } from '../i18n/LanguageProvider';
 import { serviceKeys } from '../i18n/translations';
 import { Reveal } from '../components/Reveal';
 import { DoctorPatientChat } from '../components/chat/DoctorPatientChat';
+import { DemoBadge } from '../components/ui/DemoBadge';
 import { 
   Appointment, 
   ServiceType, 
@@ -398,7 +399,10 @@ export const PatientPanel: React.FC = () => {
                     <Sparkles className="w-3 h-3" />
                     {isFa ? 'ورود سریع تستی (مراجع نمونه):' : 'Demo Patient Login:'}
                   </span>
-                  <span className="text-[10px] font-mono text-muted-foreground">09123456789</span>
+                  <div className="flex items-center gap-1.5">
+                    <DemoBadge text={isFa ? 'دمو' : 'Demo'} size="sm" />
+                    <span className="text-[10px] font-mono text-muted-foreground">09123456789</span>
+                  </div>
                 </div>
                 <button
                   type="button"

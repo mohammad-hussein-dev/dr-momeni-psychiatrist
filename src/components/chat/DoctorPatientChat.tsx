@@ -33,6 +33,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
+import { DemoBadge } from '../ui/DemoBadge';
 import { ChatMessage, PatientThread, ServiceType, VisitType, MessageReaction } from '../../types';
 import {
   getAllPatientThreads,
@@ -43,6 +44,7 @@ import {
   toggleMessageReaction,
   editChatMessage
 } from '../../lib/chatStore';
+import { HOSPITAL_CENTRAL_PHONE, HOSPITAL_CENTRAL_PHONE_FA } from '../../lib/siteConstants';
 import { getAllAppointments, updateAppointmentStatus } from '../../lib/appointmentStore';
 
 const CLINICAL_REACTIONS = [
@@ -135,7 +137,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
     reloadThreads();
     reloadMessages();
 
-    const handleChatUpdate = (e: any) => {
+    const handleChatUpdate = (e: Event) => {
       reloadThreads();
       reloadMessages();
     };
@@ -497,6 +499,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                     {isFa ? 'نظام پزشکی: ۱۳۳۴۳۹' : 'M.D. 133439'}
                   </span>
                 )}
+                <DemoBadge text={isFa ? 'داده نمونه' : 'Demo'} size="sm" />
               </div>
 
               <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-muted-foreground">
@@ -519,7 +522,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
 
           {/* Quick Actions in Header */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {isDoctor && (
+            {isDoctor ? (
               <a
                 href={`tel:${selectedPhone}`}
                 className="w-8 h-8 rounded-xl bg-card border border-border/80 text-foreground hover:text-primary flex items-center justify-center transition-colors"
@@ -527,10 +530,18 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
               >
                 <Phone className="w-3.5 h-3.5 text-primary" />
               </a>
+            ) : (
+              <a
+                href={`tel:${HOSPITAL_CENTRAL_PHONE}`}
+                className="w-8 h-8 rounded-xl bg-card border border-border/80 text-foreground hover:text-primary flex items-center justify-center transition-colors"
+                title={isFa ? 'تماس با بیمارستان نیکان غرب' : 'Call Nikan Hospital'}
+              >
+                <Phone className="w-3.5 h-3.5 text-primary" />
+              </a>
             )}
 
             <div className="px-2.5 py-1 rounded-xl bg-muted/60 border border-border/60 text-[10px] text-muted-foreground font-mono" dir="ltr">
-              {isDoctor ? selectedPhone : '021-29124000'}
+              {isDoctor ? selectedPhone : HOSPITAL_CENTRAL_PHONE_FA}
             </div>
           </div>
 

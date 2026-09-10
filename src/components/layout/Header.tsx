@@ -196,7 +196,7 @@ export const Header: React.FC = () => {
         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-bold shadow-xs"
         >
         <ShieldCheck className="w-4 h-4" />
-        <span>پنل مدیریت کلینیک</span>
+        <span>{lang === 'fa' ? 'پنل مدیریت کلینیک' : 'Admin Dashboard'}</span>
         </Link>
       ) : (
         <Link

@@ -6,6 +6,7 @@ import { Reveal } from '../../../components/Reveal';
 import { SectionHeading } from '../../../components/site/SectionHeading';
 import { ShadowAvatar } from '../../../components/ShadowAvatar';
 import { PatientReactionBar } from '../../../components/PatientReactionBar';
+import { DemoBadge } from '../../../components/ui/DemoBadge';
 import { INITIAL_TESTIMONIALS } from '../../../data/mockData';
 
 export const TestimonialsPreviewSection: React.FC = () => {
@@ -33,12 +34,15 @@ export const TestimonialsPreviewSection: React.FC = () => {
                         <Star key={i} className="w-3.5 h-3.5 fill-amber-500" />
                       ))}
                     </div>
-                    {item.verified && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary">
-                        <CheckCircle2 className="w-3 h-3" />
-                        <span>{lang === 'fa' ? 'تاییدشده' : 'Verified'}</span>
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1.5">
+                      <DemoBadge text={lang === 'fa' ? 'نمونه' : 'Demo'} size="sm" />
+                      {item.verified && (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary">
+                          <CheckCircle2 className="w-3 h-3" />
+                          <span>{lang === 'fa' ? 'تاییدشده' : 'Verified'}</span>
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Outcome Highlight Tag */}

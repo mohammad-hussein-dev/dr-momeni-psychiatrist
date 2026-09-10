@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#fef08a" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bgGrad)" />
+
+  <!-- Sun Horizon (Transition from Darkness to Warm Light) -->
+  <circle cx="600" cy="380" r="140" fill="url(#sunGrad)" opacity="0.85" />
+  <rect x="0" y="380" width="1200" height="295" fill="#0f172a" opacity="0.95" />
+  
+  <!-- Horizon glow line -->
+  <line x1="200" y1="380" x2="1000" y2="380" stroke="#fbbf24" stroke-width="3" opacity="0.6" />
+
+  <!-- Rays -->
+  <g stroke="#fde047" stroke-width="2" opacity="0.4">
+    <line x1="600" y1="220" x2="600" y2="170" />
+    <line x1="500" y1="260" x2="460" y2="220" />
+    <line x1="700" y1="260" x2="740" y2="220" />
+    <line x1="420" y1="340" x2="370" y2="330" />
+    <line x1="780" y1="340" x2="830" y2="330" />
+  </g>
+
+  <!-- Serotonin Molecule subtle path -->
+  <path d="M480,260 L520,290 L560,260 L600,290 L640,260 L680,290 L720,260" 
+        fill="none" stroke="#60a5fa" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+  
+  <rect x="420" y="470" width="360" height="46" rx="23" fill="#1e1b4b" stroke="#f59e0b" stroke-width="1.5" />
+  <text x="600" y="499" text-anchor="middle" fill="#fef08a" font-family="system-ui, sans-serif" font-size="18" font-weight="bold">
+    درمان افسردگی و بازیابی نشاط زیستی
+  </text>
+  
+  <text x="600" y="550" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="14">
+    Depression &amp; Mood Architecture • Dr. Fatemeh Momeni
+  </text>
+</svg>

@@ -14,7 +14,7 @@
  * @type VisitType
  * @description Allowed types of medical visits
  */
-export type VisitType = 'حضوری' | 'آنلاین';
+export type VisitType = 'حضوری' | 'آنلاین' | 'in_person' | 'online' | 'Online Telehealth' | 'In-Person Consultation';
 
 /**
  * @type BookingStatus

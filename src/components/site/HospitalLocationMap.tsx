@@ -434,13 +434,19 @@ export const HospitalLocationMap: React.FC<IHospitalLocationMapProps> = ({
       <Phone className="w-3.5 h-3.5" />
       <span>{isFa ? 'هماهنگی تلفنی' : 'Phone Assistance'}</span>
       </div>
-      <p className="text-[11px] text-muted-foreground leading-relaxed">
+      <div className="text-[11px] text-muted-foreground leading-relaxed space-y-1">
       {isFa ? (
-        <>پاسخگویی مستقیم منشی: <a href="tel:+989934420967" className="text-primary hover:underline font-mono">۰۹۹۳۴۴۲۰۹۶۷</a></>
+        <>
+          <div>تلفن گویای بیمارستان نیکان: <a href={`tel:${HOSPITAL_CENTRAL_PHONE}`} className="text-primary hover:underline font-mono font-semibold" dir="ltr">{HOSPITAL_CENTRAL_PHONE_FA}</a></div>
+          <div>پاسخگویی منشی مطب: <a href={`tel:${PHONE_TEL}`} className="text-primary hover:underline font-mono">{PHONE}</a></div>
+        </>
       ) : (
-        <>Reception: <a href="tel:+989934420967" className="text-primary hover:underline font-mono">+98 993 442 0967</a></>
+        <>
+          <div>Hospital Call Center: <a href={`tel:${HOSPITAL_CENTRAL_PHONE}`} className="text-primary hover:underline font-mono font-semibold" dir="ltr">021-29129</a></div>
+          <div>Reception Cell: <a href={`tel:${PHONE_TEL}`} className="text-primary hover:underline font-mono">{PHONE}</a></div>
+        </>
       )}
-      </p>
+      </div>
       </div>
       </div>
     )}
@@ -508,7 +514,7 @@ export const HospitalLocationMap: React.FC<IHospitalLocationMapProps> = ({
     title={t('hospital_central_phone_label') || 'تماس با بیمارستان'}
     >
     <Phone className="w-3 h-3 text-primary" />
-    <span>{HOSPITAL_CENTRAL_PHONE_FA}</span>
+    <span>{isFa ? HOSPITAL_CENTRAL_PHONE_FA : HOSPITAL_CENTRAL_PHONE}</span>
     </a>
     </div>
     </div>

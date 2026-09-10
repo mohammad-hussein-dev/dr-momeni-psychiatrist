@@ -28,6 +28,7 @@ import { Reveal } from '../components/Reveal';
 import { getPostBySlug, getAllPosts, deletePost } from '../lib/blogStore';
 import { BrandLogo } from '../components/site/BrandLogo';
 import { getActiveSession } from '../lib/appointmentStore';
+import { AppImage } from '../components/ui/AppImage';
 import { ArticleEditorModal } from '../components/admin/ArticleEditorModal';
 import { BlogPost as BlogPostType } from '../types';
 import { AudioPlayerWidget } from '../components/site/AudioPlayerWidget';
@@ -262,10 +263,12 @@ export const BlogPost: React.FC = () => {
         {/* Cover Image */}
         <Reveal delay={100} className="mb-8">
           <div className="rounded-3xl overflow-hidden shadow-lg border-2 border-border/80 bg-muted aspect-[16/9]">
-            <img
+            <AppImage
               src={post.image_url}
               alt={pick(post, 'title')}
               className="w-full h-full object-cover"
+              loading="eager"
+              fallbackText={pick(post, 'title')}
             />
           </div>
         </Reveal>

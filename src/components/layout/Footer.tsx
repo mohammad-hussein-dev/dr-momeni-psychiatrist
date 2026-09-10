@@ -17,6 +17,7 @@ import {
   Code2
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
+import { AppImage } from '../ui/AppImage';
 import {
   PHONE,
   PHONE_TEL,
@@ -129,7 +130,7 @@ export const Footer: React.FC = () => {
     href={`tel:${PHONE_TEL}`}
     className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-card border border-primary/30 text-primary hover:bg-accent/40 text-xs font-semibold transition-all shadow-2xs"
     dir="ltr"
-    title="تماس با مطب"
+    title={lang === 'fa' ? 'تماس با مطب' : 'Call Clinic'}
     >
     <Phone className="w-3.5 h-3.5 text-primary" />
     <span>{PHONE}</span>
@@ -288,7 +289,7 @@ export const Footer: React.FC = () => {
     <span>{lang === 'fa' ? 'تلفن بیمارستان:' : 'Hospital Central:'}</span>
     </span>
     <a href={`tel:${HOSPITAL_CENTRAL_PHONE}`} className="font-semibold text-foreground hover:text-primary" dir="ltr">
-    {HOSPITAL_CENTRAL_PHONE_FA}
+    {lang === 'fa' ? HOSPITAL_CENTRAL_PHONE_FA : HOSPITAL_CENTRAL_PHONE}
     </a>
     </div>
 
@@ -313,13 +314,12 @@ export const Footer: React.FC = () => {
     title={lang === 'fa' ? 'مشاهده معماری فنی، مشخصات مهندسی و پورتفولیو محمدحسین' : 'View Senior Engineering Architecture & Portfolio'}
     >
     <div className="relative w-6 h-6 rounded-full overflow-hidden border border-primary/40 bg-card shrink-0 shadow-2xs">
-    <img
+    <AppImage
     src="/developer.jpg"
     alt="Mohammad Hussein - Senior Full-Stack Engineer"
     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-    onError={(e) => {
-      (e.currentTarget as HTMLImageElement).style.display = 'none';
-    }}
+    loading="lazy"
+    fallbackText=""
     />
     <Code2 className="w-3.5 h-3.5 text-primary absolute inset-0 m-auto -z-1" />
     </div>

@@ -28,6 +28,7 @@ export const MEDICAL_COUNCIL_CODE = "00133439";
 export const MEDICAL_COUNCIL_FA = "۱۳۳۴۳۹";
 export const HOSPITAL_CENTRAL_PHONE = "02129129";
 export const HOSPITAL_CENTRAL_PHONE_FA = "۰۲۱-۲۹۱۲۹";
+export const HOSPITAL_CENTRAL_PHONE_TEL = "02129129";
 
 // ============================================================================
 // GEOLOCATION & MAPPING COORDINATES

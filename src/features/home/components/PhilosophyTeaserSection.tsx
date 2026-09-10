@@ -4,6 +4,7 @@ import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../../../i18n/LanguageProvider';
 import { Reveal } from '../../../components/Reveal';
 import { CLINICAL_ASSETS } from '../../../lib/assetRegistry';
+import { AppImage } from '../../../components/ui/AppImage';
 
 export const PhilosophyTeaserSection: React.FC = () => {
   const { t, isRTL } = useLanguage();
@@ -17,17 +18,12 @@ export const PhilosophyTeaserSection: React.FC = () => {
           <div className="lg:col-span-6">
             <Reveal>
               <div className="relative rounded-3xl overflow-hidden shadow-lg aspect-[4/3] border-4 border-card bg-card max-w-lg mx-auto">
-                <img
+                <AppImage
                   src={CLINICAL_ASSETS.consultingRoom.src}
-                  alt="Clinical Consulting Room"
+                  alt="اتاق مشاوره و ویزیت تخصصی"
                   className="w-full h-full object-cover"
                   loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    if (CLINICAL_ASSETS.consultingRoom.fallbackSrc && target.src !== CLINICAL_ASSETS.consultingRoom.fallbackSrc) {
-                      target.src = CLINICAL_ASSETS.consultingRoom.fallbackSrc;
-                    }
-                  }}
+                  fallbackText="اتاق ویزیت و مشاوره کلینیک"
                 />
                 <div className="absolute inset-0 bg-primary/10 pointer-events-none" />
               </div>

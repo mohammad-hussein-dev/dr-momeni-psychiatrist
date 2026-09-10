@@ -26,6 +26,7 @@ import { getAllPosts, deletePost } from '../lib/blogStore';
 import { BlogPost, BlogCategoryKey } from '../types';
 import { getActiveSession } from '../lib/appointmentStore';
 import { ArticleEditorModal } from '../components/admin/ArticleEditorModal';
+import { AppImage } from '../components/ui/AppImage';
 
 export const Blog: React.FC = () => {
   const { t, lang, pick, isRTL } = useLanguage();
@@ -318,11 +319,12 @@ export const Blog: React.FC = () => {
                   <div>
                     {/* Featured Image & Overlays */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-                      <img
+                      <AppImage
                         src={post.image_url}
                         alt={pick(post, 'title')}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
+                        fallbackText={pick(post, 'title')}
                       />
                       
                       <div className="absolute top-3.5 right-3.5 flex flex-col gap-1.5 items-end">

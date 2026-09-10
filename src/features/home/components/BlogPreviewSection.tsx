@@ -5,6 +5,7 @@ import { useLanguage } from '../../../i18n/LanguageProvider';
 import { Reveal } from '../../../components/Reveal';
 import { SectionHeading } from '../../../components/site/SectionHeading';
 import { INITIAL_POSTS } from '../../../data/mockData';
+import { AppImage } from '../../../components/ui/AppImage';
 
 export const BlogPreviewSection: React.FC = () => {
   const { t, pick, isRTL } = useLanguage();
@@ -25,7 +26,7 @@ export const BlogPreviewSection: React.FC = () => {
               <article className="group h-full rounded-2xl sm:rounded-3xl bg-card border border-border/70 overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-primary/40 transition-all">
                 <div>
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-                    <img
+                    <AppImage
                       src={post.image_url}
                       alt={pick(post, 'title')}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

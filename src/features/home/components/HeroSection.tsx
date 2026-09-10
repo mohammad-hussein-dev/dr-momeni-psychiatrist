@@ -14,6 +14,7 @@ import { useLanguage } from '../../../i18n/LanguageProvider';
 import { Reveal } from '../../../components/Reveal';
 import { PHONE, PHONE_TEL } from '../../../lib/siteConstants';
 import { DOCTOR_ASSETS } from '../../../lib/assetRegistry';
+import { AppImage } from '../../../components/ui/AppImage';
 
 export const HeroSection: React.FC = () => {
   const { t, lang, isRTL } = useLanguage();
@@ -148,17 +149,12 @@ export const HeroSection: React.FC = () => {
               
               {/* Doctor Official Photo Container */}
               <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[3/4] bg-card border-4 border-card">
-                <img
+                <AppImage
                   src={DOCTOR_ASSETS.portrait.src}
                   alt={t('brand_name')}
                   loading="eager"
                   className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    if (DOCTOR_ASSETS.portrait.fallbackSrc && target.src !== DOCTOR_ASSETS.portrait.fallbackSrc) {
-                      target.src = DOCTOR_ASSETS.portrait.fallbackSrc;
-                    }
-                  }}
+                  fallbackText="تصویر دکتر فاطمه مومنی"
                 />
               </div>
 

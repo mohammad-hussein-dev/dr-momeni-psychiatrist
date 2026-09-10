@@ -38,6 +38,7 @@ import { PatientReactionBar } from '../components/PatientReactionBar';
 import { ClinicalStatsBanner } from '../components/site/ClinicalStatsBanner';
 import { getActiveSession } from '../lib/appointmentStore';
 import { TestimonialEditorModal } from '../components/admin/TestimonialEditorModal';
+import { DemoBadge } from '../components/ui/DemoBadge';
 
 export const Testimonials: React.FC = () => {
   const { t, lang, pick, isRTL } = useLanguage();
@@ -378,12 +379,15 @@ export const Testimonials: React.FC = () => {
                         ))}
                       </div>
                       
-                      {item.verified && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20">
-                          <BadgeCheck className="w-3 h-3 text-primary" />
-                          <span>{lang === 'fa' ? 'مراجع تاییدشده' : 'Verified Patient'}</span>
-                        </span>
-                      )}
+                      <div className="flex items-center gap-1.5">
+                        <DemoBadge text={lang === 'fa' ? 'نمونه' : 'Demo'} size="sm" />
+                        {item.verified && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20">
+                            <BadgeCheck className="w-3 h-3 text-primary" />
+                            <span>{lang === 'fa' ? 'مراجع تاییدشده' : 'Verified Patient'}</span>
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Outcome Highlight Badge */}
