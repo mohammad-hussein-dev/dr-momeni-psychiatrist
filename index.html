@@ -1,12 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl" data-theme="light" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#1E6B7E" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
 
-    <!-- ─── Primary Medical SEO Meta Tags ───────────────────── -->
+    <!-- ─── Primary Medical SEO Meta Tags ────────────────────────────────── -->
     <title>دکتر فاطمه مومنی | متخصص اعصاب و روان — نیکان غرب تهران</title>
     <meta
       name="description"
@@ -16,11 +16,11 @@
       name="keywords"
       content="دکتر فاطمه مومنی, روانپزشک تهران, متخصص اعصاب و روان, بیمارستان نیکان غرب, درمان افسردگی, درمان اضطراب, رواندرمانی, NLP, rTMS"
     />
-    <meta name="author" content="دکتر فاطمه مومنی / طراحی: محمدحسین" />
+    <meta name="author" content="دکتر فاطمه مومنی | طراحی و توسعه سامانه: محمدحسین" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://drfatemehmomeni.ir/" />
 
-    <!-- ─── Open Graph / Facebook / WhatsApp ─────────────────── -->
+    <!-- ─── Open Graph / Facebook / WhatsApp Sharing ─────────────────────── -->
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:url" content="https://drfatemehmomeni.ir/" />
@@ -34,13 +34,13 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
-    <!-- ─── Twitter Card ─────────────────────────────────────── -->
+    <!-- ─── Twitter Card ─────────────────────────────────────────────────── -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="دکتر فاطمه مومنی | متخصص اعصاب و روان" />
     <meta name="twitter:description" content="نوبت‌دهی ویزیت حضوری و مشاوره آنلاین روان‌پزشکی." />
     <meta name="twitter:image" content="https://drfatemehmomeni.ir/images/doctor/dr-fatemeh-momeni-clinic.jpg" />
 
-    <!-- ─── Favicon Configuration (Complete Set) ─────────────── -->
+    <!-- ─── Favicon Configuration (Multi-format for max compatibility) ───── -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -48,26 +48,18 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- ─── Preconnect for Performance ───────────────────────── -->
+    <!-- ─── Performance: Preconnect to External Domains ──────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.google.com" />
-    <link rel="dns-prefetch" href="https://api.web3forms.com" />
 
-    <!-- ─── Persian Medical Fonts (Vazirmatn + Latin fallbacks) ─ -->
+    <!-- ─── Typography: Persian (Vazirmatn) & Latin Fallbacks ────────────── -->
     <link
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- ─── PWA & Mobile Meta ────────────────────────────────── -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="دکتر مومنی" />
-    <meta name="format-detection" content="telephone=yes" />
-
-    <!-- ─── Physician Schema.org Structured Data (JSON-LD) ───── -->
+    <!-- ─── Schema.org: Physician Structured Data (JSON-LD) ──────────────── -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -102,26 +94,11 @@
         }
       ],
       "availableService": [
-        {
-          "@type": "MedicalProcedure",
-          "name": "درمان افسردگی و اختلال دوقطبی"
-        },
-        {
-          "@type": "MedicalProcedure",
-          "name": "درمان اختلالات اضطرابی و وسواسی"
-        },
-        {
-          "@type": "MedicalProcedure",
-          "name": "روان‌درمانی تحلیلی و شناختی-رفتاری"
-        },
-        {
-          "@type": "MedicalProcedure",
-          "name": "درمان اختلالات خواب"
-        },
-        {
-          "@type": "MedicalProcedure",
-          "name": "تکنولوژی‌های نوین مغزی (EEG, rTMS, QEEG)"
-        }
+        { "@type": "MedicalProcedure", "name": "درمان افسردگی و اختلال دوقطبی" },
+        { "@type": "MedicalProcedure", "name": "درمان اختلالات اضطرابی و وسواسی" },
+        { "@type": "MedicalProcedure", "name": "روان‌درمانی تحلیلی و شناختی-رفتاری" },
+        { "@type": "MedicalProcedure", "name": "درمان اختلالات خواب" },
+        { "@type": "MedicalProcedure", "name": "تکنولوژی‌های نوین مغزی (EEG, rTMS, QEEG)" }
       ],
       "sameAs": [
         "https://www.nikanhospital.ir"
@@ -129,7 +106,7 @@
     }
     </script>
 
-    <!-- ─── BreadcrumbList Schema (SEO) ──────────────────────── -->
+    <!-- ─── Schema.org: BreadcrumbList (Homepage) ────────────────────────── -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -140,19 +117,23 @@
           "position": 1,
           "name": "خانه",
           "item": "https://drfatemehmomeni.ir/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "دکتر فاطمه مومنی",
-          "item": "https://drfatemehmomeni.ir/about"
         }
       ]
     }
     </script>
   </head>
+
+  <!--
+    Note: Tailwind utility classes applied here ensure the initial render
+    matches the design system (bg-background, text-foreground) and prevents
+    selection highlight clashes (selection:bg-primary/20).
+  -->
   <body class="bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
+
+    <!-- React 18+ Root Mount Point -->
     <div id="root"></div>
+
+    <!-- Vite Entry Point (TypeScript/React) -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
