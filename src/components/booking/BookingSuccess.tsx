@@ -236,7 +236,7 @@ export const BookingSuccess: React.FC<IBookingSuccessProps> = ({
                         <button
                             type="button"
                             onClick={handleAddToGoogleCalendar}
-                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                         >
                             <Calendar className="w-4 h-4" aria-hidden="true" />
                             <span>{t('booking_cal_google')}</span>
@@ -244,7 +244,7 @@ export const BookingSuccess: React.FC<IBookingSuccessProps> = ({
                         <button
                             type="button"
                             onClick={handleAddToOutlookCalendar}
-                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                         >
                             <Calendar className="w-4 h-4" aria-hidden="true" />
                             <span>{t('booking_cal_outlook')}</span>
@@ -256,7 +256,7 @@ export const BookingSuccess: React.FC<IBookingSuccessProps> = ({
                 <button
                     type="button"
                     onClick={handleWhatsAppContact}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-success text-success-foreground font-semibold shadow-md hover:shadow-lg hover:scale-[1.01] transition-all"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-success text-success-foreground font-semibold shadow-md hover:shadow-lg hover:scale-[1.01] transition-all duration-300"
                 >
                     <MessageCircle className="w-5 h-5" aria-hidden="true" />
                     <span>{t('booking_instant_whatsapp')}</span>
@@ -267,7 +267,7 @@ export const BookingSuccess: React.FC<IBookingSuccessProps> = ({
                     <button
                         type="button"
                         onClick={handleCopyBookingId}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-muted transition-all"
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-muted transition-all duration-300"
                     >
                         {copiedId ? (
                             <>
@@ -288,7 +288,7 @@ export const BookingSuccess: React.FC<IBookingSuccessProps> = ({
                     <button
                         type="button"
                         onClick={onReset}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-muted transition-all"
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-background border border-border text-sm font-medium text-foreground hover:bg-muted transition-all duration-300"
                     >
                         <Home className="w-4 h-4" aria-hidden="true" />
                         <span>{t('booking_back_to_form')}</span>

@@ -45,9 +45,9 @@ export const ThemeToggle: React.FC<IThemeToggleProps> = ({
 
   // ─── Size Mappings ─────────────────────────────────────────────
   const sizeClasses = {
-    sm: 'w-8 h-8 text-xs',
-    md: 'w-9 h-9 text-xs',
-    lg: 'w-10 h-10 text-sm',
+    sm: 'min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 sm:w-8 sm:h-8 text-xs',
+    md: 'min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 sm:w-9 sm:h-9 text-xs',
+    lg: 'min-h-[48px] min-w-[48px] sm:w-10 sm:h-10 text-sm',
   };
 
   const iconSizes = {
@@ -76,7 +76,7 @@ export const ThemeToggle: React.FC<IThemeToggleProps> = ({
     onClick={handleToggle}
     aria-label={titleText}
     title={titleText}
-    className={`relative group rounded-full border border-border/80 bg-card/90 hover:bg-accent/70 text-foreground transition-all duration-200 flex items-center justify-center shadow-2xs hover:shadow-xs cursor-pointer select-none active:scale-90 ${sizeClasses[size]} ${className}`}
+    className={`relative group rounded-full border border-border/80 bg-card/90 hover:bg-accent/70 text-foreground transition-all duration-300 ease-in-out flex items-center justify-center shadow-2xs hover:shadow-xs cursor-pointer select-none active:scale-95 active:bg-muted ${sizeClasses[size]} ${className}`}
     >
     {/* ─── Ambient Micro Glow ──────────────────────────────────── */}
     <div

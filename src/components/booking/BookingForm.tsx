@@ -191,15 +191,13 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 console.error('[BookingForm] Unexpected error:', error);
                 setSubmitResult({
                     success: false,
-                    message: lang === 'fa' 
-                        ? 'خطای غیرمنتظره‌ای رخ داد. لطفاً دوباره تلاش کنید.' 
-                        : 'An unexpected error occurred. Please try again.',
+                    message: t('booking_unexpected_error'),
                 });
             } finally {
                 setIsSubmitting(false);
             }
         },
-        [formState, validateField, lang, onSuccess, onError]
+        [formState, validateField, lang, onSuccess, onError, t]
     );
 
     const minDate = useMemo(() => new Date().toISOString().split('T')[0], []);
@@ -231,8 +229,8 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                     <div className="flex-1">
                         <p className="font-semibold text-sm">
                             {submitResult.success 
-                                ? (lang === 'fa' ? 'درخواست با موفقیت ثبت شد!' : 'Request Submitted Successfully!')
-                                : (lang === 'fa' ? 'خطا در ثبت درخواست' : 'Submission Error')}
+                                ? t('booking_submitted_success_title')
+                                : t('booking_submission_error_title')}
                         </p>
                         <p className="text-xs mt-1 opacity-90">{submitResult.message}</p>
                         {submitResult.bookingId && (
@@ -249,7 +247,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 {/* Full Name */}
                 <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(0)}>
                     <label htmlFor="fullName" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <User className="w-4 h-4 text-primary" />
+                        <User className="w-4 h-4 text-primary shrink-0" />
                         <span>{t('booking_fullname_label')}</span>
                         <span className="text-destructive">*</span>
                     </label>
@@ -260,14 +258,14 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                         onChange={(e) => handleFieldChange('fullName', e.target.value)}
                         onBlur={() => handleFieldBlur('fullName')}
                         placeholder={t('booking_fullname_placeholder')}
-                        className={`w-full px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary ${
-                            formState.fullName.error && formState.fullName.touched ? 'border-destructive focus:ring-destructive/20' : 'border-border hover:border-primary/50'
+                        className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
+                            formState.fullName.error && formState.fullName.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
                         }`}
                         disabled={isSubmitting}
                     />
                     {formState.fullName.error && formState.fullName.touched && (
                         <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
-                            <AlertCircle className="w-3 h-3" /> {formState.fullName.error}
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.fullName.error}</span>
                         </p>
                     )}
                 </div>
@@ -275,7 +273,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 {/* Phone */}
                 <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(1)}>
                     <label htmlFor="phone" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <Phone className="w-4 h-4 text-primary" />
+                        <Phone className="w-4 h-4 text-primary shrink-0" />
                         <span>{t('booking_phone_label')}</span>
                         <span className="text-destructive">*</span>
                     </label>
@@ -288,14 +286,14 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                         placeholder={t('booking_phone_placeholder')}
                         maxLength={15}
                         dir="ltr"
-                        className={`w-full px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary ${
-                            formState.phone.error && formState.phone.touched ? 'border-destructive focus:ring-destructive/20' : 'border-border hover:border-primary/50'
+                        className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
+                            formState.phone.error && formState.phone.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
                         }`}
                         disabled={isSubmitting}
                     />
                     {formState.phone.error && formState.phone.touched && (
                         <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
-                            <AlertCircle className="w-3 h-3" /> {formState.phone.error}
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.phone.error}</span>
                         </p>
                     )}
                 </div>
@@ -303,7 +301,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 {/* Email */}
                 <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(2)}>
                     <label htmlFor="email" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <Mail className="w-4 h-4 text-primary" />
+                        <Mail className="w-4 h-4 text-primary shrink-0" />
                         <span>{t('booking_email_label')}</span>
                     </label>
                     <input
@@ -314,14 +312,14 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                         onBlur={() => handleFieldBlur('email')}
                         placeholder={t('booking_email_placeholder')}
                         dir="ltr"
-                        className={`w-full px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary ${
-                            formState.email.error && formState.email.touched ? 'border-destructive focus:ring-destructive/20' : 'border-border hover:border-primary/50'
+                        className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
+                            formState.email.error && formState.email.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
                         }`}
                         disabled={isSubmitting}
                     />
                     {formState.email.error && formState.email.touched && (
                         <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
-                            <AlertCircle className="w-3 h-3" /> {formState.email.error}
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.email.error}</span>
                         </p>
                     )}
                 </div>
@@ -330,7 +328,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(3)}>
                     <div className="space-y-2">
                         <label htmlFor="date" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                            <Calendar className="w-4 h-4 text-primary" />
+                            <Calendar className="w-4 h-4 text-primary shrink-0" />
                             <span>{t('booking_date_label')}</span>
                             <span className="text-destructive">*</span>
                         </label>
@@ -342,21 +340,21 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                             onBlur={() => handleFieldBlur('date')}
                             min={minDate}
                             dir="ltr"
-                            className={`w-full px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary ${
-                                formState.date.error && formState.date.touched ? 'border-destructive focus:ring-destructive/20' : 'border-border hover:border-primary/50'
+                            className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
+                                formState.date.error && formState.date.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
                             }`}
                             disabled={isSubmitting}
                         />
                         {formState.date.error && formState.date.touched && (
                             <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
-                                <AlertCircle className="w-3 h-3" /> {formState.date.error}
+                                <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.date.error}</span>
                             </p>
                         )}
                     </div>
 
                     <div className="space-y-2">
                         <label htmlFor="time" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                            <Clock className="w-4 h-4 text-primary" />
+                            <Clock className="w-4 h-4 text-primary shrink-0" />
                             <span>{t('booking_time_label')}</span>
                             <span className="text-destructive">*</span>
                         </label>
@@ -365,8 +363,8 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                             value={formState.time.value}
                             onChange={(e) => handleFieldChange('time', e.target.value)}
                             onBlur={() => handleFieldBlur('time')}
-                            className={`w-full px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary ${
-                                formState.time.error && formState.time.touched ? 'border-destructive focus:ring-destructive/20' : 'border-border hover:border-primary/50'
+                            className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
+                                formState.time.error && formState.time.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
                             }`}
                             disabled={isSubmitting}
                         >
@@ -377,7 +375,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                         </select>
                         {formState.time.error && formState.time.touched && (
                             <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
-                                <AlertCircle className="w-3 h-3" /> {formState.time.error}
+                                <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.time.error}</span>
                             </p>
                         )}
                     </div>
@@ -386,7 +384,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                 {/* Description */}
                 <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(4)}>
                     <label htmlFor="description" className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <FileText className="w-4 h-4 text-primary" />
+                        <FileText className="w-4 h-4 text-primary shrink-0" />
                         <span>{t('booking_desc_label')}</span>
                     </label>
                     <textarea
@@ -396,7 +394,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                         placeholder={t('booking_desc_placeholder')}
                         rows={3}
                         maxLength={500}
-                        className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary hover:border-primary/50 resize-none"
+                        className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary hover:border-primary/50 resize-none leading-relaxed"
                         disabled={isSubmitting}
                     />
                     <p className="text-xs text-muted-foreground text-end">
@@ -409,26 +407,26 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group relative w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold text-base shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
+                        className="group relative w-full min-h-[52px] flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold text-sm sm:text-base shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 ease-in-out disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden cursor-pointer"
                     >
                         <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0" />
 
-                        <span className="relative z-10 flex items-center gap-2">
+                        <span className="relative z-10 flex items-center justify-center gap-2">
                             {isSubmitting ? (
                                 <>
-                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                    <Loader2 className="w-5 h-5 animate-spin shrink-0" />
                                     <span>{t('booking_submitting_btn')}</span>
                                 </>
                             ) : (
                                 <>
-                                    <Sparkles className="w-5 h-5" />
+                                    <Sparkles className="w-5 h-5 shrink-0" />
                                     <span>{t('booking_submit_btn')}</span>
                                 </>
                             )}
                         </span>
                     </button>
                     <p className="text-xs text-muted-foreground text-center mt-3 flex items-center justify-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-success" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-success shrink-0" />
                         <span>{t('booking_privacy_note')}</span>
                     </p>
                 </div>

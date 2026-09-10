@@ -159,7 +159,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
       {/* Optional Pulsing Acoustic Ring */}
       {showPulse && (
-        <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3 pointer-events-none">
+        <span className="absolute -bottom-0.5 -end-0.5 flex h-3 w-3 pointer-events-none">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-card"></span>
         </span>

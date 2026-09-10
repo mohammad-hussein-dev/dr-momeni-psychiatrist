@@ -179,18 +179,18 @@ export const BookingPage: React.FC = () => {
                                     href={HOSPITAL_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-base shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
+                                    className="flex-1 min-h-[48px] flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-primary text-primary-foreground font-bold text-base shadow-md hover:shadow-lg hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 ease-in-out"
                                 >
-                                    <ExternalLink className="w-5 h-5" aria-hidden="true" />
+                                    <ExternalLink className="w-5 h-5 shrink-0" aria-hidden="true" />
                                     <span>{t('booking_hospital_portal_btn')}</span>
                                 </a>
 
                                 <button
                                     type="button"
                                     onClick={() => handleModeChange('online')}
-                                    className="flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-background border border-border text-foreground font-semibold hover:bg-muted transition-all"
+                                    className="flex-1 min-h-[48px] flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-background border border-border text-foreground font-semibold hover:bg-muted active:scale-[0.98] transition-all duration-300 ease-in-out cursor-pointer"
                                 >
-                                    <CalendarCheck className="w-5 h-5 text-primary" aria-hidden="true" />
+                                    <CalendarCheck className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
                                     <span>{t('booking_want_online_btn')}</span>
                                 </button>
                             </div>
@@ -207,36 +207,30 @@ export const BookingPage: React.FC = () => {
             <section className="relative overflow-hidden border-b border-border/60">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
 
-                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-                    <div className="flex justify-center mb-6">
+                <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-16">
+                    <div className="flex justify-center mb-5 sm:mb-6">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                            <Shield className="w-4 h-4 text-primary" aria-hidden="true" />
+                            <Shield className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
                             <span className="text-xs sm:text-sm font-semibold text-primary">{t('booking_secure_badge')}</span>
                         </div>
                     </div>
 
-                    <div className="text-center space-y-4">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">
+                    <div className="text-center space-y-3 sm:space-y-4">
+                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground leading-tight">
                             {flowState === 'form' ? (
                                 <>
-                                    {lang === 'fa' ? (
-                                        <>رزرو <span className="text-primary">نوبت ویزیت آنلاین</span></>
-                                    ) : (
-                                        <>Book <span className="text-primary">Online Consultation</span></>
-                                    )}
+                                    {t('booking_hero_online_prefix')}{' '}
+                                    <span className="text-primary">{t('booking_hero_online_highlight')}</span>
                                 </>
                             ) : (
                                 <>
-                                    {lang === 'fa' ? (
-                                        <>نوبت شما <span className="text-success">ثبت شد</span></>
-                                    ) : (
-                                        <>Appointment <span className="text-success">Confirmed</span></>
-                                    )}
+                                    {t('booking_hero_confirmed_prefix')}{' '}
+                                    <span className="text-success">{t('booking_hero_confirmed_highlight')}</span>
                                 </>
                             )}
                         </h1>
 
-                        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                             {flowState === 'form'
                                 ? t('booking_online_desc')
                                 : t('booking_registered_desc')
@@ -245,34 +239,34 @@ export const BookingPage: React.FC = () => {
                     </div>
 
                     {flowState === 'form' && (
-                        <div className="flex justify-center mt-8">
-                            <div className="inline-flex p-1 rounded-2xl bg-muted/80 border border-border/60 shadow-xs">
+                        <div className="flex justify-center mt-6 sm:mt-8 w-full">
+                            <div className="inline-flex w-full sm:w-auto p-1 rounded-2xl bg-muted/80 border border-border/60 shadow-xs">
                                 <button
                                     type="button"
                                     onClick={() => handleModeChange('online')}
-                                    className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                                    className={`flex-1 sm:flex-initial min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-in-out active:scale-95 cursor-pointer ${
                                         isOnline
                                             ? 'bg-background text-foreground shadow-sm'
                                             : 'text-muted-foreground hover:text-foreground'
                                     }`}
                                 >
-                                    <span className="flex items-center gap-2">
-                                        <Stethoscope className="w-4 h-4 text-primary" />
-                                        {t('booking_tab_online')}
+                                    <span className="flex items-center justify-center gap-2">
+                                        <Stethoscope className="w-4 h-4 text-primary shrink-0" />
+                                        <span>{t('booking_tab_online')}</span>
                                     </span>
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => handleModeChange('in-person')}
-                                    className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                                    className={`flex-1 sm:flex-initial min-h-[48px] px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-in-out active:scale-95 cursor-pointer ${
                                         isInPerson
                                             ? 'bg-background text-foreground shadow-sm'
                                             : 'text-muted-foreground hover:text-foreground'
                                     }`}
                                 >
-                                    <span className="flex items-center gap-2">
-                                        <Building2 className="w-4 h-4 text-primary" />
-                                        {t('booking_tab_inperson')}
+                                    <span className="flex items-center justify-center gap-2">
+                                        <Building2 className="w-4 h-4 text-primary shrink-0" />
+                                        <span>{t('booking_tab_inperson')}</span>
                                     </span>
                                 </button>
                             </div>
@@ -281,19 +275,19 @@ export const BookingPage: React.FC = () => {
                 </div>
             </section>
 
-            <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <section className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-14">
                 {flowState === 'form' && (
                     <div className="animate-fadeIn">
-                        <div className="bg-card border border-border/80 rounded-3xl shadow-lg p-6 sm:p-8 md:p-10">
-                            <div className="flex items-center gap-3 mb-8 pb-6 border-b border-border/60">
-                                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary">
-                                    <CalendarCheck className="w-6 h-6" aria-hidden="true" />
+                        <div className="bg-card border border-border/80 rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-8 md:p-10">
+                            <div className="flex items-center gap-3 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-border/60">
+                                <div className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-primary/10 text-primary shrink-0">
+                                    <CalendarCheck className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground">
+                                    <h2 className="text-lg sm:text-2xl font-heading font-bold text-foreground">
                                         {t('booking_form_title')}
                                     </h2>
-                                    <p className="text-sm text-muted-foreground mt-0.5">
+                                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
                                         {t('booking_form_subtitle')}
                                     </p>
                                 </div>
@@ -374,17 +368,17 @@ export const BookingPage: React.FC = () => {
                                     href={`https://wa.me/${CLINIC_WHATSAPP}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-success text-success-foreground text-sm font-semibold hover:shadow-md hover:scale-[1.02] transition-all"
+                                    className="flex-1 sm:flex-initial min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-success text-success-foreground text-sm font-semibold hover:shadow-md hover:scale-[1.01] active:scale-95 transition-all duration-300 ease-in-out"
                                 >
-                                    <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                                    <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                                     <span>{t('booking_whatsapp_btn')}</span>
                                 </a>
 
                                 <a
                                     href={`tel:${HOSPITAL_CENTRAL_PHONE}`}
-                                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-card border border-border text-foreground text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                                    className="flex-1 sm:flex-initial min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-card border border-border text-foreground text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-95 transition-all duration-300 ease-in-out font-mono"
                                 >
-                                    <Phone className="w-4 h-4" aria-hidden="true" />
+                                    <Phone className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
                                     <span>{t('booking_call_btn')}</span>
                                 </a>
                             </div>

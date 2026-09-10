@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Secure Bilingual Doctor-Patient Communication Interface
+ * @description Real-time simulated psychiatric consultation chat with voice notes,
+ *              electronic prescriptions, clinical guides, emoji reactions, and message editing.
+ *
+ * @author Mohammad Hossein (Senior Frontend Engineer)
+ * @version 2.3.0
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
   MessageSquare,
@@ -57,14 +66,16 @@ const CLINICAL_REACTIONS = [
   { emoji: '😊', label_fa: 'امید و لبخند', label_en: 'Warmth' },
 ];
 
-interface DoctorPatientChatProps {
+export interface IDoctorPatientChatProps {
   mode: 'doctor' | 'patient';
   defaultPatientPhone?: string;
   defaultPatientName?: string;
   className?: string;
 }
 
-export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
+export type DoctorPatientChatProps = IDoctorPatientChatProps;
+
+export const DoctorPatientChat: React.FC<IDoctorPatientChatProps> = ({
   mode,
   defaultPatientPhone = '09123456789',
   defaultPatientName = 'مریم احمدی',
@@ -96,7 +107,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
   const [copiedMsgId, setCopiedMsgId] = useState<string | null>(null);
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const voiceTimerRef = useRef<any>(null);
+  const voiceTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const isDoctor = mode === 'doctor';
 
@@ -179,7 +190,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
       }, 1000);
     } else {
       // Finish recording and send voice note
-      clearInterval(voiceTimerRef.current);
+      if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
       setIsRecordingVoice(false);
       const duration = recordingSeconds || 5;
 
@@ -188,8 +199,8 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
         patientName: selectedPatientName,
         sender: isDoctor ? 'doctor' : 'patient',
         text: isDoctor 
-          ? (isFa ? 'پیام صوتی توضیحات بالینی و راهنمای درمانی دکتر فاطمه مومنی' : 'Dr. Momeni Clinical Voice Memo')
-          : (isFa ? 'پیام صوتی شرح حال مراجع' : 'Patient Voice Message'),
+          ? t('chat_voice_dr_memo')
+          : t('chat_voice_patient_memo'),
         attachmentType: 'voice_note',
         attachmentTitle: `Voice_Note_${duration}s.aac`,
         voiceDurationSeconds: duration
@@ -201,7 +212,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
   };
 
   const handleCancelVoice = () => {
-    clearInterval(voiceTimerRef.current);
+    if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
     setIsRecordingVoice(false);
     setRecordingSeconds(0);
   };
@@ -246,7 +257,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
   };
 
   const handleDeleteMessage = (msgId: string) => {
-    if (window.confirm(isFa ? 'آیا از حذف این پیام بالینی اطمینان دارید؟' : 'Are you sure you want to delete this message?')) {
+    if (window.confirm(t('chat_delete_confirm'))) {
       deleteChatMessage(msgId);
       setActiveMenuMsgId(null);
       reloadMessages();
@@ -261,7 +272,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
       return (
         <span 
           className="inline-flex items-center text-sky-400 font-bold drop-shadow-xs" 
-          title={isFa ? 'خوانده و مشاهده شده (دو تیک رنگی)' : 'Seen / Read'}
+          title={t('chat_status_read')}
         >
           <CheckCheck className="w-3.5 h-3.5 stroke-[2.5]" />
         </span>
@@ -272,7 +283,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
       return (
         <span 
           className="inline-flex items-center text-white/75 dark:text-muted-foreground opacity-80" 
-          title={isFa ? 'تحویل داده شد (دو تیک خاکستری)' : 'Delivered'}
+          title={t('chat_status_delivered')}
         >
           <CheckCheck className="w-3.5 h-3.5 stroke-[1.8]" />
         </span>
@@ -282,7 +293,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
     return (
       <span 
         className="inline-flex items-center text-white/70 dark:text-muted-foreground opacity-75" 
-        title={isFa ? 'ارسال به سرور انجام شد (تک تیک)' : 'Sent'}
+        title={t('chat_status_sent')}
       >
         <Check className="w-3.5 h-3.5 stroke-[1.8]" />
       </span>
@@ -322,10 +333,10 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
       patientName: selectedPatientName,
       sender: isDoctor ? 'doctor' : 'patient',
       text: type === 'prescription' 
-        ? (isFa ? 'نسخه الکترونیک و دستور دارویی رسمی با مهر نظام پزشکی صادر شد.' : 'Official Medical Prescription Generated.')
+        ? t('chat_rx_generated_alert')
         : type === 'clinical_guide'
-        ? (isFa ? 'فایل راهنمای بالینی و پایش سلامت پیوست گردید.' : 'Clinical Guide Attachment.')
-        : (isFa ? 'فایل گزارش آزمایشگاهی ضمیمه شد.' : 'Laboratory Test Report Attachment.'),
+        ? t('chat_guide_attached_alert')
+        : t('chat_lab_attached_alert'),
       attachmentType: type,
       attachmentTitle: title
     });
@@ -358,7 +369,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
       {/* 1. LEFT/RIGHT SIDEBAR: PATIENTS LIST (DOCTOR MODE ONLY) */}
       {/* ========================================================================= */}
       {isDoctor && (
-        <div className={`w-full md:w-80 lg:w-96 border-b md:border-b-0 ${isRTL ? 'md:border-l' : 'md:border-r'} border-border/70 bg-card/60 flex flex-col shrink-0 ${
+        <div className={`w-full md:w-80 lg:w-96 border-b md:border-b-0 md:border-e border-border/70 bg-card/60 flex flex-col shrink-0 ${
           mobileThreadsOpen ? 'block' : 'hidden md:flex'
         }`}>
           
@@ -371,18 +382,21 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-sm text-foreground">
-                    {isFa ? 'گفتگوهای بالینی مراجعین' : 'Patient Clinical Threads'}
+                    {t('chat_clinical_threads')}
                   </h3>
                   <span className="text-[10px] text-muted-foreground">
-                    {isFa ? `${threads.length} پرونده فعال` : `${threads.length} active`}
+                    {threads.length} {t('chat_active_records')}
                   </span>
                 </div>
               </div>
 
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{isFa ? 'ارتباط امن' : 'Encrypted'}</span>
-              </span>
+              <div className="flex items-center gap-1.5">
+                <DemoBadge text={t('chat_demo_badge')} size="xs" />
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>{t('chat_encrypted')}</span>
+                </span>
+              </div>
             </div>
 
             {/* Search Box */}
@@ -392,7 +406,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={isFa ? 'جستجوی بیمار یا شماره تماس...' : 'Search patients...'}
+                placeholder={t('chat_search_placeholder')}
                 className="w-full ps-8.5 pe-3 py-1.5 rounded-xl border border-border/80 bg-background text-xs text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
             </div>
@@ -402,7 +416,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
           <div className="flex-1 overflow-y-auto custom-scrollbar divide-y divide-border/40">
             {filteredThreads.length === 0 ? (
               <div className="p-6 text-center text-muted-foreground text-xs">
-                {isFa ? 'گفتگویی با این مشخصات یافت نشد.' : 'No threads found.'}
+                {t('chat_no_threads')}
               </div>
             ) : (
               filteredThreads.map(th => {
@@ -412,7 +426,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   <button
                     key={th.patientPhone}
                     onClick={() => selectPatientThread(th)}
-                    className={`w-full text-start p-3.5 transition-all flex items-start gap-3 cursor-pointer ${
+                    className={`w-full text-start p-3.5 transition-all duration-300 flex items-start gap-3 cursor-pointer ${
                       isSelected
                         ? 'bg-primary/10 border-s-4 border-primary'
                         : 'hover:bg-muted/40'
@@ -424,7 +438,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                         {th.patientName.slice(0, 1) || <User className="w-4 h-4" />}
                       </div>
                       {th.isOnline && (
-                        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-card" title="آنلاین" />
+                        <span className="absolute -bottom-0.5 -end-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-card" title="آنلاین" />
                       )}
                     </div>
 
@@ -440,7 +454,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                       </div>
 
                       <p className="text-[11px] text-muted-foreground truncate leading-relaxed">
-                        {th.lastMessage?.text || (isFa ? 'پیام جدید' : 'New message')}
+                        {th.lastMessage?.text || t('chat_new_message')}
                       </p>
 
                       <div className="flex items-center justify-between gap-1 mt-1.5">
@@ -491,28 +505,28 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h4 className="font-heading font-bold text-xs sm:text-sm text-foreground truncate">
-                  {isDoctor ? selectedPatientName : (isFa ? 'دکتر فاطمه مومنی (متخصص اعصاب و روان)' : 'Dr. Fatemeh Momeni (M.D.)')}
+                  {isDoctor ? selectedPatientName : t('chat_dr_title_full')}
                 </h4>
                 
                 {!isDoctor && (
                   <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-primary/10 text-primary border border-primary/25 whitespace-nowrap">
-                    {isFa ? 'نظام پزشکی: ۱۳۳۴۳۹' : 'M.D. 133439'}
+                    {t('chat_mc_code')}
                   </span>
                 )}
-                <DemoBadge text={isFa ? 'داده نمونه' : 'Demo'} size="sm" />
+                <DemoBadge text={t('chat_demo_badge')} size="sm" />
               </div>
 
               <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-muted-foreground">
                 <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span>{isFa ? 'پاسخگویی بالینی فعال' : 'Active Clinical Channel'}</span>
+                  <span>{t('chat_active_channel')}</span>
                 </span>
                 
                 {currentPatientAppt && (
                   <>
                     <span>•</span>
                     <span className="truncate">
-                      {currentPatientAppt.visit_type === 'in_person' ? (isFa ? 'بیمارستان نیکان غرب' : 'Nikan Hospital') : (isFa ? 'مشاوره آنلاین تصویری' : 'Tele-visit')}
+                      {currentPatientAppt.visit_type === 'in_person' ? t('chat_hospital_nikan') : t('chat_tele_visit')}
                     </span>
                   </>
                 )}
@@ -526,7 +540,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
               <a
                 href={`tel:${selectedPhone}`}
                 className="w-8 h-8 rounded-xl bg-card border border-border/80 text-foreground hover:text-primary flex items-center justify-center transition-colors"
-                title={isFa ? 'تماس با بیمار' : 'Call Patient'}
+                title={t('chat_call_patient')}
               >
                 <Phone className="w-3.5 h-3.5 text-primary" />
               </a>
@@ -534,7 +548,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
               <a
                 href={`tel:${HOSPITAL_CENTRAL_PHONE}`}
                 className="w-8 h-8 rounded-xl bg-card border border-border/80 text-foreground hover:text-primary flex items-center justify-center transition-colors"
-                title={isFa ? 'تماس با بیمارستان نیکان غرب' : 'Call Nikan Hospital'}
+                title={t('chat_call_hospital')}
               >
                 <Phone className="w-3.5 h-3.5 text-primary" />
               </a>
@@ -557,11 +571,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
           <div className="p-3 rounded-2xl bg-muted/40 border border-border/60 text-center max-w-md mx-auto">
             <p className="text-[10px] sm:text-[11px] text-muted-foreground flex items-center justify-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-primary shrink-0" />
-              <span>
-                {isFa 
-                  ? 'تمامی مکاتبات و فایل‌های تبادل‌شده مطابق کدهای اخلاق پزشکی و محرمانگی بالینی رمزنگاری شده است.'
-                  : 'All clinical exchanges and files are strictly confidential under medical privacy standards.'}
-              </span>
+              <span>{t('booking_confidential_desc')}</span>
             </p>
           </div>
 
@@ -569,7 +579,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
             <div className="text-center py-12 space-y-2">
               <MessageSquare className="w-8 h-8 text-muted-foreground mx-auto opacity-50" />
               <p className="text-xs text-muted-foreground">
-                {isFa ? 'هیچ پیامی در این گفتگو ثبت نشده است. اولین پیام را ارسال کنید.' : 'No messages yet in this conversation.'}
+                {t('chat_no_messages')}
               </p>
             </div>
           ) : (
@@ -617,7 +627,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                       {!isMe && msg.sender === 'doctor' && (
                         <div className="flex items-center gap-1.5 mb-1.5 text-[11px] font-bold text-primary">
                           <Sparkles className="w-3.5 h-3.5" />
-                          <span>{isFa ? 'دکتر فاطمه مومنی' : 'Dr. Fatemeh Momeni'}</span>
+                          <span>{t('chat_dr_name')}</span>
                         </div>
                       )}
 
@@ -642,7 +652,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                                 isMe ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-muted text-muted-foreground hover:bg-muted/80'
                               }`}
                             >
-                              {isFa ? 'انصراف' : 'Cancel'}
+                              {t('chat_cancel')}
                             </button>
                             <button
                               type="button"
@@ -651,7 +661,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                                 isMe ? 'bg-white text-primary hover:bg-white/90' : 'bg-primary text-primary-foreground hover:opacity-90'
                               }`}
                             >
-                              {isFa ? 'ذخیره تغییرات' : 'Save'}
+                              {t('chat_save')}
                             </button>
                           </div>
                         </div>
@@ -672,17 +682,17 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                               <FileText className="w-4 h-4" />
                             </div>
                             <div className="min-w-0">
-                              <span className="text-xs font-bold block truncate">{msg.attachmentTitle || (isFa ? 'نسخه الکترونیک دارویی' : 'Prescription')}</span>
-                              <span className="text-[10px] opacity-80">{isFa ? 'دارای کد پیگیری و مهر دیجیتال' : 'Verified Medical Rx'}</span>
+                              <span className="text-xs font-bold block truncate">{msg.attachmentTitle || t('chat_prescription')}</span>
+                              <span className="text-[10px] opacity-80">{t('chat_rx_verified')}</span>
                             </div>
                           </div>
 
                           <button 
-                            onClick={() => alert(isFa ? `دریافت فایل نسخه: ${msg.attachmentTitle}` : `Downloading: ${msg.attachmentTitle}`)}
+                            onClick={() => alert(`${t('chat_rx_download_alert')} ${msg.attachmentTitle}`)}
                             className="p-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 shrink-0 text-xs font-semibold flex items-center gap-1 cursor-pointer"
                           >
                             <Download className="w-3.5 h-3.5" />
-                            <span className="text-[10px]">{isFa ? 'دانلود' : 'PDF'}</span>
+                            <span className="text-[10px]">{t('chat_download')}</span>
                           </button>
                         </div>
                       )}
@@ -698,12 +708,12 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                             </div>
                             <div className="min-w-0">
                               <span className="text-xs font-bold block truncate">{msg.attachmentTitle || 'Document.pdf'}</span>
-                              <span className="text-[10px] opacity-80">{isFa ? 'سند ضمیمه بالینی' : 'Clinical Document'}</span>
+                              <span className="text-[10px] opacity-80">{t('chat_clinical_document')}</span>
                             </div>
                           </div>
 
                           <button 
-                            onClick={() => alert(isFa ? `مشاهده فایل: ${msg.attachmentTitle}` : `Viewing: ${msg.attachmentTitle}`)}
+                            onClick={() => alert(`${t('chat_file_view_alert')} ${msg.attachmentTitle}`)}
                             className="p-1.5 rounded-lg bg-card border border-border text-foreground hover:text-primary shrink-0 text-xs flex items-center gap-1 cursor-pointer"
                           >
                             <Download className="w-3.5 h-3.5" />
@@ -770,7 +780,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                             ? 'bg-primary/15 text-primary'
                             : 'opacity-0 group-hover:opacity-100 hover:bg-muted text-muted-foreground hover:text-foreground'
                         }`}
-                        title={isFa ? 'گزینه‌ها، واکنش و ویرایش' : 'Options & Reactions'}
+                        title={t('chat_options')}
                       >
                         <MoreHorizontal className="w-4 h-4" />
                       </button>
@@ -778,7 +788,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                       {/* Copied to clipboard Toast tooltip */}
                       {copiedMsgId === msg.id && (
                         <div className="absolute -top-7 start-1/2 -translate-x-1/2 z-40 px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-bold shadow-md animate-in fade-in duration-150 whitespace-nowrap">
-                          {isFa ? 'کپی شد!' : 'Copied!'}
+                          {t('chat_copied')}
                         </div>
                       )}
 
@@ -800,7 +810,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                             <div>
                               <div className="text-[10px] font-bold text-muted-foreground px-1.5 pb-1 flex items-center gap-1">
                                 <Smile className="w-3 h-3 text-primary" />
-                                <span>{isFa ? 'واکنش بالینی / احساسی:' : 'Quick Reaction:'}</span>
+                                <span>{t('chat_quick_reaction')}</span>
                               </div>
                               <div className="flex items-center justify-between gap-1 p-1 rounded-xl bg-muted/50 border border-border/50">
                                 {CLINICAL_REACTIONS.map((rec) => {
@@ -834,7 +844,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                                 className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl hover:bg-muted transition-colors text-start cursor-pointer"
                               >
                                 <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                                <span>{isFa ? 'کپی متن پیام' : 'Copy Message'}</span>
+                                <span>{t('chat_copy_message')}</span>
                               </button>
 
                               {(isMe || isDoctor) && (
@@ -844,7 +854,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                                   className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl hover:bg-muted transition-colors text-start cursor-pointer"
                                 >
                                   <Edit3 className="w-3.5 h-3.5 text-sky-500" />
-                                  <span>{isFa ? 'ویرایش متن پیام' : 'Edit Message'}</span>
+                                  <span>{t('chat_edit_message')}</span>
                                 </button>
                               )}
 
@@ -855,7 +865,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                                   className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl hover:bg-destructive/10 text-destructive transition-colors text-start cursor-pointer"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
-                                  <span>{isFa ? 'حذف پیام' : 'Delete Message'}</span>
+                                  <span>{t('chat_delete_message')}</span>
                                 </button>
                               )}
                             </div>
@@ -898,7 +908,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
             <div className="flex items-center justify-between text-xs font-bold text-foreground">
               <span className="flex items-center gap-1.5 text-primary">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>{isFa ? 'قالب‌های پاسخ سریع بالینی پزشک:' : 'Doctor Clinical Quick Presets:'}</span>
+                <span>{t('chat_quick_presets_title')}</span>
               </span>
               <button onClick={() => setShowQuickPresets(false)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-3.5 h-3.5" />
@@ -933,7 +943,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   className="w-full text-start p-2 rounded-xl hover:bg-primary/10 text-xs font-semibold text-foreground flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   <FileText className="w-4 h-4 text-primary" />
-                  <span>{isFa ? 'صدور و ارسال نسخه الکترونیک' : 'Issue Electronic Rx'}</span>
+                  <span>{t('chat_issue_rx')}</span>
                 </button>
 
                 <button
@@ -941,7 +951,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   className="w-full text-start p-2 rounded-xl hover:bg-primary/10 text-xs font-semibold text-foreground flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-emerald-500" />
-                  <span>{isFa ? 'ارسال راهنمای بالینی و پایش' : 'Send Clinical Guide'}</span>
+                  <span>{t('chat_send_guide')}</span>
                 </button>
               </>
             ) : (
@@ -951,7 +961,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   className="w-full text-start p-2 rounded-xl hover:bg-primary/10 text-xs font-semibold text-foreground flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   <FileText className="w-4 h-4 text-sky-500" />
-                  <span>{isFa ? 'ارسال فایل آزمایش یا نوار مغز' : 'Upload Lab / EEG File'}</span>
+                  <span>{t('chat_upload_lab')}</span>
                 </button>
               </>
             )}
@@ -967,7 +977,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-destructive animate-ping" />
                 <span className="text-xs font-bold text-destructive">
-                  {isFa ? 'در حال ضبط پیام صوتی بالینی...' : 'Recording Clinical Voice Note...'}
+                  {t('chat_recording_voice')}
                 </span>
                 <span className="text-xs font-mono font-bold text-destructive">
                   00:{String(recordingSeconds).padStart(2, '0')}
@@ -979,14 +989,14 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   onClick={handleCancelVoice}
                   className="px-3 py-1.5 rounded-xl bg-card border border-border text-xs text-muted-foreground hover:text-foreground"
                 >
-                  {isFa ? 'انصراف' : 'Cancel'}
+                  {t('chat_cancel')}
                 </button>
                 <button
                   onClick={toggleVoiceRecording}
                   className="px-3.5 py-1.5 rounded-xl bg-primary text-primary-foreground text-xs font-bold flex items-center gap-1 shadow-xs"
                 >
                   <Send className="w-3 h-3" />
-                  <span>{isFa ? 'ارسال ویس' : 'Send'}</span>
+                  <span>{t('chat_send_voice')}</span>
                 </button>
               </div>
             </div>
@@ -1001,7 +1011,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   type="button"
                   onClick={() => setShowAttachMenu(!showAttachMenu)}
                   className="w-9 h-9 rounded-2xl bg-background border border-border/80 text-muted-foreground hover:text-primary flex items-center justify-center shrink-0 transition-colors cursor-pointer"
-                  title={isFa ? 'ارسال فایل یا نسخه' : 'Attach File'}
+                  title={t('chat_attach_file')}
                 >
                   <Paperclip className="w-4 h-4" />
                 </button>
@@ -1011,7 +1021,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   type="button"
                   onClick={toggleVoiceRecording}
                   className="w-9 h-9 rounded-2xl bg-background border border-border/80 text-muted-foreground hover:text-primary flex items-center justify-center shrink-0 transition-colors cursor-pointer"
-                  title={isFa ? 'ضبط پیام صوتی' : 'Record Voice Note'}
+                  title={t('chat_record_voice')}
                 >
                   <Mic className="w-4 h-4" />
                 </button>
@@ -1024,7 +1034,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                     className="h-9 px-3 rounded-2xl bg-primary/10 border border-primary/20 text-primary text-xs font-semibold hover:bg-primary/20 flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">{isFa ? 'پاسخ‌های آماده' : 'Quick Rx'}</span>
+                    <span className="hidden sm:inline">{t('chat_quick_rx_button')}</span>
                   </button>
                 )}
 
@@ -1036,8 +1046,8 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder={
                       isDoctor
-                        ? (isFa ? 'تایپ پیام یا توصیه بالینی برای بیمار...' : 'Type clinical message to patient...')
-                        : (isFa ? 'پیام یا سوال خود از دکتر فاطمه مومنی را بنویسید...' : 'Type your question for Dr. Momeni...')
+                        ? t('chat_input_placeholder_doctor')
+                        : t('chat_input_placeholder_patient')
                     }
                     className="w-full px-4 py-2.5 rounded-2xl border border-border/80 bg-background text-xs sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
                   />
@@ -1048,7 +1058,7 @@ export const DoctorPatientChat: React.FC<DoctorPatientChatProps> = ({
                   type="submit"
                   disabled={!inputText.trim()}
                   className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-primary text-primary-foreground disabled:opacity-40 hover:bg-primary/90 flex items-center justify-center shrink-0 shadow-xs transition-all cursor-pointer"
-                  title={isFa ? 'ارسال پیام' : 'Send'}
+                  title={t('chat_send_btn')}
                 >
                   <Send className="w-4 h-4" />
                 </button>

@@ -16,6 +16,7 @@ import {
 export const PHONE = "09934420967";
 export const PHONE_TEL = "+989934420967";
 export const WHATSAPP_URL = "https://wa.me/989934420967";
+export const INSTAGRAM_URL = "https://www.instagram.com/dr.fatemehmomeni";
 
 // ============================================================================
 // HOSPITAL & MEDICAL COUNCIL CREDENTIALS

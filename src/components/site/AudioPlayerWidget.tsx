@@ -168,7 +168,7 @@ export const AudioPlayerWidget: React.FC<AudioPlayerWidgetProps> = ({
             className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md shrink-0 cursor-pointer"
             aria-label={isPlaying ? 'Pause' : 'Play'}
           >
-            {isPlaying ? <Pause className="w-5 h-5" /> : <Play className={`w-5 h-5 ${isRTL ? 'mr-0.5' : 'ml-0.5'}`} />}
+            {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ms-0.5" />}
           </button>
 
           <div className="flex-1 space-y-1">

@@ -14,7 +14,8 @@ import {
   Building2,
   Calendar,
   HeartHandshake,
-  Code2
+  Code2,
+  Instagram
 } from 'lucide-react';
 import { useLanguage } from '../../i18n/LanguageProvider';
 import { AppImage } from '../ui/AppImage';
@@ -22,6 +23,7 @@ import {
   PHONE,
   PHONE_TEL,
   WHATSAPP_URL,
+  INSTAGRAM_URL,
   ADDRESS_FA,
   ADDRESS_EN,
   GOOGLE_MAPS_URL,
@@ -49,7 +51,7 @@ export const Footer: React.FC = () => {
     { label: lang === 'fa' ? 'روان‌درمانی فردی و زوج‌درمانی' : 'Psychotherapy & Couples', key: 'psychotherapy' }
   ];
 
-  // ─── Cleaned Quick Navigation (Removed /panel and /admin) ────────────────
+  // ─── Cleaned Quick Navigation ────────────────
   const quickNav = [
     { to: '/', label: t('nav_home') },
     { to: '/about', label: t('nav_about') },
@@ -58,7 +60,7 @@ export const Footer: React.FC = () => {
     { to: '/blog', label: t('nav_blog') },
     { to: '/testimonials', label: t('nav_testimonials') },
     { to: '/contact', label: t('nav_contact') },
-    { to: '/developer', label: lang === 'fa' ? 'توسعه‌دهنده و سفارش سامانه (محمدحسین)' : 'Developer & Systems (Mohammad Hussein)' }
+    { to: '/developer', label: lang === 'fa' ? 'توسعه‌دهنده و سفارش سامانه: محمدحسین' : 'Developer & Systems Architecture: Mohammad Hussein' }
   ];
 
   return (
@@ -120,30 +122,41 @@ export const Footer: React.FC = () => {
     {/* Updated to point directly to the smart booking system */}
     <Link
     to="/booking?type=online"
-    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-all shadow-xs"
+    className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 active:scale-95 transition-all duration-300 ease-in-out shadow-xs"
     >
-    <Calendar className="w-3.5 h-3.5" />
+    <Calendar className="w-3.5 h-3.5 shrink-0" />
     <span>{t('book_now')}</span>
     </Link>
 
     <a
     href={`tel:${PHONE_TEL}`}
-    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-card border border-primary/30 text-primary hover:bg-accent/40 text-xs font-semibold transition-all shadow-2xs"
+    className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-card border border-primary/30 text-primary hover:bg-accent/40 active:scale-95 text-xs font-semibold transition-all duration-300 ease-in-out shadow-2xs"
     dir="ltr"
     title={lang === 'fa' ? 'تماس با مطب' : 'Call Clinic'}
     >
-    <Phone className="w-3.5 h-3.5 text-primary" />
+    <Phone className="w-3.5 h-3.5 text-primary shrink-0" />
     <span>{PHONE}</span>
     </a>
 
     <a
     href={WHATSAPP_URL}
     target="_blank"
-    rel="noreferrer"
-    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-emerald-600/10 text-emerald-700 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-600 hover:text-white transition-all shadow-2xs"
+    rel="noopener noreferrer"
+    className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-600/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 text-xs font-semibold hover:bg-emerald-600 hover:text-white active:scale-95 transition-all duration-300 ease-in-out shadow-2xs"
     >
-    <MessageCircle className="w-3.5 h-3.5" />
+    <MessageCircle className="w-3.5 h-3.5 shrink-0" />
     <span>{t('whatsapp')}</span>
+    </a>
+
+    <a
+    href={INSTAGRAM_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-card border border-border/70 text-foreground/80 hover:text-pink-600 active:scale-95 hover:scale-105 transition-all duration-300 ease-in-out text-xs font-semibold shadow-2xs"
+    title={t('social_instagram')}
+    >
+    <Instagram className="w-3.5 h-3.5 text-pink-600 shrink-0" />
+    <span>{lang === 'fa' ? 'اینستاگرام' : 'Instagram'}</span>
     </a>
     </div>
 
@@ -152,21 +165,21 @@ export const Footer: React.FC = () => {
     href={DOCTOR_NIKAN_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20 text-[11px] font-semibold hover:bg-primary hover:text-primary-foreground transition-all shadow-2xs"
+    className="min-h-[38px] inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary border border-primary/20 text-[11px] font-semibold hover:bg-primary hover:text-primary-foreground active:scale-95 transition-all duration-300 ease-in-out shadow-2xs"
     >
-    <Building2 className="w-3.5 h-3.5" />
+    <Building2 className="w-3.5 h-3.5 shrink-0" />
     <span>{lang === 'fa' ? 'پروفایل پزشک در سایت نیکان' : 'Doctor Profile at Nikan'}</span>
-    <ExternalLink className="w-3 h-3 opacity-70" />
+    <ExternalLink className="w-3 h-3 opacity-70 shrink-0" />
     </a>
 
     <a
     href={HOSPITAL_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted text-foreground/80 border border-border text-[11px] font-medium hover:text-primary hover:border-primary/40 transition-all"
+    className="min-h-[38px] inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted text-foreground/80 border border-border text-[11px] font-medium hover:text-primary hover:border-primary/40 active:scale-95 transition-all duration-300 ease-in-out"
     >
     <span>{lang === 'fa' ? 'وب‌سایت بیمارستان' : 'Hospital Site'}</span>
-    <ExternalLink className="w-3 h-3 opacity-60" />
+    <ExternalLink className="w-3 h-3 opacity-60 shrink-0" />
     </a>
     </div>
     </div>
@@ -175,15 +188,15 @@ export const Footer: React.FC = () => {
     {/* Col 2: Clinical Services */}
     <div className="lg:col-span-3 space-y-3">
     <h4 className="font-heading font-bold text-foreground text-xs sm:text-sm tracking-wide flex items-center gap-1.5 pb-1 border-b border-border/40">
-    <Sparkles className="w-4 h-4 text-primary" />
+    <Sparkles className="w-4 h-4 text-primary shrink-0" />
     <span>{t('footer_services_title')}</span>
     </h4>
-    <ul className="space-y-2 text-xs">
+    <ul className="space-y-1 text-xs">
     {serviceLinks.map((srv) => (
       <li key={srv.key}>
       <Link
       to="/services"
-      className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-0.5 group"
+      className="text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center gap-1.5 py-1.5 group"
       >
       {isRTL ? (
         <ChevronLeft className="w-3.5 h-3.5 text-muted-foreground/50 group-hover:text-primary group-hover:-translate-x-0.5 transition-transform shrink-0" />
@@ -202,12 +215,12 @@ export const Footer: React.FC = () => {
     <h4 className="font-heading font-bold text-foreground text-xs sm:text-sm tracking-wide pb-1 border-b border-border/40">
     {t('footer_quick')}
     </h4>
-    <ul className="space-y-2 text-xs">
+    <ul className="space-y-1 text-xs">
     {quickNav.map((link) => (
       <li key={link.to}>
       <Link
       to={link.to}
-      className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5 py-0.5 group"
+      className="text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center gap-1.5 py-1.5 group"
       >
       {isRTL ? (
         <ChevronLeft className="w-3 h-3 text-muted-foreground/40 group-hover:text-primary group-hover:-translate-x-0.5 transition-transform shrink-0" />
@@ -241,7 +254,7 @@ export const Footer: React.FC = () => {
     href={NESHAN_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 text-[10px] font-bold transition-colors shadow-2xs"
+    className="min-h-[36px] inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-700 active:scale-95 text-[11px] font-bold transition-all duration-200 shadow-2xs"
     >
     <span>{lang === 'fa' ? 'نشان' : 'Neshan'}</span>
     <ExternalLink className="w-2.5 h-2.5 opacity-80" />
@@ -250,7 +263,7 @@ export const Footer: React.FC = () => {
     href={BALAD_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
+    className="min-h-[36px] inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground active:scale-95 text-[11px] font-semibold transition-all duration-200"
     >
     <span>{lang === 'fa' ? 'بلد' : 'Balad'}</span>
     <ExternalLink className="w-2.5 h-2.5 opacity-60" />
@@ -259,7 +272,7 @@ export const Footer: React.FC = () => {
     href={GOOGLE_MAPS_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
+    className="min-h-[36px] inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground active:scale-95 text-[11px] font-semibold transition-all duration-200"
     >
     <span>Maps</span>
     <ExternalLink className="w-2.5 h-2.5 opacity-60" />
@@ -268,7 +281,7 @@ export const Footer: React.FC = () => {
     href={WAZE_URL}
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground text-[10px] font-semibold transition-colors"
+    className="min-h-[36px] inline-flex items-center gap-1 px-3 py-1.5 rounded-md bg-muted/80 hover:bg-primary hover:text-primary-foreground active:scale-95 text-[11px] font-semibold transition-all duration-200"
     >
     <span>Waze</span>
     <ExternalLink className="w-2.5 h-2.5 opacity-60" />
@@ -310,13 +323,15 @@ export const Footer: React.FC = () => {
     <div className="order-1 md:order-2 flex justify-center">
     <Link
     to="/developer"
-    className="footer-dev-badge-wrap group relative inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card/95 hover:bg-card border border-border/80 text-foreground transition-all duration-200 transform hover:-translate-y-0.5 shadow-xs hover:shadow-md cursor-pointer select-none"
+    className="footer-dev-badge-wrap group relative min-h-[44px] inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-card/95 hover:bg-card border border-border/80 text-foreground transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 shadow-xs hover:shadow-md cursor-pointer select-none"
     title={lang === 'fa' ? 'مشاهده معماری فنی، مشخصات مهندسی و پورتفولیو محمدحسین' : 'View Senior Engineering Architecture & Portfolio'}
     >
     <div className="relative w-6 h-6 rounded-full overflow-hidden border border-primary/40 bg-card shrink-0 shadow-2xs">
     <AppImage
     src="/developer.jpg"
-    alt="Mohammad Hussein - Senior Full-Stack Engineer"
+    alt={lang === 'fa' ? 'محمدحسین - مهندس ارشد نرم‌افزار و توسعه‌دهنده سامانه' : 'Mohammad Hussein - Senior Full-Stack Engineer'}
+    width={24}
+    height={24}
     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
     loading="lazy"
     fallbackText=""
@@ -331,7 +346,7 @@ export const Footer: React.FC = () => {
 
     <div className="flex items-center gap-1.5 text-[11px]">
     <span className="text-muted-foreground">
-    {lang === 'fa' ? 'طراحی و توسعه:' : 'Engineered by:'}
+    {lang === 'fa' ? 'توسعه‌دهنده و سفارش سامانه:' : 'Developer & Systems Architecture:'}
     </span>
     <span className="font-bold text-foreground group-hover:text-primary transition-colors">
     {lang === 'fa' ? 'محمدحسین' : 'Mohammad Hussein'}
