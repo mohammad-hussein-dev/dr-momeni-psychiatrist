@@ -73,7 +73,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
       <div className="mt-4 pt-3 border-t border-border/50">
         <Link
-          to="/panel"
+          to="/booking"
           state={{ service: serviceKey }}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:text-primary transition-all hover:gap-2"
         >

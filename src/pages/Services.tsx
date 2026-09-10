@@ -69,7 +69,7 @@ export const Services: React.FC = () => {
               </div>
 
               <Link
-                to="/panel"
+                to="/booking"
                 state={{ service: 'non_pharma' }}
                 className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-xs sm:text-sm font-semibold btn-soft-glow hover:opacity-95 transition-all shadow-xs"
               >
@@ -145,7 +145,7 @@ export const Services: React.FC = () => {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <Link
-              to="/panel"
+              to="/booking"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs sm:text-sm btn-soft-glow hover:opacity-95 transition-all shadow-xs"
             >
               <Calendar className="w-4 h-4" />

@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
 
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <Link
-                    to="/panel"
+                    to="/booking"
                     className="px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-white text-primary font-bold text-xs sm:text-sm hover:bg-alabaster transition-all shadow-md active:scale-95"
                   >
                     {t('book_now')}

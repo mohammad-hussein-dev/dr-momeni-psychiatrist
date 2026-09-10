@@ -131,7 +131,7 @@ export const About: React.FC = () => {
 
             <Reveal delay={300} className="pt-2 flex flex-wrap gap-3">
               <Link
-                to="/panel"
+                to="/booking"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs sm:text-sm btn-soft-glow hover:opacity-95 transition-all shadow-sm"
               >
                 <Calendar className="w-4 h-4" />

@@ -48,7 +48,7 @@ export const VisitFormatsSection: React.FC = () => {
 
               <div className="mt-6 pt-2">
                 <Link
-                  to="/panel"
+                  to="/booking"
                   state={{ visit_type: 'in_person' }}
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs sm:text-sm shadow-sm hover:opacity-95 transition-all"
                 >
@@ -86,7 +86,7 @@ export const VisitFormatsSection: React.FC = () => {
 
               <div className="mt-6 pt-2">
                 <Link
-                  to="/panel"
+                  to="/booking"
                   state={{ visit_type: 'online' }}
                   className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs sm:text-sm shadow-sm hover:opacity-95 transition-all"
                 >

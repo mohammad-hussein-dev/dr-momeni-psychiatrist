@@ -74,7 +74,7 @@ export const HeroSection: React.FC = () => {
             <Reveal delay={300}>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-3">
                 <Link
-                  to="/panel"
+                  to="/booking"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-primary text-primary-foreground hover:opacity-95 shadow-md transition-all active:scale-95"
                 >
                   <Calendar className="w-4 h-4" />

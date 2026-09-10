@@ -396,7 +396,7 @@ export const BlogPost: React.FC = () => {
           </div>
 
           <Link
-            to="/panel"
+            to="/booking"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-md hover:bg-primary/90 transition-all cursor-pointer"
           >
             <Calendar className="w-4 h-4" />

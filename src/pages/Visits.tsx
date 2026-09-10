@@ -94,7 +94,7 @@ export const Visits: React.FC = () => {
 
               <div className="mt-8 pt-6 border-t border-border/60">
                 <Link
-                  to="/panel"
+                  to="/booking"
                   state={{ visit_type: 'in_person' }}
                   className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:opacity-95 transition-all"
                 >
@@ -138,7 +138,7 @@ export const Visits: React.FC = () => {
 
               <div className="mt-8 pt-6 border-t border-border/60">
                 <Link
-                  to="/panel"
+                  to="/booking"
                   state={{ visit_type: 'online' }}
                   className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:opacity-95 transition-all"
                 >

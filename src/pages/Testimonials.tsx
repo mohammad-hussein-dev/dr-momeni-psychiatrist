@@ -490,7 +490,7 @@ export const Testimonials: React.FC = () => {
               : 'Schedule your consultation easily online in just a few clicks.'}
           </p>
           <Link
-            to="/panel"
+            to="/booking"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs sm:text-sm btn-soft-glow hover:opacity-95 transition-all shadow-md"
           >
             <Calendar className="w-4 h-4" />
