@@ -4,13 +4,15 @@
  * @fileoverview Telegram Notification Service for the Booking System.
  * @description Sends formatted, emoji-rich booking notifications to a specified
  *              Telegram chat via a server-side PHP proxy to bypass ISP restrictions.
- *              Implements fault-tolerant error handling to ensure the main booking
- *              flow is never blocked by network failures.
+ *              Implements fault-tolerant error handling and Persian (Jalali) date formatting.
  * @author Mohammad Hossein (Senior Frontend Engineer)
- * @version 2.0.0 (Proxy Integration)
+ * @version 2.1.0 (Persian Date in Notifications)
  * @since 2026-09-11
  */
 
+import DateObject from 'react-date-object';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
 import { IBookingRequest, IBookingResponse } from '../types/booking';
 
 // ─── Constants & Configuration ──────────────────────────────────────────────
@@ -26,6 +28,7 @@ const PROXY_URL = '/telegram-proxy.php';
 /**
  * @function formatBookingMessage
  * @description Formats the booking request into a readable, HTML-parsed Telegram message
+ *              with Persian (Jalali) date formatting.
  * @param data - The validated booking request payload
  * @returns Formatted string ready for Telegram API
  */
@@ -33,13 +36,29 @@ const formatBookingMessage = (data: IBookingRequest): string => {
     // Convert Iranian phone format (09...) to international format (+989...) for tel links
     const intlPhone = data.phone.startsWith('0') ? `+98${data.phone.slice(1)}` : data.phone;
 
+    // Convert Gregorian date (YYYY-MM-DD) to Persian (Jalali) date (YYYY/MM/DD)
+    let formattedPersianDate = data.date;
+    try {
+        const gregorianDate = new Date(data.date);
+        if (!isNaN(gregorianDate.getTime())) {
+            const persianDate = new DateObject({
+                date: gregorianDate,
+                calendar: persian,
+                locale: persian_fa
+            });
+            formattedPersianDate = persianDate.format("YYYY/MM/DD");
+        }
+    } catch (error) {
+        console.warn('[TelegramService] Date conversion failed, falling back to original date:', error);
+    }
+
     return `
     🔔 <b>نوبت جدید — دکتر فاطمه مومنی</b>
     ━━━━━━━━━━━━━━━━━━━━━
     👤 <b>بیمار:</b> ${data.fullName}
     📱 <b>موبایل:</b> <a href="tel:${intlPhone}">${data.phone}</a>
     📧 <b>ایمیل:</b> ${data.email || '—'}
-    📅 <b>تاریخ:</b> ${data.date}
+    📅 <b>تاریخ:</b> ${formattedPersianDate}
     ⏰ <b>ساعت:</b> ${data.time}
     🏥 <b>نوع:</b> ${data.visitType}
     🏨 <b>بیمه:</b> ${data.insurance || 'آزاد'}
