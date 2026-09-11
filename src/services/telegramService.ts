@@ -3,11 +3,12 @@
 /**
  * @fileoverview Telegram Notification Service for the Booking System.
  * @description Sends formatted, emoji-rich booking notifications to a specified
- *              Telegram chat using the Telegram Bot API. Implements fault-tolerant
- *              error handling to ensure the main booking flow is never blocked.
+ *              Telegram chat via a server-side PHP proxy to bypass ISP restrictions.
+ *              Implements fault-tolerant error handling to ensure the main booking
+ *              flow is never blocked by network failures.
  * @author Mohammad Hossein (Senior Frontend Engineer)
- * @version 1.0.1
- * @since 2026-09-10
+ * @version 2.0.0 (Proxy Integration)
+ * @since 2026-09-11
  */
 
 import { IBookingRequest, IBookingResponse } from '../types/booking';
@@ -16,7 +17,9 @@ import { IBookingRequest, IBookingResponse } from '../types/booking';
 
 const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
 const CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-const API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+// Point to the local PHP proxy instead of direct Telegram API to bypass Iranian ISP restrictions
+const PROXY_URL = '/telegram-proxy.php';
 
 // ─── Helper Functions ───────────────────────────────────────────────────────
 
@@ -52,7 +55,7 @@ const formatBookingMessage = (data: IBookingRequest): string => {
 
 /**
  * @function sendTelegramNotification
- * @description Submits the booking notification to Telegram asynchronously
+ * @description Submits the booking notification to Telegram asynchronously via PHP proxy
  * @param data - The validated booking request payload
  * @returns A promise resolving to the standardized booking response
  */
@@ -69,29 +72,30 @@ export const sendTelegramNotification = async (
     }
 
     try {
-        // ─── API Request ──────────────────────────────────────────────────────
-        const response = await fetch(API_URL, {
+        // ─── API Request via PHP Proxy ──────────────────────────────────────
+        const response = await fetch(PROXY_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                token: BOT_TOKEN,
                 chat_id: CHAT_ID,
                 text: formatBookingMessage(data),
                                  parse_mode: 'HTML', // Enables bold text and clickable links
-                                 disable_web_page_preview: true,
             }),
         });
 
         // ─── Response Handling ────────────────────────────────────────────────
         const result = await response.json();
 
+        // The PHP proxy returns the raw Telegram API response, which includes "ok": true
         if (!response.ok || !result.ok) {
-            console.error('[TelegramService] API Error:', result);
-            throw new Error(result.description || 'Failed to send Telegram message');
+            console.error('[TelegramService] Proxy/API Error:', result);
+            throw new Error(result.description || 'Failed to send Telegram message via proxy');
         }
 
-        console.log('[TelegramService] ✅ Notification sent successfully.');
+        console.log('[TelegramService] ✅ Notification sent successfully via proxy.');
         return {
             success: true,
             message: 'اعلان تلگرام با موفقیت ارسال شد',
