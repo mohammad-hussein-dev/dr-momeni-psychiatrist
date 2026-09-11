@@ -2,18 +2,17 @@
 // ─── src/components/booking/BookingForm.tsx ─────────────────────────────────
 /**
  * @fileoverview Bilingual Online Booking Form Component
- * @description A streamlined, high-conversion, fully bilingual booking form specifically
- *              for online psychiatric consultations. Features micro-interactions,
- *              dynamic multilingual validation, smooth feedback, and a native-like
- *              Persian (Shamsi) Date Picker for optimal user experience.
+ * @description Features a robust, bug-free Persian Date Picker with strict
+ *              Gregorian-Jalali state decoupling, preventing year-jump bugs (e.g., 1405).
  *
  * @author Mohammad Hossein (Senior Frontend Engineer)
- * @version 3.2.0 (Persian Date Picker Integrated)
+ * @version 4.0.0 (Bulletproof Date Handling)
  * @since 2026-09-11
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
 import DatePicker from 'react-multi-date-picker';
+import DateObject from 'react-date-object';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import {
@@ -79,44 +78,43 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
     onError,
     className = '',
 }) => {
-    const { t, lang, isRTL } = useLanguage();
+    const { t, lang } = useLanguage();
     const [formState, setFormState] = useState<IFormState>(INITIAL_FORM_STATE);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [submitResult, setSubmitResult] = useState<IBookingResponse | null>(null);
 
-    // ─── Validation Helpers with Bilingual Context ───────────────────────────
+    // ─── Validation Helpers ──────────────────────────────────────────────────
     const validateField = useCallback((field: keyof IFormState, value: string): string => {
-        const isEn = lang === 'en';
-    switch (field) {
-        case 'fullName':
-            if (!value.trim()) return t('booking_val_name_req');
-            if (value.trim().length < 3) return t('booking_val_name_len');
+        switch (field) {
+            case 'fullName':
+                if (!value.trim()) return t('booking_val_name_req');
+                if (value.trim().length < 3) return t('booking_val_name_len');
+                return '';
+            case 'phone':
+                if (!value.trim()) return t('booking_val_phone_req');
+                const phoneClean = value.replace(/[\s\-\+]/g, '');
+            if (phoneClean.length < 10) return t('booking_val_phone_inv');
             return '';
-        case 'phone':
-            if (!value.trim()) return t('booking_val_phone_req');
-            const phoneClean = value.replace(/[\s\-\+]/g, '');
-        if (phoneClean.length < 10) return t('booking_val_phone_inv');
-        return '';
-        case 'email':
-            if (!value.trim()) return '';
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) return t('booking_val_email_inv');
-        return '';
-        case 'date':
-            if (!value) return t('booking_val_date_req');
-            const selectedDate = new Date(value);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        if (selectedDate < today) return t('booking_val_date_past');
-        if (selectedDate.getDay() === 5) return t('booking_val_date_closed'); // 5 = Friday
-        return '';
-        case 'time':
-            if (!value) return t('booking_val_time_req');
+            case 'email':
+                if (!value.trim()) return '';
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) return t('booking_val_email_inv');
             return '';
-        default:
+            case 'date':
+                if (!value) return t('booking_val_date_req');
+                const selectedDate = new Date(value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (selectedDate < today) return t('booking_val_date_past');
+            if (selectedDate.getDay() === 5) return t('booking_val_date_closed'); // Friday
             return '';
-    }
-    }, [lang, t]);
+            case 'time':
+                if (!value) return t('booking_val_time_req');
+                return '';
+            default:
+                return '';
+        }
+    }, [t]);
 
     const handleFieldChange = useCallback(
         (field: keyof IFormState, value: string) => {
@@ -142,6 +140,40 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
         },
         [validateField]
     );
+
+    // ─── Bulletproof Date Conversion Logic ───────────────────────────────────
+    /**
+     * Safely converts Gregorian ISO string (from state) to Persian DateObject (for UI)
+     * Prevents "1405" bug by ensuring valid parsing.
+     */
+    const getSafeJalaliValue = useMemo(() => {
+        if (!formState.date.value) return undefined;
+        try {
+            return new DateObject({
+                date: new Date(formState.date.value),
+                                  calendar: persian,
+                                  locale: persian_fa
+            });
+        } catch (e) {
+            return undefined; // Fallback to empty if parsing fails
+        }
+    }, [formState.date.value]);
+
+    const handleDateChange = (dateObj: any) => {
+        if (dateObj) {
+            // Convert Persian DateObject back to standard Gregorian JS Date, then to ISO string
+            const gregorianDate = dateObj.toDate();
+            const isoString = gregorianDate.toISOString().split('T')[0];
+            handleFieldChange('date', isoString);
+        } else {
+            handleFieldChange('date', '');
+        }
+    };
+
+    // Minimum date is today (in Persian calendar for the picker UI)
+    const minJalaliDate = useMemo(() => {
+        return new DateObject({ calendar: persian, locale: persian_fa });
+    }, []);
 
     const handleSubmit = useCallback(
         async (event: React.FormEvent<HTMLFormElement>) => {
@@ -176,7 +208,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
                     fullName: formState.fullName.value.trim(),
                                      phone: formState.phone.value.trim(),
                                      email: formState.email.value.trim() || undefined,
-                                     date: formState.date.value,
+                                     date: formState.date.value, // Already in YYYY-MM-DD format
                                      time: formState.time.value,
                                      visitType: lang === 'fa' ? 'آنلاین' : 'Online Telehealth',
                                      description: formState.description.value.trim() || undefined,
@@ -204,68 +236,48 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
         [formState, validateField, lang, onSuccess, onError, t]
     );
 
-    const minDate = useMemo(() => new Date(), []);
-
     const staggerDelay = (index: number): React.CSSProperties => ({
         animationDelay: `${index * 60}ms`,
     });
 
     return (
         <form onSubmit={handleSubmit} className={`relative space-y-5 ${className}`} noValidate>
-        {/* Background Glow Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 rounded-3xl pointer-events-none" />
 
-        {/* Success/Error Alert Message */}
         {submitResult && (
-            <div
-            className={`relative z-10 flex items-start gap-3 p-4 rounded-2xl border animate-in fade-in slide-in-from-top-2 duration-300 ${
-                submitResult.success
-                ? 'bg-success/10 border-success/30 text-success'
-                : 'bg-destructive/10 border-destructive/30 text-destructive'
-            }`}
-            role="alert"
-            >
-            {submitResult.success ? (
-                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
-            ) : (
-                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-            )}
+            <div className={`relative z-10 flex items-start gap-3 p-4 rounded-2xl border animate-in fade-in slide-in-from-top-2 duration-300 ${
+                submitResult.success ? 'bg-success/10 border-success/30 text-success' : 'bg-destructive/10 border-destructive/30 text-destructive'
+            }`} role="alert">
+            {submitResult.success ? <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" /> : <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />}
             <div className="flex-1">
             <p className="font-semibold text-sm">
-            {submitResult.success
-                ? t('booking_submitted_success_title')
-                : t('booking_submission_error_title')}
+            {submitResult.success ? t('booking_submitted_success_title') : t('booking_submission_error_title')}
+            </p>
+            <p className="text-xs mt-1 opacity-90">{submitResult.message}</p>
+            {submitResult.bookingId && (
+                <p className="text-xs mt-2 font-mono bg-background/60 px-2.5 py-1 rounded-md inline-block border border-border">
+                {t('booking_tracking_code_label')} <span className="font-bold text-primary">{submitResult.bookingId}</span>
                 </p>
-                <p className="text-xs mt-1 opacity-90">{submitResult.message}</p>
-                {submitResult.bookingId && (
-                    <p className="text-xs mt-2 font-mono bg-background/60 px-2.5 py-1 rounded-md inline-block border border-border">
-                    {t('booking_tracking_code_label')} <span className="font-bold text-primary">{submitResult.bookingId}</span>
-                    </p>
-                )}
-                </div>
-                </div>
+            )}
+            </div>
+            </div>
         )}
 
-        {/* Form Fields */}
         <div className="relative z-10 space-y-5">
         {/* Full Name */}
         <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(0)}>
         <label htmlFor="fullName" className="flex items-center gap-2 text-sm font-semibold text-foreground">
         <User className="w-4 h-4 text-primary shrink-0" />
-        <span>{t('booking_fullname_label')}</span>
-        <span className="text-destructive">*</span>
+        <span>{t('booking_fullname_label')} <span className="text-destructive">*</span></span>
         </label>
         <input
-        id="fullName"
-        type="text"
-        value={formState.fullName.value}
+        id="fullName" type="text" value={formState.fullName.value}
         onChange={(e) => handleFieldChange('fullName', e.target.value)}
         onBlur={() => handleFieldBlur('fullName')}
         placeholder={t('booking_fullname_placeholder')}
         className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
             formState.fullName.error && formState.fullName.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
-        }`}
-        disabled={isSubmitting}
+        }`} disabled={isSubmitting}
         />
         {formState.fullName.error && formState.fullName.touched && (
             <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
@@ -278,22 +290,16 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
         <div className="space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(1)}>
         <label htmlFor="phone" className="flex items-center gap-2 text-sm font-semibold text-foreground">
         <Phone className="w-4 h-4 text-primary shrink-0" />
-        <span>{t('booking_phone_label')}</span>
-        <span className="text-destructive">*</span>
+        <span>{t('booking_phone_label')} <span className="text-destructive">*</span></span>
         </label>
         <input
-        id="phone"
-        type="tel"
-        value={formState.phone.value}
+        id="phone" type="tel" value={formState.phone.value}
         onChange={(e) => handleFieldChange('phone', e.target.value)}
         onBlur={() => handleFieldBlur('phone')}
-        placeholder={t('booking_phone_placeholder')}
-        maxLength={15}
-        dir="ltr"
+        placeholder={t('booking_phone_placeholder')} maxLength={15} dir="ltr"
         className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
             formState.phone.error && formState.phone.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
-        }`}
-        disabled={isSubmitting}
+        }`} disabled={isSubmitting}
         />
         {formState.phone.error && formState.phone.touched && (
             <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
@@ -309,17 +315,13 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
         <span>{t('booking_email_label')}</span>
         </label>
         <input
-        id="email"
-        type="email"
-        value={formState.email.value}
+        id="email" type="email" value={formState.email.value}
         onChange={(e) => handleFieldChange('email', e.target.value)}
         onBlur={() => handleFieldBlur('email')}
-        placeholder={t('booking_email_placeholder')}
-        dir="ltr"
+        placeholder={t('booking_email_placeholder')} dir="ltr"
         className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
             formState.email.error && formState.email.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
-        }`}
-        disabled={isSubmitting}
+        }`} disabled={isSubmitting}
         />
         {formState.email.error && formState.email.touched && (
             <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
@@ -330,37 +332,31 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
 
         {/* Date & Time Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(3)}>
-        {/* ─── Persian Date Picker ─────────────────────────────── */}
+
+        {/* ─── PROFESSIONAL PERSIAN DATE PICKER ────────────────── */}
         <div className="space-y-2">
         <label htmlFor="date" className="flex items-center gap-2 text-sm font-semibold text-foreground">
         <Calendar className="w-4 h-4 text-primary shrink-0" />
-        <span>{t('booking_date_label')}</span>
-        <span className="text-destructive">*</span>
+        <span>{t('booking_date_label')} <span className="text-destructive">*</span></span>
         </label>
+
         <DatePicker
-        value={formState.date.value}
-        onChange={(date) => {
-            if (date) {
-                // Convert Persian date to standard Gregorian ISO string (YYYY-MM-DD)
-                // This ensures existing validation (past dates, Fridays) and backend submission work seamlessly.
-                const gregorianDate = date.toDate();
-                const formattedDate = gregorianDate.toISOString().split('T')[0];
-                handleFieldChange('date', formattedDate);
-            } else {
-                handleFieldChange('date', '');
-            }
-        }}
-        onBlur={() => handleFieldBlur('date')}
-        minDate={minDate}
+        value={getSafeJalaliValue} // Safely parsed Persian DateObject
+        onChange={handleDateChange} // Converts back to Gregorian ISO string
+        minDate={minJalaliDate}
         calendar={persian}
         locale={persian_fa}
         format="YYYY/MM/DD"
-            inputClass={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary cursor-pointer ${
+            calendarPosition="bottom-right"
+            inputClass={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary cursor-pointer text-center ${
                 formState.date.error && formState.date.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
             }`}
-            placeholder={lang === 'fa' ? 'انتخاب تاریخ' : 'Select Date'}
+            containerClassName="w-full"
+            // Premium styling for the calendar popup itself
+            calendarClassName="!bg-background !border !border-border !shadow-2xl !rounded-2xl !font-sans !z-50"
             disabled={isSubmitting}
             />
+
             {formState.date.error && formState.date.touched && (
                 <p className="text-xs text-destructive flex items-center gap-1 animate-in fade-in">
                 <AlertCircle className="w-3.5 h-3.5 shrink-0" /> <span>{formState.date.error}</span>
@@ -368,22 +364,19 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
             )}
             </div>
 
-            {/* ─── Time Selector ───────────────────────────────────── */}
+            {/* Time Selector */}
             <div className="space-y-2">
             <label htmlFor="time" className="flex items-center gap-2 text-sm font-semibold text-foreground">
             <Clock className="w-4 h-4 text-primary shrink-0" />
-            <span>{t('booking_time_label')}</span>
-            <span className="text-destructive">*</span>
+            <span>{t('booking_time_label')} <span className="text-destructive">*</span></span>
             </label>
             <select
-            id="time"
-            value={formState.time.value}
+            id="time" value={formState.time.value}
             onChange={(e) => handleFieldChange('time', e.target.value)}
             onBlur={() => handleFieldBlur('time')}
             className={`w-full min-h-[48px] px-4 py-3 rounded-xl border bg-background/50 backdrop-blur-sm text-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
                 formState.time.error && formState.time.touched ? 'border-destructive focus:ring-destructive/50 focus:border-destructive' : 'border-border hover:border-primary/50'
-            }`}
-            disabled={isSubmitting}
+            }`} disabled={isSubmitting}
             >
             <option value="">{t('booking_select_time')}</option>
             {TIME_SLOTS.map((slot) => (
@@ -405,12 +398,9 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
             <span>{t('booking_desc_label')}</span>
             </label>
             <textarea
-            id="description"
-            value={formState.description.value}
+            id="description" value={formState.description.value}
             onChange={(e) => handleFieldChange('description', e.target.value)}
-            placeholder={t('booking_desc_placeholder')}
-            rows={3}
-            maxLength={500}
+            placeholder={t('booking_desc_placeholder')} rows={3} maxLength={500}
             className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary hover:border-primary/50 resize-none leading-relaxed"
             disabled={isSubmitting}
             />
@@ -422,23 +412,15 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
             {/* Submit Button */}
             <div className="pt-2 animate-in fade-in slide-in-from-bottom-2 duration-500" style={staggerDelay(5)}>
             <button
-            type="submit"
-            disabled={isSubmitting}
+            type="submit" disabled={isSubmitting}
             className="group relative w-full min-h-[52px] flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold text-sm sm:text-base shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 ease-in-out disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden cursor-pointer"
             >
             <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0" />
-
             <span className="relative z-10 flex items-center justify-center gap-2">
             {isSubmitting ? (
-                <>
-                <Loader2 className="w-5 h-5 animate-spin shrink-0" />
-                <span>{t('booking_submitting_btn')}</span>
-                </>
+                <><Loader2 className="w-5 h-5 animate-spin shrink-0" /><span>{t('booking_submitting_btn')}</span></>
             ) : (
-                <>
-                <Sparkles className="w-5 h-5 shrink-0" />
-                <span>{t('booking_submit_btn')}</span>
-                </>
+                <><Sparkles className="w-5 h-5 shrink-0" /><span>{t('booking_submit_btn')}</span></>
             )}
             </span>
             </button>
@@ -450,9 +432,7 @@ export const BookingForm: React.FC<IBookingFormProps> = ({
             </div>
 
             <style>{`
-                @keyframes shimmer {
-                    100% { transform: translateX(100%); }
-                }
+                @keyframes shimmer { 100% { transform: translateX(100%); } }
                 `}</style>
                 </form>
     );
