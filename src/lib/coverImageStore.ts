@@ -147,7 +147,7 @@ export const DEFAULT_PRESET_COVERS: CoverImageItem[] = [
   // Standardized clinical and therapeutic presets
   {
     id: 'cov-photo-1',
-    url: '/images/clinical/consulting-room.svg',
+    url: '/images/clinical/consulting-room.jpg',
     label_fa: 'مطب بالینی و فضای درمانی',
     label_en: 'Clinical Consultation',
     category: 'general',

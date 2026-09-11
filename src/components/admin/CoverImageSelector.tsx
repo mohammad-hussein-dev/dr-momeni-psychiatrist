@@ -519,7 +519,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
             <div className="flex flex-wrap gap-1.5 text-xs">
               <button
                 type="button"
-                onClick={() => { setUrlInput('/images/doctor/portrait-main.svg'); onSelectCover('/images/doctor/portrait-main.svg'); }}
+                onClick={() => { setUrlInput('/images/doctor/dr-fatemeh-momeni.jpg'); onSelectCover('/images/doctor/dr-fatemeh-momeni.jpg'); }}
                 className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
               >
                 /images/doctor/portrait-main.svg
@@ -540,7 +540,7 @@ export const CoverImageSelector: React.FC<CoverImageSelectorProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => { setUrlInput('/images/philosophy/treatment-philosophy.svg'); onSelectCover('/images/philosophy/treatment-philosophy.svg'); }}
+                onClick={() => { setUrlInput('/images/philosophy/clinical-philosophy.svg'); onSelectCover('/images/philosophy/clinical-philosophy.svg'); }}
                 className="px-2.5 py-1 rounded-lg bg-muted text-muted-foreground hover:text-foreground font-mono text-[11px] cursor-pointer"
               >
                 /images/philosophy/treatment-philosophy.svg
